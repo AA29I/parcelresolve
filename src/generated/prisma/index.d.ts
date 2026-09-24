@@ -148,6 +148,11 @@ export type AuditLog = $Result.DefaultSelection<Prisma.$AuditLogPayload>
  * 
  */
 export type JobQueue = $Result.DefaultSelection<Prisma.$JobQueuePayload>
+/**
+ * Model ClaimInvoice
+ * 
+ */
+export type ClaimInvoice = $Result.DefaultSelection<Prisma.$ClaimInvoicePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -541,6 +546,16 @@ export class PrismaClient<
     * ```
     */
   get jobQueue(): Prisma.JobQueueDelegate<ExtArgs>;
+
+  /**
+   * `prisma.claimInvoice`: Exposes CRUD operations for the **ClaimInvoice** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ClaimInvoices
+    * const claimInvoices = await prisma.claimInvoice.findMany()
+    * ```
+    */
+  get claimInvoice(): Prisma.ClaimInvoiceDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -1008,7 +1023,8 @@ export namespace Prisma {
     ImportBatch: 'ImportBatch',
     ExportLayout: 'ExportLayout',
     AuditLog: 'AuditLog',
-    JobQueue: 'JobQueue'
+    JobQueue: 'JobQueue',
+    ClaimInvoice: 'ClaimInvoice'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1024,7 +1040,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "organization" | "user" | "passwordResetToken" | "warehouse" | "carrier" | "carrierMapping" | "carrierConnector" | "linnworksConnection" | "parcel" | "rawTrackingEvent" | "trackingEvent" | "slaPolicy" | "carrierEnquiry" | "enquiryMessage" | "claim" | "claimDocument" | "customField" | "customStatusMapping" | "workflowRule" | "workflowVersion" | "apiKey" | "outboundWebhook" | "webhookDelivery" | "importBatch" | "exportLayout" | "auditLog" | "jobQueue"
+      modelProps: "organization" | "user" | "passwordResetToken" | "warehouse" | "carrier" | "carrierMapping" | "carrierConnector" | "linnworksConnection" | "parcel" | "rawTrackingEvent" | "trackingEvent" | "slaPolicy" | "carrierEnquiry" | "enquiryMessage" | "claim" | "claimDocument" | "customField" | "customStatusMapping" | "workflowRule" | "workflowVersion" | "apiKey" | "outboundWebhook" | "webhookDelivery" | "importBatch" | "exportLayout" | "auditLog" | "jobQueue" | "claimInvoice"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2918,6 +2934,76 @@ export namespace Prisma {
           }
         }
       }
+      ClaimInvoice: {
+        payload: Prisma.$ClaimInvoicePayload<ExtArgs>
+        fields: Prisma.ClaimInvoiceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ClaimInvoiceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClaimInvoicePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ClaimInvoiceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClaimInvoicePayload>
+          }
+          findFirst: {
+            args: Prisma.ClaimInvoiceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClaimInvoicePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ClaimInvoiceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClaimInvoicePayload>
+          }
+          findMany: {
+            args: Prisma.ClaimInvoiceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClaimInvoicePayload>[]
+          }
+          create: {
+            args: Prisma.ClaimInvoiceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClaimInvoicePayload>
+          }
+          createMany: {
+            args: Prisma.ClaimInvoiceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ClaimInvoiceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClaimInvoicePayload>[]
+          }
+          delete: {
+            args: Prisma.ClaimInvoiceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClaimInvoicePayload>
+          }
+          update: {
+            args: Prisma.ClaimInvoiceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClaimInvoicePayload>
+          }
+          deleteMany: {
+            args: Prisma.ClaimInvoiceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ClaimInvoiceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ClaimInvoiceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClaimInvoicePayload>
+          }
+          aggregate: {
+            args: Prisma.ClaimInvoiceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClaimInvoice>
+          }
+          groupBy: {
+            args: Prisma.ClaimInvoiceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClaimInvoiceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ClaimInvoiceCountArgs<ExtArgs>
+            result: $Utils.Optional<ClaimInvoiceCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3092,6 +3178,7 @@ export namespace Prisma {
     enquiryMessages: number
     claims: number
     claimDocuments: number
+    claimInvoices: number
     customFields: number
     customStatusMappings: number
     workflowRules: number
@@ -3119,6 +3206,7 @@ export namespace Prisma {
     enquiryMessages?: boolean | OrganizationCountOutputTypeCountEnquiryMessagesArgs
     claims?: boolean | OrganizationCountOutputTypeCountClaimsArgs
     claimDocuments?: boolean | OrganizationCountOutputTypeCountClaimDocumentsArgs
+    claimInvoices?: boolean | OrganizationCountOutputTypeCountClaimInvoicesArgs
     customFields?: boolean | OrganizationCountOutputTypeCountCustomFieldsArgs
     customStatusMappings?: boolean | OrganizationCountOutputTypeCountCustomStatusMappingsArgs
     workflowRules?: boolean | OrganizationCountOutputTypeCountWorkflowRulesArgs
@@ -3232,6 +3320,13 @@ export namespace Prisma {
    */
   export type OrganizationCountOutputTypeCountClaimDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ClaimDocumentWhereInput
+  }
+
+  /**
+   * OrganizationCountOutputType without action
+   */
+  export type OrganizationCountOutputTypeCountClaimInvoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClaimInvoiceWhereInput
   }
 
   /**
@@ -3412,6 +3507,7 @@ export namespace Prisma {
     slaPolicies: number
     enquiries: number
     claims: number
+    claimInvoices: number
   }
 
   export type CarrierCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3421,6 +3517,7 @@ export namespace Prisma {
     slaPolicies?: boolean | CarrierCountOutputTypeCountSlaPoliciesArgs
     enquiries?: boolean | CarrierCountOutputTypeCountEnquiriesArgs
     claims?: boolean | CarrierCountOutputTypeCountClaimsArgs
+    claimInvoices?: boolean | CarrierCountOutputTypeCountClaimInvoicesArgs
   }
 
   // Custom InputTypes
@@ -3476,6 +3573,13 @@ export namespace Prisma {
     where?: ClaimWhereInput
   }
 
+  /**
+   * CarrierCountOutputType without action
+   */
+  export type CarrierCountOutputTypeCountClaimInvoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClaimInvoiceWhereInput
+  }
+
 
   /**
    * Count Type ParcelCountOutputType
@@ -3487,6 +3591,7 @@ export namespace Prisma {
     enquiries: number
     claims: number
     claimDocuments: number
+    claimInvoices: number
   }
 
   export type ParcelCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3495,6 +3600,7 @@ export namespace Prisma {
     enquiries?: boolean | ParcelCountOutputTypeCountEnquiriesArgs
     claims?: boolean | ParcelCountOutputTypeCountClaimsArgs
     claimDocuments?: boolean | ParcelCountOutputTypeCountClaimDocumentsArgs
+    claimInvoices?: boolean | ParcelCountOutputTypeCountClaimInvoicesArgs
   }
 
   // Custom InputTypes
@@ -3543,6 +3649,13 @@ export namespace Prisma {
     where?: ClaimDocumentWhereInput
   }
 
+  /**
+   * ParcelCountOutputType without action
+   */
+  export type ParcelCountOutputTypeCountClaimInvoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClaimInvoiceWhereInput
+  }
+
 
   /**
    * Count Type CarrierEnquiryCountOutputType
@@ -3581,10 +3694,12 @@ export namespace Prisma {
 
   export type ClaimCountOutputType = {
     documents: number
+    invoices: number
   }
 
   export type ClaimCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     documents?: boolean | ClaimCountOutputTypeCountDocumentsArgs
+    invoices?: boolean | ClaimCountOutputTypeCountInvoicesArgs
   }
 
   // Custom InputTypes
@@ -3603,6 +3718,13 @@ export namespace Prisma {
    */
   export type ClaimCountOutputTypeCountDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ClaimDocumentWhereInput
+  }
+
+  /**
+   * ClaimCountOutputType without action
+   */
+  export type ClaimCountOutputTypeCountInvoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClaimInvoiceWhereInput
   }
 
 
@@ -3996,6 +4118,7 @@ export namespace Prisma {
     enquiryMessages?: boolean | Organization$enquiryMessagesArgs<ExtArgs>
     claims?: boolean | Organization$claimsArgs<ExtArgs>
     claimDocuments?: boolean | Organization$claimDocumentsArgs<ExtArgs>
+    claimInvoices?: boolean | Organization$claimInvoicesArgs<ExtArgs>
     customFields?: boolean | Organization$customFieldsArgs<ExtArgs>
     customStatusMappings?: boolean | Organization$customStatusMappingsArgs<ExtArgs>
     workflowRules?: boolean | Organization$workflowRulesArgs<ExtArgs>
@@ -4067,6 +4190,7 @@ export namespace Prisma {
     enquiryMessages?: boolean | Organization$enquiryMessagesArgs<ExtArgs>
     claims?: boolean | Organization$claimsArgs<ExtArgs>
     claimDocuments?: boolean | Organization$claimDocumentsArgs<ExtArgs>
+    claimInvoices?: boolean | Organization$claimInvoicesArgs<ExtArgs>
     customFields?: boolean | Organization$customFieldsArgs<ExtArgs>
     customStatusMappings?: boolean | Organization$customStatusMappingsArgs<ExtArgs>
     workflowRules?: boolean | Organization$workflowRulesArgs<ExtArgs>
@@ -4099,6 +4223,7 @@ export namespace Prisma {
       enquiryMessages: Prisma.$EnquiryMessagePayload<ExtArgs>[]
       claims: Prisma.$ClaimPayload<ExtArgs>[]
       claimDocuments: Prisma.$ClaimDocumentPayload<ExtArgs>[]
+      claimInvoices: Prisma.$ClaimInvoicePayload<ExtArgs>[]
       customFields: Prisma.$CustomFieldPayload<ExtArgs>[]
       customStatusMappings: Prisma.$CustomStatusMappingPayload<ExtArgs>[]
       workflowRules: Prisma.$WorkflowRulePayload<ExtArgs>[]
@@ -4508,6 +4633,7 @@ export namespace Prisma {
     enquiryMessages<T extends Organization$enquiryMessagesArgs<ExtArgs> = {}>(args?: Subset<T, Organization$enquiryMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnquiryMessagePayload<ExtArgs>, T, "findMany"> | Null>
     claims<T extends Organization$claimsArgs<ExtArgs> = {}>(args?: Subset<T, Organization$claimsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClaimPayload<ExtArgs>, T, "findMany"> | Null>
     claimDocuments<T extends Organization$claimDocumentsArgs<ExtArgs> = {}>(args?: Subset<T, Organization$claimDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClaimDocumentPayload<ExtArgs>, T, "findMany"> | Null>
+    claimInvoices<T extends Organization$claimInvoicesArgs<ExtArgs> = {}>(args?: Subset<T, Organization$claimInvoicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClaimInvoicePayload<ExtArgs>, T, "findMany"> | Null>
     customFields<T extends Organization$customFieldsArgs<ExtArgs> = {}>(args?: Subset<T, Organization$customFieldsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomFieldPayload<ExtArgs>, T, "findMany"> | Null>
     customStatusMappings<T extends Organization$customStatusMappingsArgs<ExtArgs> = {}>(args?: Subset<T, Organization$customStatusMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomStatusMappingPayload<ExtArgs>, T, "findMany"> | Null>
     workflowRules<T extends Organization$workflowRulesArgs<ExtArgs> = {}>(args?: Subset<T, Organization$workflowRulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkflowRulePayload<ExtArgs>, T, "findMany"> | Null>
@@ -5152,6 +5278,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ClaimDocumentScalarFieldEnum | ClaimDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * Organization.claimInvoices
+   */
+  export type Organization$claimInvoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClaimInvoice
+     */
+    select?: ClaimInvoiceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClaimInvoiceInclude<ExtArgs> | null
+    where?: ClaimInvoiceWhereInput
+    orderBy?: ClaimInvoiceOrderByWithRelationInput | ClaimInvoiceOrderByWithRelationInput[]
+    cursor?: ClaimInvoiceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClaimInvoiceScalarFieldEnum | ClaimInvoiceScalarFieldEnum[]
   }
 
   /**
@@ -8827,6 +8973,7 @@ export namespace Prisma {
     slaPolicies?: boolean | Carrier$slaPoliciesArgs<ExtArgs>
     enquiries?: boolean | Carrier$enquiriesArgs<ExtArgs>
     claims?: boolean | Carrier$claimsArgs<ExtArgs>
+    claimInvoices?: boolean | Carrier$claimInvoicesArgs<ExtArgs>
     _count?: boolean | CarrierCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["carrier"]>
 
@@ -8881,6 +9028,7 @@ export namespace Prisma {
     slaPolicies?: boolean | Carrier$slaPoliciesArgs<ExtArgs>
     enquiries?: boolean | Carrier$enquiriesArgs<ExtArgs>
     claims?: boolean | Carrier$claimsArgs<ExtArgs>
+    claimInvoices?: boolean | Carrier$claimInvoicesArgs<ExtArgs>
     _count?: boolean | CarrierCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CarrierIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8897,6 +9045,7 @@ export namespace Prisma {
       slaPolicies: Prisma.$SlaPolicyPayload<ExtArgs>[]
       enquiries: Prisma.$CarrierEnquiryPayload<ExtArgs>[]
       claims: Prisma.$ClaimPayload<ExtArgs>[]
+      claimInvoices: Prisma.$ClaimInvoicePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9288,6 +9437,7 @@ export namespace Prisma {
     slaPolicies<T extends Carrier$slaPoliciesArgs<ExtArgs> = {}>(args?: Subset<T, Carrier$slaPoliciesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SlaPolicyPayload<ExtArgs>, T, "findMany"> | Null>
     enquiries<T extends Carrier$enquiriesArgs<ExtArgs> = {}>(args?: Subset<T, Carrier$enquiriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CarrierEnquiryPayload<ExtArgs>, T, "findMany"> | Null>
     claims<T extends Carrier$claimsArgs<ExtArgs> = {}>(args?: Subset<T, Carrier$claimsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClaimPayload<ExtArgs>, T, "findMany"> | Null>
+    claimInvoices<T extends Carrier$claimInvoicesArgs<ExtArgs> = {}>(args?: Subset<T, Carrier$claimInvoicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClaimInvoicePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9770,6 +9920,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ClaimScalarFieldEnum | ClaimScalarFieldEnum[]
+  }
+
+  /**
+   * Carrier.claimInvoices
+   */
+  export type Carrier$claimInvoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClaimInvoice
+     */
+    select?: ClaimInvoiceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClaimInvoiceInclude<ExtArgs> | null
+    where?: ClaimInvoiceWhereInput
+    orderBy?: ClaimInvoiceOrderByWithRelationInput | ClaimInvoiceOrderByWithRelationInput[]
+    cursor?: ClaimInvoiceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClaimInvoiceScalarFieldEnum | ClaimInvoiceScalarFieldEnum[]
   }
 
   /**
@@ -13792,6 +13962,7 @@ export namespace Prisma {
     enquiries?: boolean | Parcel$enquiriesArgs<ExtArgs>
     claims?: boolean | Parcel$claimsArgs<ExtArgs>
     claimDocuments?: boolean | Parcel$claimDocumentsArgs<ExtArgs>
+    claimInvoices?: boolean | Parcel$claimInvoicesArgs<ExtArgs>
     _count?: boolean | ParcelCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["parcel"]>
 
@@ -13913,6 +14084,7 @@ export namespace Prisma {
     enquiries?: boolean | Parcel$enquiriesArgs<ExtArgs>
     claims?: boolean | Parcel$claimsArgs<ExtArgs>
     claimDocuments?: boolean | Parcel$claimDocumentsArgs<ExtArgs>
+    claimInvoices?: boolean | Parcel$claimInvoicesArgs<ExtArgs>
     _count?: boolean | ParcelCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ParcelIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13932,6 +14104,7 @@ export namespace Prisma {
       enquiries: Prisma.$CarrierEnquiryPayload<ExtArgs>[]
       claims: Prisma.$ClaimPayload<ExtArgs>[]
       claimDocuments: Prisma.$ClaimDocumentPayload<ExtArgs>[]
+      claimInvoices: Prisma.$ClaimInvoicePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -14356,6 +14529,7 @@ export namespace Prisma {
     enquiries<T extends Parcel$enquiriesArgs<ExtArgs> = {}>(args?: Subset<T, Parcel$enquiriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CarrierEnquiryPayload<ExtArgs>, T, "findMany"> | Null>
     claims<T extends Parcel$claimsArgs<ExtArgs> = {}>(args?: Subset<T, Parcel$claimsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClaimPayload<ExtArgs>, T, "findMany"> | Null>
     claimDocuments<T extends Parcel$claimDocumentsArgs<ExtArgs> = {}>(args?: Subset<T, Parcel$claimDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClaimDocumentPayload<ExtArgs>, T, "findMany"> | Null>
+    claimInvoices<T extends Parcel$claimInvoicesArgs<ExtArgs> = {}>(args?: Subset<T, Parcel$claimInvoicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClaimInvoicePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14865,6 +15039,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ClaimDocumentScalarFieldEnum | ClaimDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * Parcel.claimInvoices
+   */
+  export type Parcel$claimInvoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClaimInvoice
+     */
+    select?: ClaimInvoiceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClaimInvoiceInclude<ExtArgs> | null
+    where?: ClaimInvoiceWhereInput
+    orderBy?: ClaimInvoiceOrderByWithRelationInput | ClaimInvoiceOrderByWithRelationInput[]
+    cursor?: ClaimInvoiceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClaimInvoiceScalarFieldEnum | ClaimInvoiceScalarFieldEnum[]
   }
 
   /**
@@ -18215,10 +18409,12 @@ export namespace Prisma {
 
   export type CarrierEnquiryAvgAggregateOutputType = {
     replyCount: number | null
+    followUpSequenceCount: number | null
   }
 
   export type CarrierEnquirySumAggregateOutputType = {
     replyCount: number | null
+    followUpSequenceCount: number | null
   }
 
   export type CarrierEnquiryMinAggregateOutputType = {
@@ -18238,6 +18434,9 @@ export namespace Prisma {
     replyCount: number | null
     internalNotes: string | null
     followUpDueDate: Date | null
+    followUpSequenceCount: number | null
+    escalationTier: string | null
+    lastFollowUpSentAt: Date | null
     assignedUserId: string | null
     createdById: string | null
     createdAt: Date | null
@@ -18261,6 +18460,9 @@ export namespace Prisma {
     replyCount: number | null
     internalNotes: string | null
     followUpDueDate: Date | null
+    followUpSequenceCount: number | null
+    escalationTier: string | null
+    lastFollowUpSentAt: Date | null
     assignedUserId: string | null
     createdById: string | null
     createdAt: Date | null
@@ -18284,6 +18486,9 @@ export namespace Prisma {
     replyCount: number
     internalNotes: number
     followUpDueDate: number
+    followUpSequenceCount: number
+    escalationTier: number
+    lastFollowUpSentAt: number
     assignedUserId: number
     createdById: number
     createdAt: number
@@ -18294,10 +18499,12 @@ export namespace Prisma {
 
   export type CarrierEnquiryAvgAggregateInputType = {
     replyCount?: true
+    followUpSequenceCount?: true
   }
 
   export type CarrierEnquirySumAggregateInputType = {
     replyCount?: true
+    followUpSequenceCount?: true
   }
 
   export type CarrierEnquiryMinAggregateInputType = {
@@ -18317,6 +18524,9 @@ export namespace Prisma {
     replyCount?: true
     internalNotes?: true
     followUpDueDate?: true
+    followUpSequenceCount?: true
+    escalationTier?: true
+    lastFollowUpSentAt?: true
     assignedUserId?: true
     createdById?: true
     createdAt?: true
@@ -18340,6 +18550,9 @@ export namespace Prisma {
     replyCount?: true
     internalNotes?: true
     followUpDueDate?: true
+    followUpSequenceCount?: true
+    escalationTier?: true
+    lastFollowUpSentAt?: true
     assignedUserId?: true
     createdById?: true
     createdAt?: true
@@ -18363,6 +18576,9 @@ export namespace Prisma {
     replyCount?: true
     internalNotes?: true
     followUpDueDate?: true
+    followUpSequenceCount?: true
+    escalationTier?: true
+    lastFollowUpSentAt?: true
     assignedUserId?: true
     createdById?: true
     createdAt?: true
@@ -18473,6 +18689,9 @@ export namespace Prisma {
     replyCount: number
     internalNotes: string | null
     followUpDueDate: Date | null
+    followUpSequenceCount: number
+    escalationTier: string
+    lastFollowUpSentAt: Date | null
     assignedUserId: string | null
     createdById: string | null
     createdAt: Date
@@ -18515,6 +18734,9 @@ export namespace Prisma {
     replyCount?: boolean
     internalNotes?: boolean
     followUpDueDate?: boolean
+    followUpSequenceCount?: boolean
+    escalationTier?: boolean
+    lastFollowUpSentAt?: boolean
     assignedUserId?: boolean
     createdById?: boolean
     createdAt?: boolean
@@ -18544,6 +18766,9 @@ export namespace Prisma {
     replyCount?: boolean
     internalNotes?: boolean
     followUpDueDate?: boolean
+    followUpSequenceCount?: boolean
+    escalationTier?: boolean
+    lastFollowUpSentAt?: boolean
     assignedUserId?: boolean
     createdById?: boolean
     createdAt?: boolean
@@ -18571,6 +18796,9 @@ export namespace Prisma {
     replyCount?: boolean
     internalNotes?: boolean
     followUpDueDate?: boolean
+    followUpSequenceCount?: boolean
+    escalationTier?: boolean
+    lastFollowUpSentAt?: boolean
     assignedUserId?: boolean
     createdById?: boolean
     createdAt?: boolean
@@ -18618,6 +18846,9 @@ export namespace Prisma {
       replyCount: number
       internalNotes: string | null
       followUpDueDate: Date | null
+      followUpSequenceCount: number
+      escalationTier: string
+      lastFollowUpSentAt: Date | null
       assignedUserId: string | null
       createdById: string | null
       createdAt: Date
@@ -19036,6 +19267,9 @@ export namespace Prisma {
     readonly replyCount: FieldRef<"CarrierEnquiry", 'Int'>
     readonly internalNotes: FieldRef<"CarrierEnquiry", 'String'>
     readonly followUpDueDate: FieldRef<"CarrierEnquiry", 'DateTime'>
+    readonly followUpSequenceCount: FieldRef<"CarrierEnquiry", 'Int'>
+    readonly escalationTier: FieldRef<"CarrierEnquiry", 'String'>
+    readonly lastFollowUpSentAt: FieldRef<"CarrierEnquiry", 'DateTime'>
     readonly assignedUserId: FieldRef<"CarrierEnquiry", 'String'>
     readonly createdById: FieldRef<"CarrierEnquiry", 'String'>
     readonly createdAt: FieldRef<"CarrierEnquiry", 'DateTime'>
@@ -20769,6 +21003,7 @@ export namespace Prisma {
     carrier?: boolean | CarrierDefaultArgs<ExtArgs>
     assignedUser?: boolean | Claim$assignedUserArgs<ExtArgs>
     documents?: boolean | Claim$documentsArgs<ExtArgs>
+    invoices?: boolean | Claim$invoicesArgs<ExtArgs>
     _count?: boolean | ClaimCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["claim"]>
 
@@ -20838,6 +21073,7 @@ export namespace Prisma {
     carrier?: boolean | CarrierDefaultArgs<ExtArgs>
     assignedUser?: boolean | Claim$assignedUserArgs<ExtArgs>
     documents?: boolean | Claim$documentsArgs<ExtArgs>
+    invoices?: boolean | Claim$invoicesArgs<ExtArgs>
     _count?: boolean | ClaimCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ClaimIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -20855,6 +21091,7 @@ export namespace Prisma {
       carrier: Prisma.$CarrierPayload<ExtArgs>
       assignedUser: Prisma.$UserPayload<ExtArgs> | null
       documents: Prisma.$ClaimDocumentPayload<ExtArgs>[]
+      invoices: Prisma.$ClaimInvoicePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -21251,6 +21488,7 @@ export namespace Prisma {
     carrier<T extends CarrierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CarrierDefaultArgs<ExtArgs>>): Prisma__CarrierClient<$Result.GetResult<Prisma.$CarrierPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     assignedUser<T extends Claim$assignedUserArgs<ExtArgs> = {}>(args?: Subset<T, Claim$assignedUserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     documents<T extends Claim$documentsArgs<ExtArgs> = {}>(args?: Subset<T, Claim$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClaimDocumentPayload<ExtArgs>, T, "findMany"> | Null>
+    invoices<T extends Claim$invoicesArgs<ExtArgs> = {}>(args?: Subset<T, Claim$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClaimInvoicePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21655,6 +21893,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ClaimDocumentScalarFieldEnum | ClaimDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * Claim.invoices
+   */
+  export type Claim$invoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClaimInvoice
+     */
+    select?: ClaimInvoiceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClaimInvoiceInclude<ExtArgs> | null
+    where?: ClaimInvoiceWhereInput
+    orderBy?: ClaimInvoiceOrderByWithRelationInput | ClaimInvoiceOrderByWithRelationInput[]
+    cursor?: ClaimInvoiceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClaimInvoiceScalarFieldEnum | ClaimInvoiceScalarFieldEnum[]
   }
 
   /**
@@ -33973,6 +34231,1406 @@ export namespace Prisma {
 
 
   /**
+   * Model ClaimInvoice
+   */
+
+  export type AggregateClaimInvoice = {
+    _count: ClaimInvoiceCountAggregateOutputType | null
+    _avg: ClaimInvoiceAvgAggregateOutputType | null
+    _sum: ClaimInvoiceSumAggregateOutputType | null
+    _min: ClaimInvoiceMinAggregateOutputType | null
+    _max: ClaimInvoiceMaxAggregateOutputType | null
+  }
+
+  export type ClaimInvoiceAvgAggregateOutputType = {
+    merchandiseValue: number | null
+    shippingCost: number | null
+    taxAmount: number | null
+    adminFeeAmount: number | null
+    totalClaimedAmount: number | null
+  }
+
+  export type ClaimInvoiceSumAggregateOutputType = {
+    merchandiseValue: number | null
+    shippingCost: number | null
+    taxAmount: number | null
+    adminFeeAmount: number | null
+    totalClaimedAmount: number | null
+  }
+
+  export type ClaimInvoiceMinAggregateOutputType = {
+    id: string | null
+    organizationId: string | null
+    claimId: string | null
+    parcelId: string | null
+    carrierId: string | null
+    invoiceNumber: string | null
+    generationType: string | null
+    carrierFormat: string | null
+    claimantName: string | null
+    claimantAddress: string | null
+    claimantTaxId: string | null
+    claimantContactEmail: string | null
+    claimantPhone: string | null
+    courierName: string | null
+    courierAccountNo: string | null
+    courierDeptEmail: string | null
+    courierClaimRef: string | null
+    trackingNumber: string | null
+    orderNumber: string | null
+    dispatchDate: Date | null
+    lossReason: string | null
+    currency: string | null
+    merchandiseValue: number | null
+    shippingCost: number | null
+    taxAmount: number | null
+    adminFeeAmount: number | null
+    totalClaimedAmount: number | null
+    lineItems: string | null
+    customFields: string | null
+    evidenceImages: string | null
+    disclaimerText: string | null
+    notes: string | null
+    authorizedSignatory: string | null
+    status: string | null
+    submittedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ClaimInvoiceMaxAggregateOutputType = {
+    id: string | null
+    organizationId: string | null
+    claimId: string | null
+    parcelId: string | null
+    carrierId: string | null
+    invoiceNumber: string | null
+    generationType: string | null
+    carrierFormat: string | null
+    claimantName: string | null
+    claimantAddress: string | null
+    claimantTaxId: string | null
+    claimantContactEmail: string | null
+    claimantPhone: string | null
+    courierName: string | null
+    courierAccountNo: string | null
+    courierDeptEmail: string | null
+    courierClaimRef: string | null
+    trackingNumber: string | null
+    orderNumber: string | null
+    dispatchDate: Date | null
+    lossReason: string | null
+    currency: string | null
+    merchandiseValue: number | null
+    shippingCost: number | null
+    taxAmount: number | null
+    adminFeeAmount: number | null
+    totalClaimedAmount: number | null
+    lineItems: string | null
+    customFields: string | null
+    evidenceImages: string | null
+    disclaimerText: string | null
+    notes: string | null
+    authorizedSignatory: string | null
+    status: string | null
+    submittedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ClaimInvoiceCountAggregateOutputType = {
+    id: number
+    organizationId: number
+    claimId: number
+    parcelId: number
+    carrierId: number
+    invoiceNumber: number
+    generationType: number
+    carrierFormat: number
+    claimantName: number
+    claimantAddress: number
+    claimantTaxId: number
+    claimantContactEmail: number
+    claimantPhone: number
+    courierName: number
+    courierAccountNo: number
+    courierDeptEmail: number
+    courierClaimRef: number
+    trackingNumber: number
+    orderNumber: number
+    dispatchDate: number
+    lossReason: number
+    currency: number
+    merchandiseValue: number
+    shippingCost: number
+    taxAmount: number
+    adminFeeAmount: number
+    totalClaimedAmount: number
+    lineItems: number
+    customFields: number
+    evidenceImages: number
+    disclaimerText: number
+    notes: number
+    authorizedSignatory: number
+    status: number
+    submittedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ClaimInvoiceAvgAggregateInputType = {
+    merchandiseValue?: true
+    shippingCost?: true
+    taxAmount?: true
+    adminFeeAmount?: true
+    totalClaimedAmount?: true
+  }
+
+  export type ClaimInvoiceSumAggregateInputType = {
+    merchandiseValue?: true
+    shippingCost?: true
+    taxAmount?: true
+    adminFeeAmount?: true
+    totalClaimedAmount?: true
+  }
+
+  export type ClaimInvoiceMinAggregateInputType = {
+    id?: true
+    organizationId?: true
+    claimId?: true
+    parcelId?: true
+    carrierId?: true
+    invoiceNumber?: true
+    generationType?: true
+    carrierFormat?: true
+    claimantName?: true
+    claimantAddress?: true
+    claimantTaxId?: true
+    claimantContactEmail?: true
+    claimantPhone?: true
+    courierName?: true
+    courierAccountNo?: true
+    courierDeptEmail?: true
+    courierClaimRef?: true
+    trackingNumber?: true
+    orderNumber?: true
+    dispatchDate?: true
+    lossReason?: true
+    currency?: true
+    merchandiseValue?: true
+    shippingCost?: true
+    taxAmount?: true
+    adminFeeAmount?: true
+    totalClaimedAmount?: true
+    lineItems?: true
+    customFields?: true
+    evidenceImages?: true
+    disclaimerText?: true
+    notes?: true
+    authorizedSignatory?: true
+    status?: true
+    submittedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ClaimInvoiceMaxAggregateInputType = {
+    id?: true
+    organizationId?: true
+    claimId?: true
+    parcelId?: true
+    carrierId?: true
+    invoiceNumber?: true
+    generationType?: true
+    carrierFormat?: true
+    claimantName?: true
+    claimantAddress?: true
+    claimantTaxId?: true
+    claimantContactEmail?: true
+    claimantPhone?: true
+    courierName?: true
+    courierAccountNo?: true
+    courierDeptEmail?: true
+    courierClaimRef?: true
+    trackingNumber?: true
+    orderNumber?: true
+    dispatchDate?: true
+    lossReason?: true
+    currency?: true
+    merchandiseValue?: true
+    shippingCost?: true
+    taxAmount?: true
+    adminFeeAmount?: true
+    totalClaimedAmount?: true
+    lineItems?: true
+    customFields?: true
+    evidenceImages?: true
+    disclaimerText?: true
+    notes?: true
+    authorizedSignatory?: true
+    status?: true
+    submittedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ClaimInvoiceCountAggregateInputType = {
+    id?: true
+    organizationId?: true
+    claimId?: true
+    parcelId?: true
+    carrierId?: true
+    invoiceNumber?: true
+    generationType?: true
+    carrierFormat?: true
+    claimantName?: true
+    claimantAddress?: true
+    claimantTaxId?: true
+    claimantContactEmail?: true
+    claimantPhone?: true
+    courierName?: true
+    courierAccountNo?: true
+    courierDeptEmail?: true
+    courierClaimRef?: true
+    trackingNumber?: true
+    orderNumber?: true
+    dispatchDate?: true
+    lossReason?: true
+    currency?: true
+    merchandiseValue?: true
+    shippingCost?: true
+    taxAmount?: true
+    adminFeeAmount?: true
+    totalClaimedAmount?: true
+    lineItems?: true
+    customFields?: true
+    evidenceImages?: true
+    disclaimerText?: true
+    notes?: true
+    authorizedSignatory?: true
+    status?: true
+    submittedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ClaimInvoiceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClaimInvoice to aggregate.
+     */
+    where?: ClaimInvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClaimInvoices to fetch.
+     */
+    orderBy?: ClaimInvoiceOrderByWithRelationInput | ClaimInvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ClaimInvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClaimInvoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClaimInvoices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ClaimInvoices
+    **/
+    _count?: true | ClaimInvoiceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ClaimInvoiceAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ClaimInvoiceSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ClaimInvoiceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ClaimInvoiceMaxAggregateInputType
+  }
+
+  export type GetClaimInvoiceAggregateType<T extends ClaimInvoiceAggregateArgs> = {
+        [P in keyof T & keyof AggregateClaimInvoice]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateClaimInvoice[P]>
+      : GetScalarType<T[P], AggregateClaimInvoice[P]>
+  }
+
+
+
+
+  export type ClaimInvoiceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClaimInvoiceWhereInput
+    orderBy?: ClaimInvoiceOrderByWithAggregationInput | ClaimInvoiceOrderByWithAggregationInput[]
+    by: ClaimInvoiceScalarFieldEnum[] | ClaimInvoiceScalarFieldEnum
+    having?: ClaimInvoiceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ClaimInvoiceCountAggregateInputType | true
+    _avg?: ClaimInvoiceAvgAggregateInputType
+    _sum?: ClaimInvoiceSumAggregateInputType
+    _min?: ClaimInvoiceMinAggregateInputType
+    _max?: ClaimInvoiceMaxAggregateInputType
+  }
+
+  export type ClaimInvoiceGroupByOutputType = {
+    id: string
+    organizationId: string
+    claimId: string | null
+    parcelId: string
+    carrierId: string
+    invoiceNumber: string
+    generationType: string
+    carrierFormat: string
+    claimantName: string
+    claimantAddress: string
+    claimantTaxId: string | null
+    claimantContactEmail: string | null
+    claimantPhone: string | null
+    courierName: string
+    courierAccountNo: string | null
+    courierDeptEmail: string | null
+    courierClaimRef: string | null
+    trackingNumber: string
+    orderNumber: string
+    dispatchDate: Date | null
+    lossReason: string
+    currency: string
+    merchandiseValue: number
+    shippingCost: number
+    taxAmount: number
+    adminFeeAmount: number
+    totalClaimedAmount: number
+    lineItems: string
+    customFields: string
+    evidenceImages: string
+    disclaimerText: string
+    notes: string | null
+    authorizedSignatory: string | null
+    status: string
+    submittedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ClaimInvoiceCountAggregateOutputType | null
+    _avg: ClaimInvoiceAvgAggregateOutputType | null
+    _sum: ClaimInvoiceSumAggregateOutputType | null
+    _min: ClaimInvoiceMinAggregateOutputType | null
+    _max: ClaimInvoiceMaxAggregateOutputType | null
+  }
+
+  type GetClaimInvoiceGroupByPayload<T extends ClaimInvoiceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ClaimInvoiceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ClaimInvoiceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ClaimInvoiceGroupByOutputType[P]>
+            : GetScalarType<T[P], ClaimInvoiceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ClaimInvoiceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    organizationId?: boolean
+    claimId?: boolean
+    parcelId?: boolean
+    carrierId?: boolean
+    invoiceNumber?: boolean
+    generationType?: boolean
+    carrierFormat?: boolean
+    claimantName?: boolean
+    claimantAddress?: boolean
+    claimantTaxId?: boolean
+    claimantContactEmail?: boolean
+    claimantPhone?: boolean
+    courierName?: boolean
+    courierAccountNo?: boolean
+    courierDeptEmail?: boolean
+    courierClaimRef?: boolean
+    trackingNumber?: boolean
+    orderNumber?: boolean
+    dispatchDate?: boolean
+    lossReason?: boolean
+    currency?: boolean
+    merchandiseValue?: boolean
+    shippingCost?: boolean
+    taxAmount?: boolean
+    adminFeeAmount?: boolean
+    totalClaimedAmount?: boolean
+    lineItems?: boolean
+    customFields?: boolean
+    evidenceImages?: boolean
+    disclaimerText?: boolean
+    notes?: boolean
+    authorizedSignatory?: boolean
+    status?: boolean
+    submittedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    claim?: boolean | ClaimInvoice$claimArgs<ExtArgs>
+    parcel?: boolean | ParcelDefaultArgs<ExtArgs>
+    carrier?: boolean | CarrierDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["claimInvoice"]>
+
+  export type ClaimInvoiceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    organizationId?: boolean
+    claimId?: boolean
+    parcelId?: boolean
+    carrierId?: boolean
+    invoiceNumber?: boolean
+    generationType?: boolean
+    carrierFormat?: boolean
+    claimantName?: boolean
+    claimantAddress?: boolean
+    claimantTaxId?: boolean
+    claimantContactEmail?: boolean
+    claimantPhone?: boolean
+    courierName?: boolean
+    courierAccountNo?: boolean
+    courierDeptEmail?: boolean
+    courierClaimRef?: boolean
+    trackingNumber?: boolean
+    orderNumber?: boolean
+    dispatchDate?: boolean
+    lossReason?: boolean
+    currency?: boolean
+    merchandiseValue?: boolean
+    shippingCost?: boolean
+    taxAmount?: boolean
+    adminFeeAmount?: boolean
+    totalClaimedAmount?: boolean
+    lineItems?: boolean
+    customFields?: boolean
+    evidenceImages?: boolean
+    disclaimerText?: boolean
+    notes?: boolean
+    authorizedSignatory?: boolean
+    status?: boolean
+    submittedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    claim?: boolean | ClaimInvoice$claimArgs<ExtArgs>
+    parcel?: boolean | ParcelDefaultArgs<ExtArgs>
+    carrier?: boolean | CarrierDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["claimInvoice"]>
+
+  export type ClaimInvoiceSelectScalar = {
+    id?: boolean
+    organizationId?: boolean
+    claimId?: boolean
+    parcelId?: boolean
+    carrierId?: boolean
+    invoiceNumber?: boolean
+    generationType?: boolean
+    carrierFormat?: boolean
+    claimantName?: boolean
+    claimantAddress?: boolean
+    claimantTaxId?: boolean
+    claimantContactEmail?: boolean
+    claimantPhone?: boolean
+    courierName?: boolean
+    courierAccountNo?: boolean
+    courierDeptEmail?: boolean
+    courierClaimRef?: boolean
+    trackingNumber?: boolean
+    orderNumber?: boolean
+    dispatchDate?: boolean
+    lossReason?: boolean
+    currency?: boolean
+    merchandiseValue?: boolean
+    shippingCost?: boolean
+    taxAmount?: boolean
+    adminFeeAmount?: boolean
+    totalClaimedAmount?: boolean
+    lineItems?: boolean
+    customFields?: boolean
+    evidenceImages?: boolean
+    disclaimerText?: boolean
+    notes?: boolean
+    authorizedSignatory?: boolean
+    status?: boolean
+    submittedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ClaimInvoiceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    claim?: boolean | ClaimInvoice$claimArgs<ExtArgs>
+    parcel?: boolean | ParcelDefaultArgs<ExtArgs>
+    carrier?: boolean | CarrierDefaultArgs<ExtArgs>
+  }
+  export type ClaimInvoiceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    claim?: boolean | ClaimInvoice$claimArgs<ExtArgs>
+    parcel?: boolean | ParcelDefaultArgs<ExtArgs>
+    carrier?: boolean | CarrierDefaultArgs<ExtArgs>
+  }
+
+  export type $ClaimInvoicePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ClaimInvoice"
+    objects: {
+      organization: Prisma.$OrganizationPayload<ExtArgs>
+      claim: Prisma.$ClaimPayload<ExtArgs> | null
+      parcel: Prisma.$ParcelPayload<ExtArgs>
+      carrier: Prisma.$CarrierPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      organizationId: string
+      claimId: string | null
+      parcelId: string
+      carrierId: string
+      invoiceNumber: string
+      generationType: string
+      carrierFormat: string
+      claimantName: string
+      claimantAddress: string
+      claimantTaxId: string | null
+      claimantContactEmail: string | null
+      claimantPhone: string | null
+      courierName: string
+      courierAccountNo: string | null
+      courierDeptEmail: string | null
+      courierClaimRef: string | null
+      trackingNumber: string
+      orderNumber: string
+      dispatchDate: Date | null
+      lossReason: string
+      currency: string
+      merchandiseValue: number
+      shippingCost: number
+      taxAmount: number
+      adminFeeAmount: number
+      totalClaimedAmount: number
+      lineItems: string
+      customFields: string
+      evidenceImages: string
+      disclaimerText: string
+      notes: string | null
+      authorizedSignatory: string | null
+      status: string
+      submittedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["claimInvoice"]>
+    composites: {}
+  }
+
+  type ClaimInvoiceGetPayload<S extends boolean | null | undefined | ClaimInvoiceDefaultArgs> = $Result.GetResult<Prisma.$ClaimInvoicePayload, S>
+
+  type ClaimInvoiceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ClaimInvoiceFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ClaimInvoiceCountAggregateInputType | true
+    }
+
+  export interface ClaimInvoiceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ClaimInvoice'], meta: { name: 'ClaimInvoice' } }
+    /**
+     * Find zero or one ClaimInvoice that matches the filter.
+     * @param {ClaimInvoiceFindUniqueArgs} args - Arguments to find a ClaimInvoice
+     * @example
+     * // Get one ClaimInvoice
+     * const claimInvoice = await prisma.claimInvoice.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ClaimInvoiceFindUniqueArgs>(args: SelectSubset<T, ClaimInvoiceFindUniqueArgs<ExtArgs>>): Prisma__ClaimInvoiceClient<$Result.GetResult<Prisma.$ClaimInvoicePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one ClaimInvoice that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {ClaimInvoiceFindUniqueOrThrowArgs} args - Arguments to find a ClaimInvoice
+     * @example
+     * // Get one ClaimInvoice
+     * const claimInvoice = await prisma.claimInvoice.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ClaimInvoiceFindUniqueOrThrowArgs>(args: SelectSubset<T, ClaimInvoiceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClaimInvoiceClient<$Result.GetResult<Prisma.$ClaimInvoicePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first ClaimInvoice that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClaimInvoiceFindFirstArgs} args - Arguments to find a ClaimInvoice
+     * @example
+     * // Get one ClaimInvoice
+     * const claimInvoice = await prisma.claimInvoice.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ClaimInvoiceFindFirstArgs>(args?: SelectSubset<T, ClaimInvoiceFindFirstArgs<ExtArgs>>): Prisma__ClaimInvoiceClient<$Result.GetResult<Prisma.$ClaimInvoicePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first ClaimInvoice that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClaimInvoiceFindFirstOrThrowArgs} args - Arguments to find a ClaimInvoice
+     * @example
+     * // Get one ClaimInvoice
+     * const claimInvoice = await prisma.claimInvoice.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ClaimInvoiceFindFirstOrThrowArgs>(args?: SelectSubset<T, ClaimInvoiceFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClaimInvoiceClient<$Result.GetResult<Prisma.$ClaimInvoicePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more ClaimInvoices that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClaimInvoiceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ClaimInvoices
+     * const claimInvoices = await prisma.claimInvoice.findMany()
+     * 
+     * // Get first 10 ClaimInvoices
+     * const claimInvoices = await prisma.claimInvoice.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const claimInvoiceWithIdOnly = await prisma.claimInvoice.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ClaimInvoiceFindManyArgs>(args?: SelectSubset<T, ClaimInvoiceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClaimInvoicePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a ClaimInvoice.
+     * @param {ClaimInvoiceCreateArgs} args - Arguments to create a ClaimInvoice.
+     * @example
+     * // Create one ClaimInvoice
+     * const ClaimInvoice = await prisma.claimInvoice.create({
+     *   data: {
+     *     // ... data to create a ClaimInvoice
+     *   }
+     * })
+     * 
+     */
+    create<T extends ClaimInvoiceCreateArgs>(args: SelectSubset<T, ClaimInvoiceCreateArgs<ExtArgs>>): Prisma__ClaimInvoiceClient<$Result.GetResult<Prisma.$ClaimInvoicePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many ClaimInvoices.
+     * @param {ClaimInvoiceCreateManyArgs} args - Arguments to create many ClaimInvoices.
+     * @example
+     * // Create many ClaimInvoices
+     * const claimInvoice = await prisma.claimInvoice.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ClaimInvoiceCreateManyArgs>(args?: SelectSubset<T, ClaimInvoiceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ClaimInvoices and returns the data saved in the database.
+     * @param {ClaimInvoiceCreateManyAndReturnArgs} args - Arguments to create many ClaimInvoices.
+     * @example
+     * // Create many ClaimInvoices
+     * const claimInvoice = await prisma.claimInvoice.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ClaimInvoices and only return the `id`
+     * const claimInvoiceWithIdOnly = await prisma.claimInvoice.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ClaimInvoiceCreateManyAndReturnArgs>(args?: SelectSubset<T, ClaimInvoiceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClaimInvoicePayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a ClaimInvoice.
+     * @param {ClaimInvoiceDeleteArgs} args - Arguments to delete one ClaimInvoice.
+     * @example
+     * // Delete one ClaimInvoice
+     * const ClaimInvoice = await prisma.claimInvoice.delete({
+     *   where: {
+     *     // ... filter to delete one ClaimInvoice
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ClaimInvoiceDeleteArgs>(args: SelectSubset<T, ClaimInvoiceDeleteArgs<ExtArgs>>): Prisma__ClaimInvoiceClient<$Result.GetResult<Prisma.$ClaimInvoicePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one ClaimInvoice.
+     * @param {ClaimInvoiceUpdateArgs} args - Arguments to update one ClaimInvoice.
+     * @example
+     * // Update one ClaimInvoice
+     * const claimInvoice = await prisma.claimInvoice.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ClaimInvoiceUpdateArgs>(args: SelectSubset<T, ClaimInvoiceUpdateArgs<ExtArgs>>): Prisma__ClaimInvoiceClient<$Result.GetResult<Prisma.$ClaimInvoicePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more ClaimInvoices.
+     * @param {ClaimInvoiceDeleteManyArgs} args - Arguments to filter ClaimInvoices to delete.
+     * @example
+     * // Delete a few ClaimInvoices
+     * const { count } = await prisma.claimInvoice.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ClaimInvoiceDeleteManyArgs>(args?: SelectSubset<T, ClaimInvoiceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ClaimInvoices.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClaimInvoiceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ClaimInvoices
+     * const claimInvoice = await prisma.claimInvoice.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ClaimInvoiceUpdateManyArgs>(args: SelectSubset<T, ClaimInvoiceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ClaimInvoice.
+     * @param {ClaimInvoiceUpsertArgs} args - Arguments to update or create a ClaimInvoice.
+     * @example
+     * // Update or create a ClaimInvoice
+     * const claimInvoice = await prisma.claimInvoice.upsert({
+     *   create: {
+     *     // ... data to create a ClaimInvoice
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ClaimInvoice we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ClaimInvoiceUpsertArgs>(args: SelectSubset<T, ClaimInvoiceUpsertArgs<ExtArgs>>): Prisma__ClaimInvoiceClient<$Result.GetResult<Prisma.$ClaimInvoicePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of ClaimInvoices.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClaimInvoiceCountArgs} args - Arguments to filter ClaimInvoices to count.
+     * @example
+     * // Count the number of ClaimInvoices
+     * const count = await prisma.claimInvoice.count({
+     *   where: {
+     *     // ... the filter for the ClaimInvoices we want to count
+     *   }
+     * })
+    **/
+    count<T extends ClaimInvoiceCountArgs>(
+      args?: Subset<T, ClaimInvoiceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ClaimInvoiceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ClaimInvoice.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClaimInvoiceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ClaimInvoiceAggregateArgs>(args: Subset<T, ClaimInvoiceAggregateArgs>): Prisma.PrismaPromise<GetClaimInvoiceAggregateType<T>>
+
+    /**
+     * Group by ClaimInvoice.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClaimInvoiceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ClaimInvoiceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ClaimInvoiceGroupByArgs['orderBy'] }
+        : { orderBy?: ClaimInvoiceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ClaimInvoiceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClaimInvoiceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ClaimInvoice model
+   */
+  readonly fields: ClaimInvoiceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ClaimInvoice.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ClaimInvoiceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    organization<T extends OrganizationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrganizationDefaultArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    claim<T extends ClaimInvoice$claimArgs<ExtArgs> = {}>(args?: Subset<T, ClaimInvoice$claimArgs<ExtArgs>>): Prisma__ClaimClient<$Result.GetResult<Prisma.$ClaimPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    parcel<T extends ParcelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ParcelDefaultArgs<ExtArgs>>): Prisma__ParcelClient<$Result.GetResult<Prisma.$ParcelPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    carrier<T extends CarrierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CarrierDefaultArgs<ExtArgs>>): Prisma__CarrierClient<$Result.GetResult<Prisma.$CarrierPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ClaimInvoice model
+   */ 
+  interface ClaimInvoiceFieldRefs {
+    readonly id: FieldRef<"ClaimInvoice", 'String'>
+    readonly organizationId: FieldRef<"ClaimInvoice", 'String'>
+    readonly claimId: FieldRef<"ClaimInvoice", 'String'>
+    readonly parcelId: FieldRef<"ClaimInvoice", 'String'>
+    readonly carrierId: FieldRef<"ClaimInvoice", 'String'>
+    readonly invoiceNumber: FieldRef<"ClaimInvoice", 'String'>
+    readonly generationType: FieldRef<"ClaimInvoice", 'String'>
+    readonly carrierFormat: FieldRef<"ClaimInvoice", 'String'>
+    readonly claimantName: FieldRef<"ClaimInvoice", 'String'>
+    readonly claimantAddress: FieldRef<"ClaimInvoice", 'String'>
+    readonly claimantTaxId: FieldRef<"ClaimInvoice", 'String'>
+    readonly claimantContactEmail: FieldRef<"ClaimInvoice", 'String'>
+    readonly claimantPhone: FieldRef<"ClaimInvoice", 'String'>
+    readonly courierName: FieldRef<"ClaimInvoice", 'String'>
+    readonly courierAccountNo: FieldRef<"ClaimInvoice", 'String'>
+    readonly courierDeptEmail: FieldRef<"ClaimInvoice", 'String'>
+    readonly courierClaimRef: FieldRef<"ClaimInvoice", 'String'>
+    readonly trackingNumber: FieldRef<"ClaimInvoice", 'String'>
+    readonly orderNumber: FieldRef<"ClaimInvoice", 'String'>
+    readonly dispatchDate: FieldRef<"ClaimInvoice", 'DateTime'>
+    readonly lossReason: FieldRef<"ClaimInvoice", 'String'>
+    readonly currency: FieldRef<"ClaimInvoice", 'String'>
+    readonly merchandiseValue: FieldRef<"ClaimInvoice", 'Float'>
+    readonly shippingCost: FieldRef<"ClaimInvoice", 'Float'>
+    readonly taxAmount: FieldRef<"ClaimInvoice", 'Float'>
+    readonly adminFeeAmount: FieldRef<"ClaimInvoice", 'Float'>
+    readonly totalClaimedAmount: FieldRef<"ClaimInvoice", 'Float'>
+    readonly lineItems: FieldRef<"ClaimInvoice", 'String'>
+    readonly customFields: FieldRef<"ClaimInvoice", 'String'>
+    readonly evidenceImages: FieldRef<"ClaimInvoice", 'String'>
+    readonly disclaimerText: FieldRef<"ClaimInvoice", 'String'>
+    readonly notes: FieldRef<"ClaimInvoice", 'String'>
+    readonly authorizedSignatory: FieldRef<"ClaimInvoice", 'String'>
+    readonly status: FieldRef<"ClaimInvoice", 'String'>
+    readonly submittedAt: FieldRef<"ClaimInvoice", 'DateTime'>
+    readonly createdAt: FieldRef<"ClaimInvoice", 'DateTime'>
+    readonly updatedAt: FieldRef<"ClaimInvoice", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ClaimInvoice findUnique
+   */
+  export type ClaimInvoiceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClaimInvoice
+     */
+    select?: ClaimInvoiceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClaimInvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which ClaimInvoice to fetch.
+     */
+    where: ClaimInvoiceWhereUniqueInput
+  }
+
+  /**
+   * ClaimInvoice findUniqueOrThrow
+   */
+  export type ClaimInvoiceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClaimInvoice
+     */
+    select?: ClaimInvoiceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClaimInvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which ClaimInvoice to fetch.
+     */
+    where: ClaimInvoiceWhereUniqueInput
+  }
+
+  /**
+   * ClaimInvoice findFirst
+   */
+  export type ClaimInvoiceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClaimInvoice
+     */
+    select?: ClaimInvoiceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClaimInvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which ClaimInvoice to fetch.
+     */
+    where?: ClaimInvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClaimInvoices to fetch.
+     */
+    orderBy?: ClaimInvoiceOrderByWithRelationInput | ClaimInvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClaimInvoices.
+     */
+    cursor?: ClaimInvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClaimInvoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClaimInvoices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClaimInvoices.
+     */
+    distinct?: ClaimInvoiceScalarFieldEnum | ClaimInvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * ClaimInvoice findFirstOrThrow
+   */
+  export type ClaimInvoiceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClaimInvoice
+     */
+    select?: ClaimInvoiceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClaimInvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which ClaimInvoice to fetch.
+     */
+    where?: ClaimInvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClaimInvoices to fetch.
+     */
+    orderBy?: ClaimInvoiceOrderByWithRelationInput | ClaimInvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClaimInvoices.
+     */
+    cursor?: ClaimInvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClaimInvoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClaimInvoices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClaimInvoices.
+     */
+    distinct?: ClaimInvoiceScalarFieldEnum | ClaimInvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * ClaimInvoice findMany
+   */
+  export type ClaimInvoiceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClaimInvoice
+     */
+    select?: ClaimInvoiceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClaimInvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which ClaimInvoices to fetch.
+     */
+    where?: ClaimInvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClaimInvoices to fetch.
+     */
+    orderBy?: ClaimInvoiceOrderByWithRelationInput | ClaimInvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ClaimInvoices.
+     */
+    cursor?: ClaimInvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClaimInvoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClaimInvoices.
+     */
+    skip?: number
+    distinct?: ClaimInvoiceScalarFieldEnum | ClaimInvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * ClaimInvoice create
+   */
+  export type ClaimInvoiceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClaimInvoice
+     */
+    select?: ClaimInvoiceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClaimInvoiceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ClaimInvoice.
+     */
+    data: XOR<ClaimInvoiceCreateInput, ClaimInvoiceUncheckedCreateInput>
+  }
+
+  /**
+   * ClaimInvoice createMany
+   */
+  export type ClaimInvoiceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ClaimInvoices.
+     */
+    data: ClaimInvoiceCreateManyInput | ClaimInvoiceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ClaimInvoice createManyAndReturn
+   */
+  export type ClaimInvoiceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClaimInvoice
+     */
+    select?: ClaimInvoiceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many ClaimInvoices.
+     */
+    data: ClaimInvoiceCreateManyInput | ClaimInvoiceCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClaimInvoiceIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ClaimInvoice update
+   */
+  export type ClaimInvoiceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClaimInvoice
+     */
+    select?: ClaimInvoiceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClaimInvoiceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ClaimInvoice.
+     */
+    data: XOR<ClaimInvoiceUpdateInput, ClaimInvoiceUncheckedUpdateInput>
+    /**
+     * Choose, which ClaimInvoice to update.
+     */
+    where: ClaimInvoiceWhereUniqueInput
+  }
+
+  /**
+   * ClaimInvoice updateMany
+   */
+  export type ClaimInvoiceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ClaimInvoices.
+     */
+    data: XOR<ClaimInvoiceUpdateManyMutationInput, ClaimInvoiceUncheckedUpdateManyInput>
+    /**
+     * Filter which ClaimInvoices to update
+     */
+    where?: ClaimInvoiceWhereInput
+  }
+
+  /**
+   * ClaimInvoice upsert
+   */
+  export type ClaimInvoiceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClaimInvoice
+     */
+    select?: ClaimInvoiceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClaimInvoiceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ClaimInvoice to update in case it exists.
+     */
+    where: ClaimInvoiceWhereUniqueInput
+    /**
+     * In case the ClaimInvoice found by the `where` argument doesn't exist, create a new ClaimInvoice with this data.
+     */
+    create: XOR<ClaimInvoiceCreateInput, ClaimInvoiceUncheckedCreateInput>
+    /**
+     * In case the ClaimInvoice was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ClaimInvoiceUpdateInput, ClaimInvoiceUncheckedUpdateInput>
+  }
+
+  /**
+   * ClaimInvoice delete
+   */
+  export type ClaimInvoiceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClaimInvoice
+     */
+    select?: ClaimInvoiceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClaimInvoiceInclude<ExtArgs> | null
+    /**
+     * Filter which ClaimInvoice to delete.
+     */
+    where: ClaimInvoiceWhereUniqueInput
+  }
+
+  /**
+   * ClaimInvoice deleteMany
+   */
+  export type ClaimInvoiceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClaimInvoices to delete
+     */
+    where?: ClaimInvoiceWhereInput
+  }
+
+  /**
+   * ClaimInvoice.claim
+   */
+  export type ClaimInvoice$claimArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Claim
+     */
+    select?: ClaimSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClaimInclude<ExtArgs> | null
+    where?: ClaimWhereInput
+  }
+
+  /**
+   * ClaimInvoice without action
+   */
+  export type ClaimInvoiceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClaimInvoice
+     */
+    select?: ClaimInvoiceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClaimInvoiceInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -34300,6 +35958,9 @@ export namespace Prisma {
     replyCount: 'replyCount',
     internalNotes: 'internalNotes',
     followUpDueDate: 'followUpDueDate',
+    followUpSequenceCount: 'followUpSequenceCount',
+    escalationTier: 'escalationTier',
+    lastFollowUpSentAt: 'lastFollowUpSentAt',
     assignedUserId: 'assignedUserId',
     createdById: 'createdById',
     createdAt: 'createdAt',
@@ -34551,6 +36212,49 @@ export namespace Prisma {
   export type JobQueueScalarFieldEnum = (typeof JobQueueScalarFieldEnum)[keyof typeof JobQueueScalarFieldEnum]
 
 
+  export const ClaimInvoiceScalarFieldEnum: {
+    id: 'id',
+    organizationId: 'organizationId',
+    claimId: 'claimId',
+    parcelId: 'parcelId',
+    carrierId: 'carrierId',
+    invoiceNumber: 'invoiceNumber',
+    generationType: 'generationType',
+    carrierFormat: 'carrierFormat',
+    claimantName: 'claimantName',
+    claimantAddress: 'claimantAddress',
+    claimantTaxId: 'claimantTaxId',
+    claimantContactEmail: 'claimantContactEmail',
+    claimantPhone: 'claimantPhone',
+    courierName: 'courierName',
+    courierAccountNo: 'courierAccountNo',
+    courierDeptEmail: 'courierDeptEmail',
+    courierClaimRef: 'courierClaimRef',
+    trackingNumber: 'trackingNumber',
+    orderNumber: 'orderNumber',
+    dispatchDate: 'dispatchDate',
+    lossReason: 'lossReason',
+    currency: 'currency',
+    merchandiseValue: 'merchandiseValue',
+    shippingCost: 'shippingCost',
+    taxAmount: 'taxAmount',
+    adminFeeAmount: 'adminFeeAmount',
+    totalClaimedAmount: 'totalClaimedAmount',
+    lineItems: 'lineItems',
+    customFields: 'customFields',
+    evidenceImages: 'evidenceImages',
+    disclaimerText: 'disclaimerText',
+    notes: 'notes',
+    authorizedSignatory: 'authorizedSignatory',
+    status: 'status',
+    submittedAt: 'submittedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ClaimInvoiceScalarFieldEnum = (typeof ClaimInvoiceScalarFieldEnum)[keyof typeof ClaimInvoiceScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -34682,6 +36386,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageListRelationFilter
     claims?: ClaimListRelationFilter
     claimDocuments?: ClaimDocumentListRelationFilter
+    claimInvoices?: ClaimInvoiceListRelationFilter
     customFields?: CustomFieldListRelationFilter
     customStatusMappings?: CustomStatusMappingListRelationFilter
     workflowRules?: WorkflowRuleListRelationFilter
@@ -34728,6 +36433,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageOrderByRelationAggregateInput
     claims?: ClaimOrderByRelationAggregateInput
     claimDocuments?: ClaimDocumentOrderByRelationAggregateInput
+    claimInvoices?: ClaimInvoiceOrderByRelationAggregateInput
     customFields?: CustomFieldOrderByRelationAggregateInput
     customStatusMappings?: CustomStatusMappingOrderByRelationAggregateInput
     workflowRules?: WorkflowRuleOrderByRelationAggregateInput
@@ -34777,6 +36483,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageListRelationFilter
     claims?: ClaimListRelationFilter
     claimDocuments?: ClaimDocumentListRelationFilter
+    claimInvoices?: ClaimInvoiceListRelationFilter
     customFields?: CustomFieldListRelationFilter
     customStatusMappings?: CustomStatusMappingListRelationFilter
     workflowRules?: WorkflowRuleListRelationFilter
@@ -35151,6 +36858,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyListRelationFilter
     enquiries?: CarrierEnquiryListRelationFilter
     claims?: ClaimListRelationFilter
+    claimInvoices?: ClaimInvoiceListRelationFilter
   }
 
   export type CarrierOrderByWithRelationInput = {
@@ -35179,6 +36887,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyOrderByRelationAggregateInput
     enquiries?: CarrierEnquiryOrderByRelationAggregateInput
     claims?: ClaimOrderByRelationAggregateInput
+    claimInvoices?: ClaimInvoiceOrderByRelationAggregateInput
   }
 
   export type CarrierWhereUniqueInput = Prisma.AtLeast<{
@@ -35211,6 +36920,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyListRelationFilter
     enquiries?: CarrierEnquiryListRelationFilter
     claims?: ClaimListRelationFilter
+    claimInvoices?: ClaimInvoiceListRelationFilter
   }, "id" | "organizationId_code">
 
   export type CarrierOrderByWithAggregationInput = {
@@ -35708,6 +37418,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryListRelationFilter
     claims?: ClaimListRelationFilter
     claimDocuments?: ClaimDocumentListRelationFilter
+    claimInvoices?: ClaimInvoiceListRelationFilter
   }
 
   export type ParcelOrderByWithRelationInput = {
@@ -35769,6 +37480,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryOrderByRelationAggregateInput
     claims?: ClaimOrderByRelationAggregateInput
     claimDocuments?: ClaimDocumentOrderByRelationAggregateInput
+    claimInvoices?: ClaimInvoiceOrderByRelationAggregateInput
   }
 
   export type ParcelWhereUniqueInput = Prisma.AtLeast<{
@@ -35834,6 +37546,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryListRelationFilter
     claims?: ClaimListRelationFilter
     claimDocuments?: ClaimDocumentListRelationFilter
+    claimInvoices?: ClaimInvoiceListRelationFilter
   }, "id" | "organizationId_trackingNumber">
 
   export type ParcelOrderByWithAggregationInput = {
@@ -36310,6 +38023,9 @@ export namespace Prisma {
     replyCount?: IntFilter<"CarrierEnquiry"> | number
     internalNotes?: StringNullableFilter<"CarrierEnquiry"> | string | null
     followUpDueDate?: DateTimeNullableFilter<"CarrierEnquiry"> | Date | string | null
+    followUpSequenceCount?: IntFilter<"CarrierEnquiry"> | number
+    escalationTier?: StringFilter<"CarrierEnquiry"> | string
+    lastFollowUpSentAt?: DateTimeNullableFilter<"CarrierEnquiry"> | Date | string | null
     assignedUserId?: StringNullableFilter<"CarrierEnquiry"> | string | null
     createdById?: StringNullableFilter<"CarrierEnquiry"> | string | null
     createdAt?: DateTimeFilter<"CarrierEnquiry"> | Date | string
@@ -36338,6 +38054,9 @@ export namespace Prisma {
     replyCount?: SortOrder
     internalNotes?: SortOrderInput | SortOrder
     followUpDueDate?: SortOrderInput | SortOrder
+    followUpSequenceCount?: SortOrder
+    escalationTier?: SortOrder
+    lastFollowUpSentAt?: SortOrderInput | SortOrder
     assignedUserId?: SortOrderInput | SortOrder
     createdById?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -36369,6 +38088,9 @@ export namespace Prisma {
     replyCount?: IntFilter<"CarrierEnquiry"> | number
     internalNotes?: StringNullableFilter<"CarrierEnquiry"> | string | null
     followUpDueDate?: DateTimeNullableFilter<"CarrierEnquiry"> | Date | string | null
+    followUpSequenceCount?: IntFilter<"CarrierEnquiry"> | number
+    escalationTier?: StringFilter<"CarrierEnquiry"> | string
+    lastFollowUpSentAt?: DateTimeNullableFilter<"CarrierEnquiry"> | Date | string | null
     assignedUserId?: StringNullableFilter<"CarrierEnquiry"> | string | null
     createdById?: StringNullableFilter<"CarrierEnquiry"> | string | null
     createdAt?: DateTimeFilter<"CarrierEnquiry"> | Date | string
@@ -36397,6 +38119,9 @@ export namespace Prisma {
     replyCount?: SortOrder
     internalNotes?: SortOrderInput | SortOrder
     followUpDueDate?: SortOrderInput | SortOrder
+    followUpSequenceCount?: SortOrder
+    escalationTier?: SortOrder
+    lastFollowUpSentAt?: SortOrderInput | SortOrder
     assignedUserId?: SortOrderInput | SortOrder
     createdById?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -36428,6 +38153,9 @@ export namespace Prisma {
     replyCount?: IntWithAggregatesFilter<"CarrierEnquiry"> | number
     internalNotes?: StringNullableWithAggregatesFilter<"CarrierEnquiry"> | string | null
     followUpDueDate?: DateTimeNullableWithAggregatesFilter<"CarrierEnquiry"> | Date | string | null
+    followUpSequenceCount?: IntWithAggregatesFilter<"CarrierEnquiry"> | number
+    escalationTier?: StringWithAggregatesFilter<"CarrierEnquiry"> | string
+    lastFollowUpSentAt?: DateTimeNullableWithAggregatesFilter<"CarrierEnquiry"> | Date | string | null
     assignedUserId?: StringNullableWithAggregatesFilter<"CarrierEnquiry"> | string | null
     createdById?: StringNullableWithAggregatesFilter<"CarrierEnquiry"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"CarrierEnquiry"> | Date | string
@@ -36546,6 +38274,7 @@ export namespace Prisma {
     carrier?: XOR<CarrierRelationFilter, CarrierWhereInput>
     assignedUser?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     documents?: ClaimDocumentListRelationFilter
+    invoices?: ClaimInvoiceListRelationFilter
   }
 
   export type ClaimOrderByWithRelationInput = {
@@ -36579,6 +38308,7 @@ export namespace Prisma {
     carrier?: CarrierOrderByWithRelationInput
     assignedUser?: UserOrderByWithRelationInput
     documents?: ClaimDocumentOrderByRelationAggregateInput
+    invoices?: ClaimInvoiceOrderByRelationAggregateInput
   }
 
   export type ClaimWhereUniqueInput = Prisma.AtLeast<{
@@ -36615,6 +38345,7 @@ export namespace Prisma {
     carrier?: XOR<CarrierRelationFilter, CarrierWhereInput>
     assignedUser?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     documents?: ClaimDocumentListRelationFilter
+    invoices?: ClaimInvoiceListRelationFilter
   }, "id" | "claimNumber">
 
   export type ClaimOrderByWithAggregationInput = {
@@ -37696,6 +39427,232 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"JobQueue"> | Date | string
   }
 
+  export type ClaimInvoiceWhereInput = {
+    AND?: ClaimInvoiceWhereInput | ClaimInvoiceWhereInput[]
+    OR?: ClaimInvoiceWhereInput[]
+    NOT?: ClaimInvoiceWhereInput | ClaimInvoiceWhereInput[]
+    id?: StringFilter<"ClaimInvoice"> | string
+    organizationId?: StringFilter<"ClaimInvoice"> | string
+    claimId?: StringNullableFilter<"ClaimInvoice"> | string | null
+    parcelId?: StringFilter<"ClaimInvoice"> | string
+    carrierId?: StringFilter<"ClaimInvoice"> | string
+    invoiceNumber?: StringFilter<"ClaimInvoice"> | string
+    generationType?: StringFilter<"ClaimInvoice"> | string
+    carrierFormat?: StringFilter<"ClaimInvoice"> | string
+    claimantName?: StringFilter<"ClaimInvoice"> | string
+    claimantAddress?: StringFilter<"ClaimInvoice"> | string
+    claimantTaxId?: StringNullableFilter<"ClaimInvoice"> | string | null
+    claimantContactEmail?: StringNullableFilter<"ClaimInvoice"> | string | null
+    claimantPhone?: StringNullableFilter<"ClaimInvoice"> | string | null
+    courierName?: StringFilter<"ClaimInvoice"> | string
+    courierAccountNo?: StringNullableFilter<"ClaimInvoice"> | string | null
+    courierDeptEmail?: StringNullableFilter<"ClaimInvoice"> | string | null
+    courierClaimRef?: StringNullableFilter<"ClaimInvoice"> | string | null
+    trackingNumber?: StringFilter<"ClaimInvoice"> | string
+    orderNumber?: StringFilter<"ClaimInvoice"> | string
+    dispatchDate?: DateTimeNullableFilter<"ClaimInvoice"> | Date | string | null
+    lossReason?: StringFilter<"ClaimInvoice"> | string
+    currency?: StringFilter<"ClaimInvoice"> | string
+    merchandiseValue?: FloatFilter<"ClaimInvoice"> | number
+    shippingCost?: FloatFilter<"ClaimInvoice"> | number
+    taxAmount?: FloatFilter<"ClaimInvoice"> | number
+    adminFeeAmount?: FloatFilter<"ClaimInvoice"> | number
+    totalClaimedAmount?: FloatFilter<"ClaimInvoice"> | number
+    lineItems?: StringFilter<"ClaimInvoice"> | string
+    customFields?: StringFilter<"ClaimInvoice"> | string
+    evidenceImages?: StringFilter<"ClaimInvoice"> | string
+    disclaimerText?: StringFilter<"ClaimInvoice"> | string
+    notes?: StringNullableFilter<"ClaimInvoice"> | string | null
+    authorizedSignatory?: StringNullableFilter<"ClaimInvoice"> | string | null
+    status?: StringFilter<"ClaimInvoice"> | string
+    submittedAt?: DateTimeNullableFilter<"ClaimInvoice"> | Date | string | null
+    createdAt?: DateTimeFilter<"ClaimInvoice"> | Date | string
+    updatedAt?: DateTimeFilter<"ClaimInvoice"> | Date | string
+    organization?: XOR<OrganizationRelationFilter, OrganizationWhereInput>
+    claim?: XOR<ClaimNullableRelationFilter, ClaimWhereInput> | null
+    parcel?: XOR<ParcelRelationFilter, ParcelWhereInput>
+    carrier?: XOR<CarrierRelationFilter, CarrierWhereInput>
+  }
+
+  export type ClaimInvoiceOrderByWithRelationInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    claimId?: SortOrderInput | SortOrder
+    parcelId?: SortOrder
+    carrierId?: SortOrder
+    invoiceNumber?: SortOrder
+    generationType?: SortOrder
+    carrierFormat?: SortOrder
+    claimantName?: SortOrder
+    claimantAddress?: SortOrder
+    claimantTaxId?: SortOrderInput | SortOrder
+    claimantContactEmail?: SortOrderInput | SortOrder
+    claimantPhone?: SortOrderInput | SortOrder
+    courierName?: SortOrder
+    courierAccountNo?: SortOrderInput | SortOrder
+    courierDeptEmail?: SortOrderInput | SortOrder
+    courierClaimRef?: SortOrderInput | SortOrder
+    trackingNumber?: SortOrder
+    orderNumber?: SortOrder
+    dispatchDate?: SortOrderInput | SortOrder
+    lossReason?: SortOrder
+    currency?: SortOrder
+    merchandiseValue?: SortOrder
+    shippingCost?: SortOrder
+    taxAmount?: SortOrder
+    adminFeeAmount?: SortOrder
+    totalClaimedAmount?: SortOrder
+    lineItems?: SortOrder
+    customFields?: SortOrder
+    evidenceImages?: SortOrder
+    disclaimerText?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    authorizedSignatory?: SortOrderInput | SortOrder
+    status?: SortOrder
+    submittedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    organization?: OrganizationOrderByWithRelationInput
+    claim?: ClaimOrderByWithRelationInput
+    parcel?: ParcelOrderByWithRelationInput
+    carrier?: CarrierOrderByWithRelationInput
+  }
+
+  export type ClaimInvoiceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    invoiceNumber?: string
+    AND?: ClaimInvoiceWhereInput | ClaimInvoiceWhereInput[]
+    OR?: ClaimInvoiceWhereInput[]
+    NOT?: ClaimInvoiceWhereInput | ClaimInvoiceWhereInput[]
+    organizationId?: StringFilter<"ClaimInvoice"> | string
+    claimId?: StringNullableFilter<"ClaimInvoice"> | string | null
+    parcelId?: StringFilter<"ClaimInvoice"> | string
+    carrierId?: StringFilter<"ClaimInvoice"> | string
+    generationType?: StringFilter<"ClaimInvoice"> | string
+    carrierFormat?: StringFilter<"ClaimInvoice"> | string
+    claimantName?: StringFilter<"ClaimInvoice"> | string
+    claimantAddress?: StringFilter<"ClaimInvoice"> | string
+    claimantTaxId?: StringNullableFilter<"ClaimInvoice"> | string | null
+    claimantContactEmail?: StringNullableFilter<"ClaimInvoice"> | string | null
+    claimantPhone?: StringNullableFilter<"ClaimInvoice"> | string | null
+    courierName?: StringFilter<"ClaimInvoice"> | string
+    courierAccountNo?: StringNullableFilter<"ClaimInvoice"> | string | null
+    courierDeptEmail?: StringNullableFilter<"ClaimInvoice"> | string | null
+    courierClaimRef?: StringNullableFilter<"ClaimInvoice"> | string | null
+    trackingNumber?: StringFilter<"ClaimInvoice"> | string
+    orderNumber?: StringFilter<"ClaimInvoice"> | string
+    dispatchDate?: DateTimeNullableFilter<"ClaimInvoice"> | Date | string | null
+    lossReason?: StringFilter<"ClaimInvoice"> | string
+    currency?: StringFilter<"ClaimInvoice"> | string
+    merchandiseValue?: FloatFilter<"ClaimInvoice"> | number
+    shippingCost?: FloatFilter<"ClaimInvoice"> | number
+    taxAmount?: FloatFilter<"ClaimInvoice"> | number
+    adminFeeAmount?: FloatFilter<"ClaimInvoice"> | number
+    totalClaimedAmount?: FloatFilter<"ClaimInvoice"> | number
+    lineItems?: StringFilter<"ClaimInvoice"> | string
+    customFields?: StringFilter<"ClaimInvoice"> | string
+    evidenceImages?: StringFilter<"ClaimInvoice"> | string
+    disclaimerText?: StringFilter<"ClaimInvoice"> | string
+    notes?: StringNullableFilter<"ClaimInvoice"> | string | null
+    authorizedSignatory?: StringNullableFilter<"ClaimInvoice"> | string | null
+    status?: StringFilter<"ClaimInvoice"> | string
+    submittedAt?: DateTimeNullableFilter<"ClaimInvoice"> | Date | string | null
+    createdAt?: DateTimeFilter<"ClaimInvoice"> | Date | string
+    updatedAt?: DateTimeFilter<"ClaimInvoice"> | Date | string
+    organization?: XOR<OrganizationRelationFilter, OrganizationWhereInput>
+    claim?: XOR<ClaimNullableRelationFilter, ClaimWhereInput> | null
+    parcel?: XOR<ParcelRelationFilter, ParcelWhereInput>
+    carrier?: XOR<CarrierRelationFilter, CarrierWhereInput>
+  }, "id" | "invoiceNumber">
+
+  export type ClaimInvoiceOrderByWithAggregationInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    claimId?: SortOrderInput | SortOrder
+    parcelId?: SortOrder
+    carrierId?: SortOrder
+    invoiceNumber?: SortOrder
+    generationType?: SortOrder
+    carrierFormat?: SortOrder
+    claimantName?: SortOrder
+    claimantAddress?: SortOrder
+    claimantTaxId?: SortOrderInput | SortOrder
+    claimantContactEmail?: SortOrderInput | SortOrder
+    claimantPhone?: SortOrderInput | SortOrder
+    courierName?: SortOrder
+    courierAccountNo?: SortOrderInput | SortOrder
+    courierDeptEmail?: SortOrderInput | SortOrder
+    courierClaimRef?: SortOrderInput | SortOrder
+    trackingNumber?: SortOrder
+    orderNumber?: SortOrder
+    dispatchDate?: SortOrderInput | SortOrder
+    lossReason?: SortOrder
+    currency?: SortOrder
+    merchandiseValue?: SortOrder
+    shippingCost?: SortOrder
+    taxAmount?: SortOrder
+    adminFeeAmount?: SortOrder
+    totalClaimedAmount?: SortOrder
+    lineItems?: SortOrder
+    customFields?: SortOrder
+    evidenceImages?: SortOrder
+    disclaimerText?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    authorizedSignatory?: SortOrderInput | SortOrder
+    status?: SortOrder
+    submittedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ClaimInvoiceCountOrderByAggregateInput
+    _avg?: ClaimInvoiceAvgOrderByAggregateInput
+    _max?: ClaimInvoiceMaxOrderByAggregateInput
+    _min?: ClaimInvoiceMinOrderByAggregateInput
+    _sum?: ClaimInvoiceSumOrderByAggregateInput
+  }
+
+  export type ClaimInvoiceScalarWhereWithAggregatesInput = {
+    AND?: ClaimInvoiceScalarWhereWithAggregatesInput | ClaimInvoiceScalarWhereWithAggregatesInput[]
+    OR?: ClaimInvoiceScalarWhereWithAggregatesInput[]
+    NOT?: ClaimInvoiceScalarWhereWithAggregatesInput | ClaimInvoiceScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ClaimInvoice"> | string
+    organizationId?: StringWithAggregatesFilter<"ClaimInvoice"> | string
+    claimId?: StringNullableWithAggregatesFilter<"ClaimInvoice"> | string | null
+    parcelId?: StringWithAggregatesFilter<"ClaimInvoice"> | string
+    carrierId?: StringWithAggregatesFilter<"ClaimInvoice"> | string
+    invoiceNumber?: StringWithAggregatesFilter<"ClaimInvoice"> | string
+    generationType?: StringWithAggregatesFilter<"ClaimInvoice"> | string
+    carrierFormat?: StringWithAggregatesFilter<"ClaimInvoice"> | string
+    claimantName?: StringWithAggregatesFilter<"ClaimInvoice"> | string
+    claimantAddress?: StringWithAggregatesFilter<"ClaimInvoice"> | string
+    claimantTaxId?: StringNullableWithAggregatesFilter<"ClaimInvoice"> | string | null
+    claimantContactEmail?: StringNullableWithAggregatesFilter<"ClaimInvoice"> | string | null
+    claimantPhone?: StringNullableWithAggregatesFilter<"ClaimInvoice"> | string | null
+    courierName?: StringWithAggregatesFilter<"ClaimInvoice"> | string
+    courierAccountNo?: StringNullableWithAggregatesFilter<"ClaimInvoice"> | string | null
+    courierDeptEmail?: StringNullableWithAggregatesFilter<"ClaimInvoice"> | string | null
+    courierClaimRef?: StringNullableWithAggregatesFilter<"ClaimInvoice"> | string | null
+    trackingNumber?: StringWithAggregatesFilter<"ClaimInvoice"> | string
+    orderNumber?: StringWithAggregatesFilter<"ClaimInvoice"> | string
+    dispatchDate?: DateTimeNullableWithAggregatesFilter<"ClaimInvoice"> | Date | string | null
+    lossReason?: StringWithAggregatesFilter<"ClaimInvoice"> | string
+    currency?: StringWithAggregatesFilter<"ClaimInvoice"> | string
+    merchandiseValue?: FloatWithAggregatesFilter<"ClaimInvoice"> | number
+    shippingCost?: FloatWithAggregatesFilter<"ClaimInvoice"> | number
+    taxAmount?: FloatWithAggregatesFilter<"ClaimInvoice"> | number
+    adminFeeAmount?: FloatWithAggregatesFilter<"ClaimInvoice"> | number
+    totalClaimedAmount?: FloatWithAggregatesFilter<"ClaimInvoice"> | number
+    lineItems?: StringWithAggregatesFilter<"ClaimInvoice"> | string
+    customFields?: StringWithAggregatesFilter<"ClaimInvoice"> | string
+    evidenceImages?: StringWithAggregatesFilter<"ClaimInvoice"> | string
+    disclaimerText?: StringWithAggregatesFilter<"ClaimInvoice"> | string
+    notes?: StringNullableWithAggregatesFilter<"ClaimInvoice"> | string | null
+    authorizedSignatory?: StringNullableWithAggregatesFilter<"ClaimInvoice"> | string | null
+    status?: StringWithAggregatesFilter<"ClaimInvoice"> | string
+    submittedAt?: DateTimeNullableWithAggregatesFilter<"ClaimInvoice"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ClaimInvoice"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ClaimInvoice"> | Date | string
+  }
+
   export type OrganizationCreateInput = {
     id?: string
     name: string
@@ -37729,6 +39686,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -37775,6 +39733,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -37821,6 +39780,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -37867,6 +39827,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -38293,6 +40254,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyCreateNestedManyWithoutCarrierInput
     enquiries?: CarrierEnquiryCreateNestedManyWithoutCarrierInput
     claims?: ClaimCreateNestedManyWithoutCarrierInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutCarrierInput
   }
 
   export type CarrierUncheckedCreateInput = {
@@ -38320,6 +40282,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyUncheckedCreateNestedManyWithoutCarrierInput
     enquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutCarrierInput
     claims?: ClaimUncheckedCreateNestedManyWithoutCarrierInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutCarrierInput
   }
 
   export type CarrierUpdateInput = {
@@ -38347,6 +40310,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyUpdateManyWithoutCarrierNestedInput
     enquiries?: CarrierEnquiryUpdateManyWithoutCarrierNestedInput
     claims?: ClaimUpdateManyWithoutCarrierNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutCarrierNestedInput
   }
 
   export type CarrierUncheckedUpdateInput = {
@@ -38374,6 +40338,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyUncheckedUpdateManyWithoutCarrierNestedInput
     enquiries?: CarrierEnquiryUncheckedUpdateManyWithoutCarrierNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutCarrierNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutCarrierNestedInput
   }
 
   export type CarrierCreateManyInput = {
@@ -38951,6 +40916,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryCreateNestedManyWithoutParcelInput
     claims?: ClaimCreateNestedManyWithoutParcelInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutParcelInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutParcelInput
   }
 
   export type ParcelUncheckedCreateInput = {
@@ -39009,6 +40975,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutParcelInput
     claims?: ClaimUncheckedCreateNestedManyWithoutParcelInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutParcelInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutParcelInput
   }
 
   export type ParcelUpdateInput = {
@@ -39067,6 +41034,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryUpdateManyWithoutParcelNestedInput
     claims?: ClaimUpdateManyWithoutParcelNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutParcelNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutParcelNestedInput
   }
 
   export type ParcelUncheckedUpdateInput = {
@@ -39125,6 +41093,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryUncheckedUpdateManyWithoutParcelNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutParcelNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutParcelNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutParcelNestedInput
   }
 
   export type ParcelCreateManyInput = {
@@ -39683,6 +41652,9 @@ export namespace Prisma {
     replyCount?: number
     internalNotes?: string | null
     followUpDueDate?: Date | string | null
+    followUpSequenceCount?: number
+    escalationTier?: string
+    lastFollowUpSentAt?: Date | string | null
     createdById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39710,6 +41682,9 @@ export namespace Prisma {
     replyCount?: number
     internalNotes?: string | null
     followUpDueDate?: Date | string | null
+    followUpSequenceCount?: number
+    escalationTier?: string
+    lastFollowUpSentAt?: Date | string | null
     assignedUserId?: string | null
     createdById?: string | null
     createdAt?: Date | string
@@ -39731,6 +41706,9 @@ export namespace Prisma {
     replyCount?: IntFieldUpdateOperationsInput | number
     internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
     followUpDueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    followUpSequenceCount?: IntFieldUpdateOperationsInput | number
+    escalationTier?: StringFieldUpdateOperationsInput | string
+    lastFollowUpSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39758,6 +41736,9 @@ export namespace Prisma {
     replyCount?: IntFieldUpdateOperationsInput | number
     internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
     followUpDueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    followUpSequenceCount?: IntFieldUpdateOperationsInput | number
+    escalationTier?: StringFieldUpdateOperationsInput | string
+    lastFollowUpSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     assignedUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39782,6 +41763,9 @@ export namespace Prisma {
     replyCount?: number
     internalNotes?: string | null
     followUpDueDate?: Date | string | null
+    followUpSequenceCount?: number
+    escalationTier?: string
+    lastFollowUpSentAt?: Date | string | null
     assignedUserId?: string | null
     createdById?: string | null
     createdAt?: Date | string
@@ -39802,6 +41786,9 @@ export namespace Prisma {
     replyCount?: IntFieldUpdateOperationsInput | number
     internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
     followUpDueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    followUpSequenceCount?: IntFieldUpdateOperationsInput | number
+    escalationTier?: StringFieldUpdateOperationsInput | string
+    lastFollowUpSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39824,6 +41811,9 @@ export namespace Prisma {
     replyCount?: IntFieldUpdateOperationsInput | number
     internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
     followUpDueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    followUpSequenceCount?: IntFieldUpdateOperationsInput | number
+    escalationTier?: StringFieldUpdateOperationsInput | string
+    lastFollowUpSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     assignedUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39939,6 +41929,7 @@ export namespace Prisma {
     carrier: CarrierCreateNestedOneWithoutClaimsInput
     assignedUser?: UserCreateNestedOneWithoutClaimsInput
     documents?: ClaimDocumentCreateNestedManyWithoutClaimInput
+    invoices?: ClaimInvoiceCreateNestedManyWithoutClaimInput
   }
 
   export type ClaimUncheckedCreateInput = {
@@ -39968,6 +41959,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     documents?: ClaimDocumentUncheckedCreateNestedManyWithoutClaimInput
+    invoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutClaimInput
   }
 
   export type ClaimUpdateInput = {
@@ -39997,6 +41989,7 @@ export namespace Prisma {
     carrier?: CarrierUpdateOneRequiredWithoutClaimsNestedInput
     assignedUser?: UserUpdateOneWithoutClaimsNestedInput
     documents?: ClaimDocumentUpdateManyWithoutClaimNestedInput
+    invoices?: ClaimInvoiceUpdateManyWithoutClaimNestedInput
   }
 
   export type ClaimUncheckedUpdateInput = {
@@ -40026,6 +42019,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documents?: ClaimDocumentUncheckedUpdateManyWithoutClaimNestedInput
+    invoices?: ClaimInvoiceUncheckedUpdateManyWithoutClaimNestedInput
   }
 
   export type ClaimCreateManyInput = {
@@ -41219,6 +43213,282 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ClaimInvoiceCreateInput = {
+    id?: string
+    invoiceNumber: string
+    generationType?: string
+    carrierFormat?: string
+    claimantName: string
+    claimantAddress: string
+    claimantTaxId?: string | null
+    claimantContactEmail?: string | null
+    claimantPhone?: string | null
+    courierName: string
+    courierAccountNo?: string | null
+    courierDeptEmail?: string | null
+    courierClaimRef?: string | null
+    trackingNumber: string
+    orderNumber: string
+    dispatchDate?: Date | string | null
+    lossReason?: string
+    currency?: string
+    merchandiseValue?: number
+    shippingCost?: number
+    taxAmount?: number
+    adminFeeAmount?: number
+    totalClaimedAmount?: number
+    lineItems?: string
+    customFields?: string
+    evidenceImages?: string
+    disclaimerText?: string
+    notes?: string | null
+    authorizedSignatory?: string | null
+    status?: string
+    submittedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organization: OrganizationCreateNestedOneWithoutClaimInvoicesInput
+    claim?: ClaimCreateNestedOneWithoutInvoicesInput
+    parcel: ParcelCreateNestedOneWithoutClaimInvoicesInput
+    carrier: CarrierCreateNestedOneWithoutClaimInvoicesInput
+  }
+
+  export type ClaimInvoiceUncheckedCreateInput = {
+    id?: string
+    organizationId: string
+    claimId?: string | null
+    parcelId: string
+    carrierId: string
+    invoiceNumber: string
+    generationType?: string
+    carrierFormat?: string
+    claimantName: string
+    claimantAddress: string
+    claimantTaxId?: string | null
+    claimantContactEmail?: string | null
+    claimantPhone?: string | null
+    courierName: string
+    courierAccountNo?: string | null
+    courierDeptEmail?: string | null
+    courierClaimRef?: string | null
+    trackingNumber: string
+    orderNumber: string
+    dispatchDate?: Date | string | null
+    lossReason?: string
+    currency?: string
+    merchandiseValue?: number
+    shippingCost?: number
+    taxAmount?: number
+    adminFeeAmount?: number
+    totalClaimedAmount?: number
+    lineItems?: string
+    customFields?: string
+    evidenceImages?: string
+    disclaimerText?: string
+    notes?: string | null
+    authorizedSignatory?: string | null
+    status?: string
+    submittedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClaimInvoiceUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    generationType?: StringFieldUpdateOperationsInput | string
+    carrierFormat?: StringFieldUpdateOperationsInput | string
+    claimantName?: StringFieldUpdateOperationsInput | string
+    claimantAddress?: StringFieldUpdateOperationsInput | string
+    claimantTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantContactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    courierName?: StringFieldUpdateOperationsInput | string
+    courierAccountNo?: NullableStringFieldUpdateOperationsInput | string | null
+    courierDeptEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    courierClaimRef?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    dispatchDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lossReason?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    merchandiseValue?: FloatFieldUpdateOperationsInput | number
+    shippingCost?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    adminFeeAmount?: FloatFieldUpdateOperationsInput | number
+    totalClaimedAmount?: FloatFieldUpdateOperationsInput | number
+    lineItems?: StringFieldUpdateOperationsInput | string
+    customFields?: StringFieldUpdateOperationsInput | string
+    evidenceImages?: StringFieldUpdateOperationsInput | string
+    disclaimerText?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    authorizedSignatory?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutClaimInvoicesNestedInput
+    claim?: ClaimUpdateOneWithoutInvoicesNestedInput
+    parcel?: ParcelUpdateOneRequiredWithoutClaimInvoicesNestedInput
+    carrier?: CarrierUpdateOneRequiredWithoutClaimInvoicesNestedInput
+  }
+
+  export type ClaimInvoiceUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    claimId?: NullableStringFieldUpdateOperationsInput | string | null
+    parcelId?: StringFieldUpdateOperationsInput | string
+    carrierId?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    generationType?: StringFieldUpdateOperationsInput | string
+    carrierFormat?: StringFieldUpdateOperationsInput | string
+    claimantName?: StringFieldUpdateOperationsInput | string
+    claimantAddress?: StringFieldUpdateOperationsInput | string
+    claimantTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantContactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    courierName?: StringFieldUpdateOperationsInput | string
+    courierAccountNo?: NullableStringFieldUpdateOperationsInput | string | null
+    courierDeptEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    courierClaimRef?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    dispatchDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lossReason?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    merchandiseValue?: FloatFieldUpdateOperationsInput | number
+    shippingCost?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    adminFeeAmount?: FloatFieldUpdateOperationsInput | number
+    totalClaimedAmount?: FloatFieldUpdateOperationsInput | number
+    lineItems?: StringFieldUpdateOperationsInput | string
+    customFields?: StringFieldUpdateOperationsInput | string
+    evidenceImages?: StringFieldUpdateOperationsInput | string
+    disclaimerText?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    authorizedSignatory?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClaimInvoiceCreateManyInput = {
+    id?: string
+    organizationId: string
+    claimId?: string | null
+    parcelId: string
+    carrierId: string
+    invoiceNumber: string
+    generationType?: string
+    carrierFormat?: string
+    claimantName: string
+    claimantAddress: string
+    claimantTaxId?: string | null
+    claimantContactEmail?: string | null
+    claimantPhone?: string | null
+    courierName: string
+    courierAccountNo?: string | null
+    courierDeptEmail?: string | null
+    courierClaimRef?: string | null
+    trackingNumber: string
+    orderNumber: string
+    dispatchDate?: Date | string | null
+    lossReason?: string
+    currency?: string
+    merchandiseValue?: number
+    shippingCost?: number
+    taxAmount?: number
+    adminFeeAmount?: number
+    totalClaimedAmount?: number
+    lineItems?: string
+    customFields?: string
+    evidenceImages?: string
+    disclaimerText?: string
+    notes?: string | null
+    authorizedSignatory?: string | null
+    status?: string
+    submittedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClaimInvoiceUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    generationType?: StringFieldUpdateOperationsInput | string
+    carrierFormat?: StringFieldUpdateOperationsInput | string
+    claimantName?: StringFieldUpdateOperationsInput | string
+    claimantAddress?: StringFieldUpdateOperationsInput | string
+    claimantTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantContactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    courierName?: StringFieldUpdateOperationsInput | string
+    courierAccountNo?: NullableStringFieldUpdateOperationsInput | string | null
+    courierDeptEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    courierClaimRef?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    dispatchDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lossReason?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    merchandiseValue?: FloatFieldUpdateOperationsInput | number
+    shippingCost?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    adminFeeAmount?: FloatFieldUpdateOperationsInput | number
+    totalClaimedAmount?: FloatFieldUpdateOperationsInput | number
+    lineItems?: StringFieldUpdateOperationsInput | string
+    customFields?: StringFieldUpdateOperationsInput | string
+    evidenceImages?: StringFieldUpdateOperationsInput | string
+    disclaimerText?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    authorizedSignatory?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClaimInvoiceUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    claimId?: NullableStringFieldUpdateOperationsInput | string | null
+    parcelId?: StringFieldUpdateOperationsInput | string
+    carrierId?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    generationType?: StringFieldUpdateOperationsInput | string
+    carrierFormat?: StringFieldUpdateOperationsInput | string
+    claimantName?: StringFieldUpdateOperationsInput | string
+    claimantAddress?: StringFieldUpdateOperationsInput | string
+    claimantTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantContactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    courierName?: StringFieldUpdateOperationsInput | string
+    courierAccountNo?: NullableStringFieldUpdateOperationsInput | string | null
+    courierDeptEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    courierClaimRef?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    dispatchDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lossReason?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    merchandiseValue?: FloatFieldUpdateOperationsInput | number
+    shippingCost?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    adminFeeAmount?: FloatFieldUpdateOperationsInput | number
+    totalClaimedAmount?: FloatFieldUpdateOperationsInput | number
+    lineItems?: StringFieldUpdateOperationsInput | string
+    customFields?: StringFieldUpdateOperationsInput | string
+    evidenceImages?: StringFieldUpdateOperationsInput | string
+    disclaimerText?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    authorizedSignatory?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -41359,6 +43629,12 @@ export namespace Prisma {
     none?: ClaimDocumentWhereInput
   }
 
+  export type ClaimInvoiceListRelationFilter = {
+    every?: ClaimInvoiceWhereInput
+    some?: ClaimInvoiceWhereInput
+    none?: ClaimInvoiceWhereInput
+  }
+
   export type CustomFieldListRelationFilter = {
     every?: CustomFieldWhereInput
     some?: CustomFieldWhereInput
@@ -41479,6 +43755,10 @@ export namespace Prisma {
   }
 
   export type ClaimDocumentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ClaimInvoiceOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -42635,6 +44915,9 @@ export namespace Prisma {
     replyCount?: SortOrder
     internalNotes?: SortOrder
     followUpDueDate?: SortOrder
+    followUpSequenceCount?: SortOrder
+    escalationTier?: SortOrder
+    lastFollowUpSentAt?: SortOrder
     assignedUserId?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
@@ -42643,6 +44926,7 @@ export namespace Prisma {
 
   export type CarrierEnquiryAvgOrderByAggregateInput = {
     replyCount?: SortOrder
+    followUpSequenceCount?: SortOrder
   }
 
   export type CarrierEnquiryMaxOrderByAggregateInput = {
@@ -42662,6 +44946,9 @@ export namespace Prisma {
     replyCount?: SortOrder
     internalNotes?: SortOrder
     followUpDueDate?: SortOrder
+    followUpSequenceCount?: SortOrder
+    escalationTier?: SortOrder
+    lastFollowUpSentAt?: SortOrder
     assignedUserId?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
@@ -42685,6 +44972,9 @@ export namespace Prisma {
     replyCount?: SortOrder
     internalNotes?: SortOrder
     followUpDueDate?: SortOrder
+    followUpSequenceCount?: SortOrder
+    escalationTier?: SortOrder
+    lastFollowUpSentAt?: SortOrder
     assignedUserId?: SortOrder
     createdById?: SortOrder
     createdAt?: SortOrder
@@ -42693,6 +44983,7 @@ export namespace Prisma {
 
   export type CarrierEnquirySumOrderByAggregateInput = {
     replyCount?: SortOrder
+    followUpSequenceCount?: SortOrder
   }
 
   export type CarrierEnquiryRelationFilter = {
@@ -43426,6 +45717,142 @@ export namespace Prisma {
     maxAttempts?: SortOrder
   }
 
+  export type ClaimInvoiceCountOrderByAggregateInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    claimId?: SortOrder
+    parcelId?: SortOrder
+    carrierId?: SortOrder
+    invoiceNumber?: SortOrder
+    generationType?: SortOrder
+    carrierFormat?: SortOrder
+    claimantName?: SortOrder
+    claimantAddress?: SortOrder
+    claimantTaxId?: SortOrder
+    claimantContactEmail?: SortOrder
+    claimantPhone?: SortOrder
+    courierName?: SortOrder
+    courierAccountNo?: SortOrder
+    courierDeptEmail?: SortOrder
+    courierClaimRef?: SortOrder
+    trackingNumber?: SortOrder
+    orderNumber?: SortOrder
+    dispatchDate?: SortOrder
+    lossReason?: SortOrder
+    currency?: SortOrder
+    merchandiseValue?: SortOrder
+    shippingCost?: SortOrder
+    taxAmount?: SortOrder
+    adminFeeAmount?: SortOrder
+    totalClaimedAmount?: SortOrder
+    lineItems?: SortOrder
+    customFields?: SortOrder
+    evidenceImages?: SortOrder
+    disclaimerText?: SortOrder
+    notes?: SortOrder
+    authorizedSignatory?: SortOrder
+    status?: SortOrder
+    submittedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClaimInvoiceAvgOrderByAggregateInput = {
+    merchandiseValue?: SortOrder
+    shippingCost?: SortOrder
+    taxAmount?: SortOrder
+    adminFeeAmount?: SortOrder
+    totalClaimedAmount?: SortOrder
+  }
+
+  export type ClaimInvoiceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    claimId?: SortOrder
+    parcelId?: SortOrder
+    carrierId?: SortOrder
+    invoiceNumber?: SortOrder
+    generationType?: SortOrder
+    carrierFormat?: SortOrder
+    claimantName?: SortOrder
+    claimantAddress?: SortOrder
+    claimantTaxId?: SortOrder
+    claimantContactEmail?: SortOrder
+    claimantPhone?: SortOrder
+    courierName?: SortOrder
+    courierAccountNo?: SortOrder
+    courierDeptEmail?: SortOrder
+    courierClaimRef?: SortOrder
+    trackingNumber?: SortOrder
+    orderNumber?: SortOrder
+    dispatchDate?: SortOrder
+    lossReason?: SortOrder
+    currency?: SortOrder
+    merchandiseValue?: SortOrder
+    shippingCost?: SortOrder
+    taxAmount?: SortOrder
+    adminFeeAmount?: SortOrder
+    totalClaimedAmount?: SortOrder
+    lineItems?: SortOrder
+    customFields?: SortOrder
+    evidenceImages?: SortOrder
+    disclaimerText?: SortOrder
+    notes?: SortOrder
+    authorizedSignatory?: SortOrder
+    status?: SortOrder
+    submittedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClaimInvoiceMinOrderByAggregateInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    claimId?: SortOrder
+    parcelId?: SortOrder
+    carrierId?: SortOrder
+    invoiceNumber?: SortOrder
+    generationType?: SortOrder
+    carrierFormat?: SortOrder
+    claimantName?: SortOrder
+    claimantAddress?: SortOrder
+    claimantTaxId?: SortOrder
+    claimantContactEmail?: SortOrder
+    claimantPhone?: SortOrder
+    courierName?: SortOrder
+    courierAccountNo?: SortOrder
+    courierDeptEmail?: SortOrder
+    courierClaimRef?: SortOrder
+    trackingNumber?: SortOrder
+    orderNumber?: SortOrder
+    dispatchDate?: SortOrder
+    lossReason?: SortOrder
+    currency?: SortOrder
+    merchandiseValue?: SortOrder
+    shippingCost?: SortOrder
+    taxAmount?: SortOrder
+    adminFeeAmount?: SortOrder
+    totalClaimedAmount?: SortOrder
+    lineItems?: SortOrder
+    customFields?: SortOrder
+    evidenceImages?: SortOrder
+    disclaimerText?: SortOrder
+    notes?: SortOrder
+    authorizedSignatory?: SortOrder
+    status?: SortOrder
+    submittedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClaimInvoiceSumOrderByAggregateInput = {
+    merchandiseValue?: SortOrder
+    shippingCost?: SortOrder
+    taxAmount?: SortOrder
+    adminFeeAmount?: SortOrder
+    totalClaimedAmount?: SortOrder
+  }
+
   export type UserCreateNestedManyWithoutOrganizationInput = {
     create?: XOR<UserCreateWithoutOrganizationInput, UserUncheckedCreateWithoutOrganizationInput> | UserCreateWithoutOrganizationInput[] | UserUncheckedCreateWithoutOrganizationInput[]
     connectOrCreate?: UserCreateOrConnectWithoutOrganizationInput | UserCreateOrConnectWithoutOrganizationInput[]
@@ -43521,6 +45948,13 @@ export namespace Prisma {
     connectOrCreate?: ClaimDocumentCreateOrConnectWithoutOrganizationInput | ClaimDocumentCreateOrConnectWithoutOrganizationInput[]
     createMany?: ClaimDocumentCreateManyOrganizationInputEnvelope
     connect?: ClaimDocumentWhereUniqueInput | ClaimDocumentWhereUniqueInput[]
+  }
+
+  export type ClaimInvoiceCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<ClaimInvoiceCreateWithoutOrganizationInput, ClaimInvoiceUncheckedCreateWithoutOrganizationInput> | ClaimInvoiceCreateWithoutOrganizationInput[] | ClaimInvoiceUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: ClaimInvoiceCreateOrConnectWithoutOrganizationInput | ClaimInvoiceCreateOrConnectWithoutOrganizationInput[]
+    createMany?: ClaimInvoiceCreateManyOrganizationInputEnvelope
+    connect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
   }
 
   export type CustomFieldCreateNestedManyWithoutOrganizationInput = {
@@ -43695,6 +46129,13 @@ export namespace Prisma {
     connectOrCreate?: ClaimDocumentCreateOrConnectWithoutOrganizationInput | ClaimDocumentCreateOrConnectWithoutOrganizationInput[]
     createMany?: ClaimDocumentCreateManyOrganizationInputEnvelope
     connect?: ClaimDocumentWhereUniqueInput | ClaimDocumentWhereUniqueInput[]
+  }
+
+  export type ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<ClaimInvoiceCreateWithoutOrganizationInput, ClaimInvoiceUncheckedCreateWithoutOrganizationInput> | ClaimInvoiceCreateWithoutOrganizationInput[] | ClaimInvoiceUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: ClaimInvoiceCreateOrConnectWithoutOrganizationInput | ClaimInvoiceCreateOrConnectWithoutOrganizationInput[]
+    createMany?: ClaimInvoiceCreateManyOrganizationInputEnvelope
+    connect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
   }
 
   export type CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput = {
@@ -43988,6 +46429,20 @@ export namespace Prisma {
     update?: ClaimDocumentUpdateWithWhereUniqueWithoutOrganizationInput | ClaimDocumentUpdateWithWhereUniqueWithoutOrganizationInput[]
     updateMany?: ClaimDocumentUpdateManyWithWhereWithoutOrganizationInput | ClaimDocumentUpdateManyWithWhereWithoutOrganizationInput[]
     deleteMany?: ClaimDocumentScalarWhereInput | ClaimDocumentScalarWhereInput[]
+  }
+
+  export type ClaimInvoiceUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<ClaimInvoiceCreateWithoutOrganizationInput, ClaimInvoiceUncheckedCreateWithoutOrganizationInput> | ClaimInvoiceCreateWithoutOrganizationInput[] | ClaimInvoiceUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: ClaimInvoiceCreateOrConnectWithoutOrganizationInput | ClaimInvoiceCreateOrConnectWithoutOrganizationInput[]
+    upsert?: ClaimInvoiceUpsertWithWhereUniqueWithoutOrganizationInput | ClaimInvoiceUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: ClaimInvoiceCreateManyOrganizationInputEnvelope
+    set?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    disconnect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    delete?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    connect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    update?: ClaimInvoiceUpdateWithWhereUniqueWithoutOrganizationInput | ClaimInvoiceUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: ClaimInvoiceUpdateManyWithWhereWithoutOrganizationInput | ClaimInvoiceUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: ClaimInvoiceScalarWhereInput | ClaimInvoiceScalarWhereInput[]
   }
 
   export type CustomFieldUpdateManyWithoutOrganizationNestedInput = {
@@ -44334,6 +46789,20 @@ export namespace Prisma {
     update?: ClaimDocumentUpdateWithWhereUniqueWithoutOrganizationInput | ClaimDocumentUpdateWithWhereUniqueWithoutOrganizationInput[]
     updateMany?: ClaimDocumentUpdateManyWithWhereWithoutOrganizationInput | ClaimDocumentUpdateManyWithWhereWithoutOrganizationInput[]
     deleteMany?: ClaimDocumentScalarWhereInput | ClaimDocumentScalarWhereInput[]
+  }
+
+  export type ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<ClaimInvoiceCreateWithoutOrganizationInput, ClaimInvoiceUncheckedCreateWithoutOrganizationInput> | ClaimInvoiceCreateWithoutOrganizationInput[] | ClaimInvoiceUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: ClaimInvoiceCreateOrConnectWithoutOrganizationInput | ClaimInvoiceCreateOrConnectWithoutOrganizationInput[]
+    upsert?: ClaimInvoiceUpsertWithWhereUniqueWithoutOrganizationInput | ClaimInvoiceUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: ClaimInvoiceCreateManyOrganizationInputEnvelope
+    set?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    disconnect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    delete?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    connect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    update?: ClaimInvoiceUpdateWithWhereUniqueWithoutOrganizationInput | ClaimInvoiceUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: ClaimInvoiceUpdateManyWithWhereWithoutOrganizationInput | ClaimInvoiceUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: ClaimInvoiceScalarWhereInput | ClaimInvoiceScalarWhereInput[]
   }
 
   export type CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput = {
@@ -44794,6 +47263,13 @@ export namespace Prisma {
     connect?: ClaimWhereUniqueInput | ClaimWhereUniqueInput[]
   }
 
+  export type ClaimInvoiceCreateNestedManyWithoutCarrierInput = {
+    create?: XOR<ClaimInvoiceCreateWithoutCarrierInput, ClaimInvoiceUncheckedCreateWithoutCarrierInput> | ClaimInvoiceCreateWithoutCarrierInput[] | ClaimInvoiceUncheckedCreateWithoutCarrierInput[]
+    connectOrCreate?: ClaimInvoiceCreateOrConnectWithoutCarrierInput | ClaimInvoiceCreateOrConnectWithoutCarrierInput[]
+    createMany?: ClaimInvoiceCreateManyCarrierInputEnvelope
+    connect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+  }
+
   export type ParcelUncheckedCreateNestedManyWithoutCarrierInput = {
     create?: XOR<ParcelCreateWithoutCarrierInput, ParcelUncheckedCreateWithoutCarrierInput> | ParcelCreateWithoutCarrierInput[] | ParcelUncheckedCreateWithoutCarrierInput[]
     connectOrCreate?: ParcelCreateOrConnectWithoutCarrierInput | ParcelCreateOrConnectWithoutCarrierInput[]
@@ -44834,6 +47310,13 @@ export namespace Prisma {
     connectOrCreate?: ClaimCreateOrConnectWithoutCarrierInput | ClaimCreateOrConnectWithoutCarrierInput[]
     createMany?: ClaimCreateManyCarrierInputEnvelope
     connect?: ClaimWhereUniqueInput | ClaimWhereUniqueInput[]
+  }
+
+  export type ClaimInvoiceUncheckedCreateNestedManyWithoutCarrierInput = {
+    create?: XOR<ClaimInvoiceCreateWithoutCarrierInput, ClaimInvoiceUncheckedCreateWithoutCarrierInput> | ClaimInvoiceCreateWithoutCarrierInput[] | ClaimInvoiceUncheckedCreateWithoutCarrierInput[]
+    connectOrCreate?: ClaimInvoiceCreateOrConnectWithoutCarrierInput | ClaimInvoiceCreateOrConnectWithoutCarrierInput[]
+    createMany?: ClaimInvoiceCreateManyCarrierInputEnvelope
+    connect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
   }
 
   export type OrganizationUpdateOneRequiredWithoutCarriersNestedInput = {
@@ -44928,6 +47411,20 @@ export namespace Prisma {
     deleteMany?: ClaimScalarWhereInput | ClaimScalarWhereInput[]
   }
 
+  export type ClaimInvoiceUpdateManyWithoutCarrierNestedInput = {
+    create?: XOR<ClaimInvoiceCreateWithoutCarrierInput, ClaimInvoiceUncheckedCreateWithoutCarrierInput> | ClaimInvoiceCreateWithoutCarrierInput[] | ClaimInvoiceUncheckedCreateWithoutCarrierInput[]
+    connectOrCreate?: ClaimInvoiceCreateOrConnectWithoutCarrierInput | ClaimInvoiceCreateOrConnectWithoutCarrierInput[]
+    upsert?: ClaimInvoiceUpsertWithWhereUniqueWithoutCarrierInput | ClaimInvoiceUpsertWithWhereUniqueWithoutCarrierInput[]
+    createMany?: ClaimInvoiceCreateManyCarrierInputEnvelope
+    set?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    disconnect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    delete?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    connect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    update?: ClaimInvoiceUpdateWithWhereUniqueWithoutCarrierInput | ClaimInvoiceUpdateWithWhereUniqueWithoutCarrierInput[]
+    updateMany?: ClaimInvoiceUpdateManyWithWhereWithoutCarrierInput | ClaimInvoiceUpdateManyWithWhereWithoutCarrierInput[]
+    deleteMany?: ClaimInvoiceScalarWhereInput | ClaimInvoiceScalarWhereInput[]
+  }
+
   export type ParcelUncheckedUpdateManyWithoutCarrierNestedInput = {
     create?: XOR<ParcelCreateWithoutCarrierInput, ParcelUncheckedCreateWithoutCarrierInput> | ParcelCreateWithoutCarrierInput[] | ParcelUncheckedCreateWithoutCarrierInput[]
     connectOrCreate?: ParcelCreateOrConnectWithoutCarrierInput | ParcelCreateOrConnectWithoutCarrierInput[]
@@ -45010,6 +47507,20 @@ export namespace Prisma {
     update?: ClaimUpdateWithWhereUniqueWithoutCarrierInput | ClaimUpdateWithWhereUniqueWithoutCarrierInput[]
     updateMany?: ClaimUpdateManyWithWhereWithoutCarrierInput | ClaimUpdateManyWithWhereWithoutCarrierInput[]
     deleteMany?: ClaimScalarWhereInput | ClaimScalarWhereInput[]
+  }
+
+  export type ClaimInvoiceUncheckedUpdateManyWithoutCarrierNestedInput = {
+    create?: XOR<ClaimInvoiceCreateWithoutCarrierInput, ClaimInvoiceUncheckedCreateWithoutCarrierInput> | ClaimInvoiceCreateWithoutCarrierInput[] | ClaimInvoiceUncheckedCreateWithoutCarrierInput[]
+    connectOrCreate?: ClaimInvoiceCreateOrConnectWithoutCarrierInput | ClaimInvoiceCreateOrConnectWithoutCarrierInput[]
+    upsert?: ClaimInvoiceUpsertWithWhereUniqueWithoutCarrierInput | ClaimInvoiceUpsertWithWhereUniqueWithoutCarrierInput[]
+    createMany?: ClaimInvoiceCreateManyCarrierInputEnvelope
+    set?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    disconnect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    delete?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    connect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    update?: ClaimInvoiceUpdateWithWhereUniqueWithoutCarrierInput | ClaimInvoiceUpdateWithWhereUniqueWithoutCarrierInput[]
+    updateMany?: ClaimInvoiceUpdateManyWithWhereWithoutCarrierInput | ClaimInvoiceUpdateManyWithWhereWithoutCarrierInput[]
+    deleteMany?: ClaimInvoiceScalarWhereInput | ClaimInvoiceScalarWhereInput[]
   }
 
   export type OrganizationCreateNestedOneWithoutCarrierMappingsInput = {
@@ -45135,6 +47646,13 @@ export namespace Prisma {
     connect?: ClaimDocumentWhereUniqueInput | ClaimDocumentWhereUniqueInput[]
   }
 
+  export type ClaimInvoiceCreateNestedManyWithoutParcelInput = {
+    create?: XOR<ClaimInvoiceCreateWithoutParcelInput, ClaimInvoiceUncheckedCreateWithoutParcelInput> | ClaimInvoiceCreateWithoutParcelInput[] | ClaimInvoiceUncheckedCreateWithoutParcelInput[]
+    connectOrCreate?: ClaimInvoiceCreateOrConnectWithoutParcelInput | ClaimInvoiceCreateOrConnectWithoutParcelInput[]
+    createMany?: ClaimInvoiceCreateManyParcelInputEnvelope
+    connect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+  }
+
   export type RawTrackingEventUncheckedCreateNestedManyWithoutParcelInput = {
     create?: XOR<RawTrackingEventCreateWithoutParcelInput, RawTrackingEventUncheckedCreateWithoutParcelInput> | RawTrackingEventCreateWithoutParcelInput[] | RawTrackingEventUncheckedCreateWithoutParcelInput[]
     connectOrCreate?: RawTrackingEventCreateOrConnectWithoutParcelInput | RawTrackingEventCreateOrConnectWithoutParcelInput[]
@@ -45168,6 +47686,13 @@ export namespace Prisma {
     connectOrCreate?: ClaimDocumentCreateOrConnectWithoutParcelInput | ClaimDocumentCreateOrConnectWithoutParcelInput[]
     createMany?: ClaimDocumentCreateManyParcelInputEnvelope
     connect?: ClaimDocumentWhereUniqueInput | ClaimDocumentWhereUniqueInput[]
+  }
+
+  export type ClaimInvoiceUncheckedCreateNestedManyWithoutParcelInput = {
+    create?: XOR<ClaimInvoiceCreateWithoutParcelInput, ClaimInvoiceUncheckedCreateWithoutParcelInput> | ClaimInvoiceCreateWithoutParcelInput[] | ClaimInvoiceUncheckedCreateWithoutParcelInput[]
+    connectOrCreate?: ClaimInvoiceCreateOrConnectWithoutParcelInput | ClaimInvoiceCreateOrConnectWithoutParcelInput[]
+    createMany?: ClaimInvoiceCreateManyParcelInputEnvelope
+    connect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -45282,6 +47807,20 @@ export namespace Prisma {
     deleteMany?: ClaimDocumentScalarWhereInput | ClaimDocumentScalarWhereInput[]
   }
 
+  export type ClaimInvoiceUpdateManyWithoutParcelNestedInput = {
+    create?: XOR<ClaimInvoiceCreateWithoutParcelInput, ClaimInvoiceUncheckedCreateWithoutParcelInput> | ClaimInvoiceCreateWithoutParcelInput[] | ClaimInvoiceUncheckedCreateWithoutParcelInput[]
+    connectOrCreate?: ClaimInvoiceCreateOrConnectWithoutParcelInput | ClaimInvoiceCreateOrConnectWithoutParcelInput[]
+    upsert?: ClaimInvoiceUpsertWithWhereUniqueWithoutParcelInput | ClaimInvoiceUpsertWithWhereUniqueWithoutParcelInput[]
+    createMany?: ClaimInvoiceCreateManyParcelInputEnvelope
+    set?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    disconnect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    delete?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    connect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    update?: ClaimInvoiceUpdateWithWhereUniqueWithoutParcelInput | ClaimInvoiceUpdateWithWhereUniqueWithoutParcelInput[]
+    updateMany?: ClaimInvoiceUpdateManyWithWhereWithoutParcelInput | ClaimInvoiceUpdateManyWithWhereWithoutParcelInput[]
+    deleteMany?: ClaimInvoiceScalarWhereInput | ClaimInvoiceScalarWhereInput[]
+  }
+
   export type RawTrackingEventUncheckedUpdateManyWithoutParcelNestedInput = {
     create?: XOR<RawTrackingEventCreateWithoutParcelInput, RawTrackingEventUncheckedCreateWithoutParcelInput> | RawTrackingEventCreateWithoutParcelInput[] | RawTrackingEventUncheckedCreateWithoutParcelInput[]
     connectOrCreate?: RawTrackingEventCreateOrConnectWithoutParcelInput | RawTrackingEventCreateOrConnectWithoutParcelInput[]
@@ -45350,6 +47889,20 @@ export namespace Prisma {
     update?: ClaimDocumentUpdateWithWhereUniqueWithoutParcelInput | ClaimDocumentUpdateWithWhereUniqueWithoutParcelInput[]
     updateMany?: ClaimDocumentUpdateManyWithWhereWithoutParcelInput | ClaimDocumentUpdateManyWithWhereWithoutParcelInput[]
     deleteMany?: ClaimDocumentScalarWhereInput | ClaimDocumentScalarWhereInput[]
+  }
+
+  export type ClaimInvoiceUncheckedUpdateManyWithoutParcelNestedInput = {
+    create?: XOR<ClaimInvoiceCreateWithoutParcelInput, ClaimInvoiceUncheckedCreateWithoutParcelInput> | ClaimInvoiceCreateWithoutParcelInput[] | ClaimInvoiceUncheckedCreateWithoutParcelInput[]
+    connectOrCreate?: ClaimInvoiceCreateOrConnectWithoutParcelInput | ClaimInvoiceCreateOrConnectWithoutParcelInput[]
+    upsert?: ClaimInvoiceUpsertWithWhereUniqueWithoutParcelInput | ClaimInvoiceUpsertWithWhereUniqueWithoutParcelInput[]
+    createMany?: ClaimInvoiceCreateManyParcelInputEnvelope
+    set?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    disconnect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    delete?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    connect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    update?: ClaimInvoiceUpdateWithWhereUniqueWithoutParcelInput | ClaimInvoiceUpdateWithWhereUniqueWithoutParcelInput[]
+    updateMany?: ClaimInvoiceUpdateManyWithWhereWithoutParcelInput | ClaimInvoiceUpdateManyWithWhereWithoutParcelInput[]
+    deleteMany?: ClaimInvoiceScalarWhereInput | ClaimInvoiceScalarWhereInput[]
   }
 
   export type OrganizationCreateNestedOneWithoutRawTrackingEventsInput = {
@@ -45595,11 +48148,25 @@ export namespace Prisma {
     connect?: ClaimDocumentWhereUniqueInput | ClaimDocumentWhereUniqueInput[]
   }
 
+  export type ClaimInvoiceCreateNestedManyWithoutClaimInput = {
+    create?: XOR<ClaimInvoiceCreateWithoutClaimInput, ClaimInvoiceUncheckedCreateWithoutClaimInput> | ClaimInvoiceCreateWithoutClaimInput[] | ClaimInvoiceUncheckedCreateWithoutClaimInput[]
+    connectOrCreate?: ClaimInvoiceCreateOrConnectWithoutClaimInput | ClaimInvoiceCreateOrConnectWithoutClaimInput[]
+    createMany?: ClaimInvoiceCreateManyClaimInputEnvelope
+    connect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+  }
+
   export type ClaimDocumentUncheckedCreateNestedManyWithoutClaimInput = {
     create?: XOR<ClaimDocumentCreateWithoutClaimInput, ClaimDocumentUncheckedCreateWithoutClaimInput> | ClaimDocumentCreateWithoutClaimInput[] | ClaimDocumentUncheckedCreateWithoutClaimInput[]
     connectOrCreate?: ClaimDocumentCreateOrConnectWithoutClaimInput | ClaimDocumentCreateOrConnectWithoutClaimInput[]
     createMany?: ClaimDocumentCreateManyClaimInputEnvelope
     connect?: ClaimDocumentWhereUniqueInput | ClaimDocumentWhereUniqueInput[]
+  }
+
+  export type ClaimInvoiceUncheckedCreateNestedManyWithoutClaimInput = {
+    create?: XOR<ClaimInvoiceCreateWithoutClaimInput, ClaimInvoiceUncheckedCreateWithoutClaimInput> | ClaimInvoiceCreateWithoutClaimInput[] | ClaimInvoiceUncheckedCreateWithoutClaimInput[]
+    connectOrCreate?: ClaimInvoiceCreateOrConnectWithoutClaimInput | ClaimInvoiceCreateOrConnectWithoutClaimInput[]
+    createMany?: ClaimInvoiceCreateManyClaimInputEnvelope
+    connect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
   }
 
   export type OrganizationUpdateOneRequiredWithoutClaimsNestedInput = {
@@ -45650,6 +48217,20 @@ export namespace Prisma {
     deleteMany?: ClaimDocumentScalarWhereInput | ClaimDocumentScalarWhereInput[]
   }
 
+  export type ClaimInvoiceUpdateManyWithoutClaimNestedInput = {
+    create?: XOR<ClaimInvoiceCreateWithoutClaimInput, ClaimInvoiceUncheckedCreateWithoutClaimInput> | ClaimInvoiceCreateWithoutClaimInput[] | ClaimInvoiceUncheckedCreateWithoutClaimInput[]
+    connectOrCreate?: ClaimInvoiceCreateOrConnectWithoutClaimInput | ClaimInvoiceCreateOrConnectWithoutClaimInput[]
+    upsert?: ClaimInvoiceUpsertWithWhereUniqueWithoutClaimInput | ClaimInvoiceUpsertWithWhereUniqueWithoutClaimInput[]
+    createMany?: ClaimInvoiceCreateManyClaimInputEnvelope
+    set?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    disconnect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    delete?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    connect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    update?: ClaimInvoiceUpdateWithWhereUniqueWithoutClaimInput | ClaimInvoiceUpdateWithWhereUniqueWithoutClaimInput[]
+    updateMany?: ClaimInvoiceUpdateManyWithWhereWithoutClaimInput | ClaimInvoiceUpdateManyWithWhereWithoutClaimInput[]
+    deleteMany?: ClaimInvoiceScalarWhereInput | ClaimInvoiceScalarWhereInput[]
+  }
+
   export type ClaimDocumentUncheckedUpdateManyWithoutClaimNestedInput = {
     create?: XOR<ClaimDocumentCreateWithoutClaimInput, ClaimDocumentUncheckedCreateWithoutClaimInput> | ClaimDocumentCreateWithoutClaimInput[] | ClaimDocumentUncheckedCreateWithoutClaimInput[]
     connectOrCreate?: ClaimDocumentCreateOrConnectWithoutClaimInput | ClaimDocumentCreateOrConnectWithoutClaimInput[]
@@ -45662,6 +48243,20 @@ export namespace Prisma {
     update?: ClaimDocumentUpdateWithWhereUniqueWithoutClaimInput | ClaimDocumentUpdateWithWhereUniqueWithoutClaimInput[]
     updateMany?: ClaimDocumentUpdateManyWithWhereWithoutClaimInput | ClaimDocumentUpdateManyWithWhereWithoutClaimInput[]
     deleteMany?: ClaimDocumentScalarWhereInput | ClaimDocumentScalarWhereInput[]
+  }
+
+  export type ClaimInvoiceUncheckedUpdateManyWithoutClaimNestedInput = {
+    create?: XOR<ClaimInvoiceCreateWithoutClaimInput, ClaimInvoiceUncheckedCreateWithoutClaimInput> | ClaimInvoiceCreateWithoutClaimInput[] | ClaimInvoiceUncheckedCreateWithoutClaimInput[]
+    connectOrCreate?: ClaimInvoiceCreateOrConnectWithoutClaimInput | ClaimInvoiceCreateOrConnectWithoutClaimInput[]
+    upsert?: ClaimInvoiceUpsertWithWhereUniqueWithoutClaimInput | ClaimInvoiceUpsertWithWhereUniqueWithoutClaimInput[]
+    createMany?: ClaimInvoiceCreateManyClaimInputEnvelope
+    set?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    disconnect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    delete?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    connect?: ClaimInvoiceWhereUniqueInput | ClaimInvoiceWhereUniqueInput[]
+    update?: ClaimInvoiceUpdateWithWhereUniqueWithoutClaimInput | ClaimInvoiceUpdateWithWhereUniqueWithoutClaimInput[]
+    updateMany?: ClaimInvoiceUpdateManyWithWhereWithoutClaimInput | ClaimInvoiceUpdateManyWithWhereWithoutClaimInput[]
+    deleteMany?: ClaimInvoiceScalarWhereInput | ClaimInvoiceScalarWhereInput[]
   }
 
   export type OrganizationCreateNestedOneWithoutClaimDocumentsInput = {
@@ -45996,6 +48591,64 @@ export namespace Prisma {
     upsert?: OrganizationUpsertWithoutJobQueuesInput
     connect?: OrganizationWhereUniqueInput
     update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutJobQueuesInput, OrganizationUpdateWithoutJobQueuesInput>, OrganizationUncheckedUpdateWithoutJobQueuesInput>
+  }
+
+  export type OrganizationCreateNestedOneWithoutClaimInvoicesInput = {
+    create?: XOR<OrganizationCreateWithoutClaimInvoicesInput, OrganizationUncheckedCreateWithoutClaimInvoicesInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutClaimInvoicesInput
+    connect?: OrganizationWhereUniqueInput
+  }
+
+  export type ClaimCreateNestedOneWithoutInvoicesInput = {
+    create?: XOR<ClaimCreateWithoutInvoicesInput, ClaimUncheckedCreateWithoutInvoicesInput>
+    connectOrCreate?: ClaimCreateOrConnectWithoutInvoicesInput
+    connect?: ClaimWhereUniqueInput
+  }
+
+  export type ParcelCreateNestedOneWithoutClaimInvoicesInput = {
+    create?: XOR<ParcelCreateWithoutClaimInvoicesInput, ParcelUncheckedCreateWithoutClaimInvoicesInput>
+    connectOrCreate?: ParcelCreateOrConnectWithoutClaimInvoicesInput
+    connect?: ParcelWhereUniqueInput
+  }
+
+  export type CarrierCreateNestedOneWithoutClaimInvoicesInput = {
+    create?: XOR<CarrierCreateWithoutClaimInvoicesInput, CarrierUncheckedCreateWithoutClaimInvoicesInput>
+    connectOrCreate?: CarrierCreateOrConnectWithoutClaimInvoicesInput
+    connect?: CarrierWhereUniqueInput
+  }
+
+  export type OrganizationUpdateOneRequiredWithoutClaimInvoicesNestedInput = {
+    create?: XOR<OrganizationCreateWithoutClaimInvoicesInput, OrganizationUncheckedCreateWithoutClaimInvoicesInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutClaimInvoicesInput
+    upsert?: OrganizationUpsertWithoutClaimInvoicesInput
+    connect?: OrganizationWhereUniqueInput
+    update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutClaimInvoicesInput, OrganizationUpdateWithoutClaimInvoicesInput>, OrganizationUncheckedUpdateWithoutClaimInvoicesInput>
+  }
+
+  export type ClaimUpdateOneWithoutInvoicesNestedInput = {
+    create?: XOR<ClaimCreateWithoutInvoicesInput, ClaimUncheckedCreateWithoutInvoicesInput>
+    connectOrCreate?: ClaimCreateOrConnectWithoutInvoicesInput
+    upsert?: ClaimUpsertWithoutInvoicesInput
+    disconnect?: ClaimWhereInput | boolean
+    delete?: ClaimWhereInput | boolean
+    connect?: ClaimWhereUniqueInput
+    update?: XOR<XOR<ClaimUpdateToOneWithWhereWithoutInvoicesInput, ClaimUpdateWithoutInvoicesInput>, ClaimUncheckedUpdateWithoutInvoicesInput>
+  }
+
+  export type ParcelUpdateOneRequiredWithoutClaimInvoicesNestedInput = {
+    create?: XOR<ParcelCreateWithoutClaimInvoicesInput, ParcelUncheckedCreateWithoutClaimInvoicesInput>
+    connectOrCreate?: ParcelCreateOrConnectWithoutClaimInvoicesInput
+    upsert?: ParcelUpsertWithoutClaimInvoicesInput
+    connect?: ParcelWhereUniqueInput
+    update?: XOR<XOR<ParcelUpdateToOneWithWhereWithoutClaimInvoicesInput, ParcelUpdateWithoutClaimInvoicesInput>, ParcelUncheckedUpdateWithoutClaimInvoicesInput>
+  }
+
+  export type CarrierUpdateOneRequiredWithoutClaimInvoicesNestedInput = {
+    create?: XOR<CarrierCreateWithoutClaimInvoicesInput, CarrierUncheckedCreateWithoutClaimInvoicesInput>
+    connectOrCreate?: CarrierCreateOrConnectWithoutClaimInvoicesInput
+    upsert?: CarrierUpsertWithoutClaimInvoicesInput
+    connect?: CarrierWhereUniqueInput
+    update?: XOR<XOR<CarrierUpdateToOneWithWhereWithoutClaimInvoicesInput, CarrierUpdateWithoutClaimInvoicesInput>, CarrierUncheckedUpdateWithoutClaimInvoicesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -46349,6 +49002,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyCreateNestedManyWithoutCarrierInput
     enquiries?: CarrierEnquiryCreateNestedManyWithoutCarrierInput
     claims?: ClaimCreateNestedManyWithoutCarrierInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutCarrierInput
   }
 
   export type CarrierUncheckedCreateWithoutOrganizationInput = {
@@ -46375,6 +49029,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyUncheckedCreateNestedManyWithoutCarrierInput
     enquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutCarrierInput
     claims?: ClaimUncheckedCreateNestedManyWithoutCarrierInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutCarrierInput
   }
 
   export type CarrierCreateOrConnectWithoutOrganizationInput = {
@@ -46593,6 +49248,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryCreateNestedManyWithoutParcelInput
     claims?: ClaimCreateNestedManyWithoutParcelInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutParcelInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutParcelInput
   }
 
   export type ParcelUncheckedCreateWithoutOrganizationInput = {
@@ -46650,6 +49306,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutParcelInput
     claims?: ClaimUncheckedCreateNestedManyWithoutParcelInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutParcelInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutParcelInput
   }
 
   export type ParcelCreateOrConnectWithoutOrganizationInput = {
@@ -46812,6 +49469,9 @@ export namespace Prisma {
     replyCount?: number
     internalNotes?: string | null
     followUpDueDate?: Date | string | null
+    followUpSequenceCount?: number
+    escalationTier?: string
+    lastFollowUpSentAt?: Date | string | null
     createdById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -46837,6 +49497,9 @@ export namespace Prisma {
     replyCount?: number
     internalNotes?: string | null
     followUpDueDate?: Date | string | null
+    followUpSequenceCount?: number
+    escalationTier?: string
+    lastFollowUpSentAt?: Date | string | null
     assignedUserId?: string | null
     createdById?: string | null
     createdAt?: Date | string
@@ -46912,6 +49575,7 @@ export namespace Prisma {
     carrier: CarrierCreateNestedOneWithoutClaimsInput
     assignedUser?: UserCreateNestedOneWithoutClaimsInput
     documents?: ClaimDocumentCreateNestedManyWithoutClaimInput
+    invoices?: ClaimInvoiceCreateNestedManyWithoutClaimInput
   }
 
   export type ClaimUncheckedCreateWithoutOrganizationInput = {
@@ -46940,6 +49604,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     documents?: ClaimDocumentUncheckedCreateNestedManyWithoutClaimInput
+    invoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutClaimInput
   }
 
   export type ClaimCreateOrConnectWithoutOrganizationInput = {
@@ -46987,6 +49652,94 @@ export namespace Prisma {
 
   export type ClaimDocumentCreateManyOrganizationInputEnvelope = {
     data: ClaimDocumentCreateManyOrganizationInput | ClaimDocumentCreateManyOrganizationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ClaimInvoiceCreateWithoutOrganizationInput = {
+    id?: string
+    invoiceNumber: string
+    generationType?: string
+    carrierFormat?: string
+    claimantName: string
+    claimantAddress: string
+    claimantTaxId?: string | null
+    claimantContactEmail?: string | null
+    claimantPhone?: string | null
+    courierName: string
+    courierAccountNo?: string | null
+    courierDeptEmail?: string | null
+    courierClaimRef?: string | null
+    trackingNumber: string
+    orderNumber: string
+    dispatchDate?: Date | string | null
+    lossReason?: string
+    currency?: string
+    merchandiseValue?: number
+    shippingCost?: number
+    taxAmount?: number
+    adminFeeAmount?: number
+    totalClaimedAmount?: number
+    lineItems?: string
+    customFields?: string
+    evidenceImages?: string
+    disclaimerText?: string
+    notes?: string | null
+    authorizedSignatory?: string | null
+    status?: string
+    submittedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    claim?: ClaimCreateNestedOneWithoutInvoicesInput
+    parcel: ParcelCreateNestedOneWithoutClaimInvoicesInput
+    carrier: CarrierCreateNestedOneWithoutClaimInvoicesInput
+  }
+
+  export type ClaimInvoiceUncheckedCreateWithoutOrganizationInput = {
+    id?: string
+    claimId?: string | null
+    parcelId: string
+    carrierId: string
+    invoiceNumber: string
+    generationType?: string
+    carrierFormat?: string
+    claimantName: string
+    claimantAddress: string
+    claimantTaxId?: string | null
+    claimantContactEmail?: string | null
+    claimantPhone?: string | null
+    courierName: string
+    courierAccountNo?: string | null
+    courierDeptEmail?: string | null
+    courierClaimRef?: string | null
+    trackingNumber: string
+    orderNumber: string
+    dispatchDate?: Date | string | null
+    lossReason?: string
+    currency?: string
+    merchandiseValue?: number
+    shippingCost?: number
+    taxAmount?: number
+    adminFeeAmount?: number
+    totalClaimedAmount?: number
+    lineItems?: string
+    customFields?: string
+    evidenceImages?: string
+    disclaimerText?: string
+    notes?: string | null
+    authorizedSignatory?: string | null
+    status?: string
+    submittedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClaimInvoiceCreateOrConnectWithoutOrganizationInput = {
+    where: ClaimInvoiceWhereUniqueInput
+    create: XOR<ClaimInvoiceCreateWithoutOrganizationInput, ClaimInvoiceUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type ClaimInvoiceCreateManyOrganizationInputEnvelope = {
+    data: ClaimInvoiceCreateManyOrganizationInput | ClaimInvoiceCreateManyOrganizationInput[]
     skipDuplicates?: boolean
   }
 
@@ -47839,6 +50592,9 @@ export namespace Prisma {
     replyCount?: IntFilter<"CarrierEnquiry"> | number
     internalNotes?: StringNullableFilter<"CarrierEnquiry"> | string | null
     followUpDueDate?: DateTimeNullableFilter<"CarrierEnquiry"> | Date | string | null
+    followUpSequenceCount?: IntFilter<"CarrierEnquiry"> | number
+    escalationTier?: StringFilter<"CarrierEnquiry"> | string
+    lastFollowUpSentAt?: DateTimeNullableFilter<"CarrierEnquiry"> | Date | string | null
     assignedUserId?: StringNullableFilter<"CarrierEnquiry"> | string | null
     createdById?: StringNullableFilter<"CarrierEnquiry"> | string | null
     createdAt?: DateTimeFilter<"CarrierEnquiry"> | Date | string
@@ -47955,6 +50711,65 @@ export namespace Prisma {
     isGeneratedDeclaration?: BoolFilter<"ClaimDocument"> | boolean
     disclaimerText?: StringNullableFilter<"ClaimDocument"> | string | null
     uploadedAt?: DateTimeFilter<"ClaimDocument"> | Date | string
+  }
+
+  export type ClaimInvoiceUpsertWithWhereUniqueWithoutOrganizationInput = {
+    where: ClaimInvoiceWhereUniqueInput
+    update: XOR<ClaimInvoiceUpdateWithoutOrganizationInput, ClaimInvoiceUncheckedUpdateWithoutOrganizationInput>
+    create: XOR<ClaimInvoiceCreateWithoutOrganizationInput, ClaimInvoiceUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type ClaimInvoiceUpdateWithWhereUniqueWithoutOrganizationInput = {
+    where: ClaimInvoiceWhereUniqueInput
+    data: XOR<ClaimInvoiceUpdateWithoutOrganizationInput, ClaimInvoiceUncheckedUpdateWithoutOrganizationInput>
+  }
+
+  export type ClaimInvoiceUpdateManyWithWhereWithoutOrganizationInput = {
+    where: ClaimInvoiceScalarWhereInput
+    data: XOR<ClaimInvoiceUpdateManyMutationInput, ClaimInvoiceUncheckedUpdateManyWithoutOrganizationInput>
+  }
+
+  export type ClaimInvoiceScalarWhereInput = {
+    AND?: ClaimInvoiceScalarWhereInput | ClaimInvoiceScalarWhereInput[]
+    OR?: ClaimInvoiceScalarWhereInput[]
+    NOT?: ClaimInvoiceScalarWhereInput | ClaimInvoiceScalarWhereInput[]
+    id?: StringFilter<"ClaimInvoice"> | string
+    organizationId?: StringFilter<"ClaimInvoice"> | string
+    claimId?: StringNullableFilter<"ClaimInvoice"> | string | null
+    parcelId?: StringFilter<"ClaimInvoice"> | string
+    carrierId?: StringFilter<"ClaimInvoice"> | string
+    invoiceNumber?: StringFilter<"ClaimInvoice"> | string
+    generationType?: StringFilter<"ClaimInvoice"> | string
+    carrierFormat?: StringFilter<"ClaimInvoice"> | string
+    claimantName?: StringFilter<"ClaimInvoice"> | string
+    claimantAddress?: StringFilter<"ClaimInvoice"> | string
+    claimantTaxId?: StringNullableFilter<"ClaimInvoice"> | string | null
+    claimantContactEmail?: StringNullableFilter<"ClaimInvoice"> | string | null
+    claimantPhone?: StringNullableFilter<"ClaimInvoice"> | string | null
+    courierName?: StringFilter<"ClaimInvoice"> | string
+    courierAccountNo?: StringNullableFilter<"ClaimInvoice"> | string | null
+    courierDeptEmail?: StringNullableFilter<"ClaimInvoice"> | string | null
+    courierClaimRef?: StringNullableFilter<"ClaimInvoice"> | string | null
+    trackingNumber?: StringFilter<"ClaimInvoice"> | string
+    orderNumber?: StringFilter<"ClaimInvoice"> | string
+    dispatchDate?: DateTimeNullableFilter<"ClaimInvoice"> | Date | string | null
+    lossReason?: StringFilter<"ClaimInvoice"> | string
+    currency?: StringFilter<"ClaimInvoice"> | string
+    merchandiseValue?: FloatFilter<"ClaimInvoice"> | number
+    shippingCost?: FloatFilter<"ClaimInvoice"> | number
+    taxAmount?: FloatFilter<"ClaimInvoice"> | number
+    adminFeeAmount?: FloatFilter<"ClaimInvoice"> | number
+    totalClaimedAmount?: FloatFilter<"ClaimInvoice"> | number
+    lineItems?: StringFilter<"ClaimInvoice"> | string
+    customFields?: StringFilter<"ClaimInvoice"> | string
+    evidenceImages?: StringFilter<"ClaimInvoice"> | string
+    disclaimerText?: StringFilter<"ClaimInvoice"> | string
+    notes?: StringNullableFilter<"ClaimInvoice"> | string | null
+    authorizedSignatory?: StringNullableFilter<"ClaimInvoice"> | string | null
+    status?: StringFilter<"ClaimInvoice"> | string
+    submittedAt?: DateTimeNullableFilter<"ClaimInvoice"> | Date | string | null
+    createdAt?: DateTimeFilter<"ClaimInvoice"> | Date | string
+    updatedAt?: DateTimeFilter<"ClaimInvoice"> | Date | string
   }
 
   export type CustomFieldUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -48343,6 +51158,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -48388,6 +51204,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -48420,6 +51237,9 @@ export namespace Prisma {
     replyCount?: number
     internalNotes?: string | null
     followUpDueDate?: Date | string | null
+    followUpSequenceCount?: number
+    escalationTier?: string
+    lastFollowUpSentAt?: Date | string | null
     createdById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -48446,6 +51266,9 @@ export namespace Prisma {
     replyCount?: number
     internalNotes?: string | null
     followUpDueDate?: Date | string | null
+    followUpSequenceCount?: number
+    escalationTier?: string
+    lastFollowUpSentAt?: Date | string | null
     createdById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -48488,6 +51311,7 @@ export namespace Prisma {
     parcel: ParcelCreateNestedOneWithoutClaimsInput
     carrier: CarrierCreateNestedOneWithoutClaimsInput
     documents?: ClaimDocumentCreateNestedManyWithoutClaimInput
+    invoices?: ClaimInvoiceCreateNestedManyWithoutClaimInput
   }
 
   export type ClaimUncheckedCreateWithoutAssignedUserInput = {
@@ -48516,6 +51340,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     documents?: ClaimDocumentUncheckedCreateNestedManyWithoutClaimInput
+    invoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutClaimInput
   }
 
   export type ClaimCreateOrConnectWithoutAssignedUserInput = {
@@ -48631,6 +51456,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -48676,6 +51502,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -48890,6 +51717,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -48935,6 +51763,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -49008,6 +51837,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryCreateNestedManyWithoutParcelInput
     claims?: ClaimCreateNestedManyWithoutParcelInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutParcelInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutParcelInput
   }
 
   export type ParcelUncheckedCreateWithoutWarehouseInput = {
@@ -49065,6 +51895,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutParcelInput
     claims?: ClaimUncheckedCreateNestedManyWithoutParcelInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutParcelInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutParcelInput
   }
 
   export type ParcelCreateOrConnectWithoutWarehouseInput = {
@@ -49120,6 +51951,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -49165,6 +51997,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -49226,6 +52059,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -49271,6 +52105,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -49344,6 +52179,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryCreateNestedManyWithoutParcelInput
     claims?: ClaimCreateNestedManyWithoutParcelInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutParcelInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutParcelInput
   }
 
   export type ParcelUncheckedCreateWithoutCarrierInput = {
@@ -49401,6 +52237,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutParcelInput
     claims?: ClaimUncheckedCreateNestedManyWithoutParcelInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutParcelInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutParcelInput
   }
 
   export type ParcelCreateOrConnectWithoutCarrierInput = {
@@ -49587,6 +52424,9 @@ export namespace Prisma {
     replyCount?: number
     internalNotes?: string | null
     followUpDueDate?: Date | string | null
+    followUpSequenceCount?: number
+    escalationTier?: string
+    lastFollowUpSentAt?: Date | string | null
     createdById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -49612,6 +52452,9 @@ export namespace Prisma {
     replyCount?: number
     internalNotes?: string | null
     followUpDueDate?: Date | string | null
+    followUpSequenceCount?: number
+    escalationTier?: string
+    lastFollowUpSentAt?: Date | string | null
     assignedUserId?: string | null
     createdById?: string | null
     createdAt?: Date | string
@@ -49655,6 +52498,7 @@ export namespace Prisma {
     parcel: ParcelCreateNestedOneWithoutClaimsInput
     assignedUser?: UserCreateNestedOneWithoutClaimsInput
     documents?: ClaimDocumentCreateNestedManyWithoutClaimInput
+    invoices?: ClaimInvoiceCreateNestedManyWithoutClaimInput
   }
 
   export type ClaimUncheckedCreateWithoutCarrierInput = {
@@ -49683,6 +52527,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     documents?: ClaimDocumentUncheckedCreateNestedManyWithoutClaimInput
+    invoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutClaimInput
   }
 
   export type ClaimCreateOrConnectWithoutCarrierInput = {
@@ -49692,6 +52537,94 @@ export namespace Prisma {
 
   export type ClaimCreateManyCarrierInputEnvelope = {
     data: ClaimCreateManyCarrierInput | ClaimCreateManyCarrierInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ClaimInvoiceCreateWithoutCarrierInput = {
+    id?: string
+    invoiceNumber: string
+    generationType?: string
+    carrierFormat?: string
+    claimantName: string
+    claimantAddress: string
+    claimantTaxId?: string | null
+    claimantContactEmail?: string | null
+    claimantPhone?: string | null
+    courierName: string
+    courierAccountNo?: string | null
+    courierDeptEmail?: string | null
+    courierClaimRef?: string | null
+    trackingNumber: string
+    orderNumber: string
+    dispatchDate?: Date | string | null
+    lossReason?: string
+    currency?: string
+    merchandiseValue?: number
+    shippingCost?: number
+    taxAmount?: number
+    adminFeeAmount?: number
+    totalClaimedAmount?: number
+    lineItems?: string
+    customFields?: string
+    evidenceImages?: string
+    disclaimerText?: string
+    notes?: string | null
+    authorizedSignatory?: string | null
+    status?: string
+    submittedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organization: OrganizationCreateNestedOneWithoutClaimInvoicesInput
+    claim?: ClaimCreateNestedOneWithoutInvoicesInput
+    parcel: ParcelCreateNestedOneWithoutClaimInvoicesInput
+  }
+
+  export type ClaimInvoiceUncheckedCreateWithoutCarrierInput = {
+    id?: string
+    organizationId: string
+    claimId?: string | null
+    parcelId: string
+    invoiceNumber: string
+    generationType?: string
+    carrierFormat?: string
+    claimantName: string
+    claimantAddress: string
+    claimantTaxId?: string | null
+    claimantContactEmail?: string | null
+    claimantPhone?: string | null
+    courierName: string
+    courierAccountNo?: string | null
+    courierDeptEmail?: string | null
+    courierClaimRef?: string | null
+    trackingNumber: string
+    orderNumber: string
+    dispatchDate?: Date | string | null
+    lossReason?: string
+    currency?: string
+    merchandiseValue?: number
+    shippingCost?: number
+    taxAmount?: number
+    adminFeeAmount?: number
+    totalClaimedAmount?: number
+    lineItems?: string
+    customFields?: string
+    evidenceImages?: string
+    disclaimerText?: string
+    notes?: string | null
+    authorizedSignatory?: string | null
+    status?: string
+    submittedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClaimInvoiceCreateOrConnectWithoutCarrierInput = {
+    where: ClaimInvoiceWhereUniqueInput
+    create: XOR<ClaimInvoiceCreateWithoutCarrierInput, ClaimInvoiceUncheckedCreateWithoutCarrierInput>
+  }
+
+  export type ClaimInvoiceCreateManyCarrierInputEnvelope = {
+    data: ClaimInvoiceCreateManyCarrierInput | ClaimInvoiceCreateManyCarrierInput[]
     skipDuplicates?: boolean
   }
 
@@ -49738,6 +52671,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -49783,6 +52717,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -49892,6 +52827,22 @@ export namespace Prisma {
     data: XOR<ClaimUpdateManyMutationInput, ClaimUncheckedUpdateManyWithoutCarrierInput>
   }
 
+  export type ClaimInvoiceUpsertWithWhereUniqueWithoutCarrierInput = {
+    where: ClaimInvoiceWhereUniqueInput
+    update: XOR<ClaimInvoiceUpdateWithoutCarrierInput, ClaimInvoiceUncheckedUpdateWithoutCarrierInput>
+    create: XOR<ClaimInvoiceCreateWithoutCarrierInput, ClaimInvoiceUncheckedCreateWithoutCarrierInput>
+  }
+
+  export type ClaimInvoiceUpdateWithWhereUniqueWithoutCarrierInput = {
+    where: ClaimInvoiceWhereUniqueInput
+    data: XOR<ClaimInvoiceUpdateWithoutCarrierInput, ClaimInvoiceUncheckedUpdateWithoutCarrierInput>
+  }
+
+  export type ClaimInvoiceUpdateManyWithWhereWithoutCarrierInput = {
+    where: ClaimInvoiceScalarWhereInput
+    data: XOR<ClaimInvoiceUpdateManyMutationInput, ClaimInvoiceUncheckedUpdateManyWithoutCarrierInput>
+  }
+
   export type OrganizationCreateWithoutCarrierMappingsInput = {
     id?: string
     name: string
@@ -49924,6 +52875,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -49969,6 +52921,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -50011,6 +52964,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyCreateNestedManyWithoutCarrierInput
     enquiries?: CarrierEnquiryCreateNestedManyWithoutCarrierInput
     claims?: ClaimCreateNestedManyWithoutCarrierInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutCarrierInput
   }
 
   export type CarrierUncheckedCreateWithoutMappingsInput = {
@@ -50037,6 +52991,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyUncheckedCreateNestedManyWithoutCarrierInput
     enquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutCarrierInput
     claims?: ClaimUncheckedCreateNestedManyWithoutCarrierInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutCarrierInput
   }
 
   export type CarrierCreateOrConnectWithoutMappingsInput = {
@@ -50087,6 +53042,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -50132,6 +53088,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -50180,6 +53137,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyUpdateManyWithoutCarrierNestedInput
     enquiries?: CarrierEnquiryUpdateManyWithoutCarrierNestedInput
     claims?: ClaimUpdateManyWithoutCarrierNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutCarrierNestedInput
   }
 
   export type CarrierUncheckedUpdateWithoutMappingsInput = {
@@ -50206,6 +53164,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyUncheckedUpdateManyWithoutCarrierNestedInput
     enquiries?: CarrierEnquiryUncheckedUpdateManyWithoutCarrierNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutCarrierNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutCarrierNestedInput
   }
 
   export type OrganizationCreateWithoutCarrierConnectorsInput = {
@@ -50240,6 +53199,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -50285,6 +53245,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -50327,6 +53288,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyCreateNestedManyWithoutCarrierInput
     enquiries?: CarrierEnquiryCreateNestedManyWithoutCarrierInput
     claims?: ClaimCreateNestedManyWithoutCarrierInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutCarrierInput
   }
 
   export type CarrierUncheckedCreateWithoutConnectorsInput = {
@@ -50353,6 +53315,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyUncheckedCreateNestedManyWithoutCarrierInput
     enquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutCarrierInput
     claims?: ClaimUncheckedCreateNestedManyWithoutCarrierInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutCarrierInput
   }
 
   export type CarrierCreateOrConnectWithoutConnectorsInput = {
@@ -50403,6 +53366,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -50448,6 +53412,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -50496,6 +53461,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyUpdateManyWithoutCarrierNestedInput
     enquiries?: CarrierEnquiryUpdateManyWithoutCarrierNestedInput
     claims?: ClaimUpdateManyWithoutCarrierNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutCarrierNestedInput
   }
 
   export type CarrierUncheckedUpdateWithoutConnectorsInput = {
@@ -50522,6 +53488,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyUncheckedUpdateManyWithoutCarrierNestedInput
     enquiries?: CarrierEnquiryUncheckedUpdateManyWithoutCarrierNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutCarrierNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutCarrierNestedInput
   }
 
   export type OrganizationCreateWithoutLinnworksConnectionInput = {
@@ -50556,6 +53523,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -50601,6 +53569,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -50662,6 +53631,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -50707,6 +53677,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -50752,6 +53723,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -50797,6 +53769,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -50880,6 +53853,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyCreateNestedManyWithoutCarrierInput
     enquiries?: CarrierEnquiryCreateNestedManyWithoutCarrierInput
     claims?: ClaimCreateNestedManyWithoutCarrierInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutCarrierInput
   }
 
   export type CarrierUncheckedCreateWithoutParcelsInput = {
@@ -50906,6 +53880,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyUncheckedCreateNestedManyWithoutCarrierInput
     enquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutCarrierInput
     claims?: ClaimUncheckedCreateNestedManyWithoutCarrierInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutCarrierInput
   }
 
   export type CarrierCreateOrConnectWithoutParcelsInput = {
@@ -51009,6 +53984,9 @@ export namespace Prisma {
     replyCount?: number
     internalNotes?: string | null
     followUpDueDate?: Date | string | null
+    followUpSequenceCount?: number
+    escalationTier?: string
+    lastFollowUpSentAt?: Date | string | null
     createdById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -51034,6 +54012,9 @@ export namespace Prisma {
     replyCount?: number
     internalNotes?: string | null
     followUpDueDate?: Date | string | null
+    followUpSequenceCount?: number
+    escalationTier?: string
+    lastFollowUpSentAt?: Date | string | null
     assignedUserId?: string | null
     createdById?: string | null
     createdAt?: Date | string
@@ -51077,6 +54058,7 @@ export namespace Prisma {
     carrier: CarrierCreateNestedOneWithoutClaimsInput
     assignedUser?: UserCreateNestedOneWithoutClaimsInput
     documents?: ClaimDocumentCreateNestedManyWithoutClaimInput
+    invoices?: ClaimInvoiceCreateNestedManyWithoutClaimInput
   }
 
   export type ClaimUncheckedCreateWithoutParcelInput = {
@@ -51105,6 +54087,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     documents?: ClaimDocumentUncheckedCreateNestedManyWithoutClaimInput
+    invoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutClaimInput
   }
 
   export type ClaimCreateOrConnectWithoutParcelInput = {
@@ -51155,6 +54138,94 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ClaimInvoiceCreateWithoutParcelInput = {
+    id?: string
+    invoiceNumber: string
+    generationType?: string
+    carrierFormat?: string
+    claimantName: string
+    claimantAddress: string
+    claimantTaxId?: string | null
+    claimantContactEmail?: string | null
+    claimantPhone?: string | null
+    courierName: string
+    courierAccountNo?: string | null
+    courierDeptEmail?: string | null
+    courierClaimRef?: string | null
+    trackingNumber: string
+    orderNumber: string
+    dispatchDate?: Date | string | null
+    lossReason?: string
+    currency?: string
+    merchandiseValue?: number
+    shippingCost?: number
+    taxAmount?: number
+    adminFeeAmount?: number
+    totalClaimedAmount?: number
+    lineItems?: string
+    customFields?: string
+    evidenceImages?: string
+    disclaimerText?: string
+    notes?: string | null
+    authorizedSignatory?: string | null
+    status?: string
+    submittedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organization: OrganizationCreateNestedOneWithoutClaimInvoicesInput
+    claim?: ClaimCreateNestedOneWithoutInvoicesInput
+    carrier: CarrierCreateNestedOneWithoutClaimInvoicesInput
+  }
+
+  export type ClaimInvoiceUncheckedCreateWithoutParcelInput = {
+    id?: string
+    organizationId: string
+    claimId?: string | null
+    carrierId: string
+    invoiceNumber: string
+    generationType?: string
+    carrierFormat?: string
+    claimantName: string
+    claimantAddress: string
+    claimantTaxId?: string | null
+    claimantContactEmail?: string | null
+    claimantPhone?: string | null
+    courierName: string
+    courierAccountNo?: string | null
+    courierDeptEmail?: string | null
+    courierClaimRef?: string | null
+    trackingNumber: string
+    orderNumber: string
+    dispatchDate?: Date | string | null
+    lossReason?: string
+    currency?: string
+    merchandiseValue?: number
+    shippingCost?: number
+    taxAmount?: number
+    adminFeeAmount?: number
+    totalClaimedAmount?: number
+    lineItems?: string
+    customFields?: string
+    evidenceImages?: string
+    disclaimerText?: string
+    notes?: string | null
+    authorizedSignatory?: string | null
+    status?: string
+    submittedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClaimInvoiceCreateOrConnectWithoutParcelInput = {
+    where: ClaimInvoiceWhereUniqueInput
+    create: XOR<ClaimInvoiceCreateWithoutParcelInput, ClaimInvoiceUncheckedCreateWithoutParcelInput>
+  }
+
+  export type ClaimInvoiceCreateManyParcelInputEnvelope = {
+    data: ClaimInvoiceCreateManyParcelInput | ClaimInvoiceCreateManyParcelInput[]
+    skipDuplicates?: boolean
+  }
+
   export type OrganizationUpsertWithoutParcelsInput = {
     update: XOR<OrganizationUpdateWithoutParcelsInput, OrganizationUncheckedUpdateWithoutParcelsInput>
     create: XOR<OrganizationCreateWithoutParcelsInput, OrganizationUncheckedCreateWithoutParcelsInput>
@@ -51198,6 +54269,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -51243,6 +54315,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -51338,6 +54411,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyUpdateManyWithoutCarrierNestedInput
     enquiries?: CarrierEnquiryUpdateManyWithoutCarrierNestedInput
     claims?: ClaimUpdateManyWithoutCarrierNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutCarrierNestedInput
   }
 
   export type CarrierUncheckedUpdateWithoutParcelsInput = {
@@ -51364,6 +54438,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyUncheckedUpdateManyWithoutCarrierNestedInput
     enquiries?: CarrierEnquiryUncheckedUpdateManyWithoutCarrierNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutCarrierNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutCarrierNestedInput
   }
 
   export type RawTrackingEventUpsertWithWhereUniqueWithoutParcelInput = {
@@ -51446,6 +54521,22 @@ export namespace Prisma {
     data: XOR<ClaimDocumentUpdateManyMutationInput, ClaimDocumentUncheckedUpdateManyWithoutParcelInput>
   }
 
+  export type ClaimInvoiceUpsertWithWhereUniqueWithoutParcelInput = {
+    where: ClaimInvoiceWhereUniqueInput
+    update: XOR<ClaimInvoiceUpdateWithoutParcelInput, ClaimInvoiceUncheckedUpdateWithoutParcelInput>
+    create: XOR<ClaimInvoiceCreateWithoutParcelInput, ClaimInvoiceUncheckedCreateWithoutParcelInput>
+  }
+
+  export type ClaimInvoiceUpdateWithWhereUniqueWithoutParcelInput = {
+    where: ClaimInvoiceWhereUniqueInput
+    data: XOR<ClaimInvoiceUpdateWithoutParcelInput, ClaimInvoiceUncheckedUpdateWithoutParcelInput>
+  }
+
+  export type ClaimInvoiceUpdateManyWithWhereWithoutParcelInput = {
+    where: ClaimInvoiceScalarWhereInput
+    data: XOR<ClaimInvoiceUpdateManyMutationInput, ClaimInvoiceUncheckedUpdateManyWithoutParcelInput>
+  }
+
   export type OrganizationCreateWithoutRawTrackingEventsInput = {
     id?: string
     name: string
@@ -51478,6 +54569,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -51523,6 +54615,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -51596,6 +54689,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryCreateNestedManyWithoutParcelInput
     claims?: ClaimCreateNestedManyWithoutParcelInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutParcelInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutParcelInput
   }
 
   export type ParcelUncheckedCreateWithoutRawTrackingEventsInput = {
@@ -51653,6 +54747,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutParcelInput
     claims?: ClaimUncheckedCreateNestedManyWithoutParcelInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutParcelInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutParcelInput
   }
 
   export type ParcelCreateOrConnectWithoutRawTrackingEventsInput = {
@@ -51703,6 +54798,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -51748,6 +54844,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -51827,6 +54924,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryUpdateManyWithoutParcelNestedInput
     claims?: ClaimUpdateManyWithoutParcelNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutParcelNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutParcelNestedInput
   }
 
   export type ParcelUncheckedUpdateWithoutRawTrackingEventsInput = {
@@ -51884,6 +54982,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryUncheckedUpdateManyWithoutParcelNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutParcelNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutParcelNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutParcelNestedInput
   }
 
   export type OrganizationCreateWithoutTrackingEventsInput = {
@@ -51918,6 +55017,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -51963,6 +55063,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -52036,6 +55137,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryCreateNestedManyWithoutParcelInput
     claims?: ClaimCreateNestedManyWithoutParcelInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutParcelInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutParcelInput
   }
 
   export type ParcelUncheckedCreateWithoutTrackingEventsInput = {
@@ -52093,6 +55195,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutParcelInput
     claims?: ClaimUncheckedCreateNestedManyWithoutParcelInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutParcelInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutParcelInput
   }
 
   export type ParcelCreateOrConnectWithoutTrackingEventsInput = {
@@ -52143,6 +55246,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -52188,6 +55292,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -52267,6 +55372,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryUpdateManyWithoutParcelNestedInput
     claims?: ClaimUpdateManyWithoutParcelNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutParcelNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutParcelNestedInput
   }
 
   export type ParcelUncheckedUpdateWithoutTrackingEventsInput = {
@@ -52324,6 +55430,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryUncheckedUpdateManyWithoutParcelNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutParcelNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutParcelNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutParcelNestedInput
   }
 
   export type OrganizationCreateWithoutSlaPoliciesInput = {
@@ -52358,6 +55465,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -52403,6 +55511,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -52445,6 +55554,7 @@ export namespace Prisma {
     connectors?: CarrierConnectorCreateNestedManyWithoutCarrierInput
     enquiries?: CarrierEnquiryCreateNestedManyWithoutCarrierInput
     claims?: ClaimCreateNestedManyWithoutCarrierInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutCarrierInput
   }
 
   export type CarrierUncheckedCreateWithoutSlaPoliciesInput = {
@@ -52471,6 +55581,7 @@ export namespace Prisma {
     connectors?: CarrierConnectorUncheckedCreateNestedManyWithoutCarrierInput
     enquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutCarrierInput
     claims?: ClaimUncheckedCreateNestedManyWithoutCarrierInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutCarrierInput
   }
 
   export type CarrierCreateOrConnectWithoutSlaPoliciesInput = {
@@ -52521,6 +55632,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -52566,6 +55678,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -52614,6 +55727,7 @@ export namespace Prisma {
     connectors?: CarrierConnectorUpdateManyWithoutCarrierNestedInput
     enquiries?: CarrierEnquiryUpdateManyWithoutCarrierNestedInput
     claims?: ClaimUpdateManyWithoutCarrierNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutCarrierNestedInput
   }
 
   export type CarrierUncheckedUpdateWithoutSlaPoliciesInput = {
@@ -52640,6 +55754,7 @@ export namespace Prisma {
     connectors?: CarrierConnectorUncheckedUpdateManyWithoutCarrierNestedInput
     enquiries?: CarrierEnquiryUncheckedUpdateManyWithoutCarrierNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutCarrierNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutCarrierNestedInput
   }
 
   export type OrganizationCreateWithoutCarrierEnquiriesInput = {
@@ -52674,6 +55789,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -52719,6 +55835,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -52792,6 +55909,7 @@ export namespace Prisma {
     trackingEvents?: TrackingEventCreateNestedManyWithoutParcelInput
     claims?: ClaimCreateNestedManyWithoutParcelInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutParcelInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutParcelInput
   }
 
   export type ParcelUncheckedCreateWithoutEnquiriesInput = {
@@ -52849,6 +55967,7 @@ export namespace Prisma {
     trackingEvents?: TrackingEventUncheckedCreateNestedManyWithoutParcelInput
     claims?: ClaimUncheckedCreateNestedManyWithoutParcelInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutParcelInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutParcelInput
   }
 
   export type ParcelCreateOrConnectWithoutEnquiriesInput = {
@@ -52880,6 +55999,7 @@ export namespace Prisma {
     connectors?: CarrierConnectorCreateNestedManyWithoutCarrierInput
     slaPolicies?: SlaPolicyCreateNestedManyWithoutCarrierInput
     claims?: ClaimCreateNestedManyWithoutCarrierInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutCarrierInput
   }
 
   export type CarrierUncheckedCreateWithoutEnquiriesInput = {
@@ -52906,6 +56026,7 @@ export namespace Prisma {
     connectors?: CarrierConnectorUncheckedCreateNestedManyWithoutCarrierInput
     slaPolicies?: SlaPolicyUncheckedCreateNestedManyWithoutCarrierInput
     claims?: ClaimUncheckedCreateNestedManyWithoutCarrierInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutCarrierInput
   }
 
   export type CarrierCreateOrConnectWithoutEnquiriesInput = {
@@ -53031,6 +56152,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -53076,6 +56198,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -53155,6 +56278,7 @@ export namespace Prisma {
     trackingEvents?: TrackingEventUpdateManyWithoutParcelNestedInput
     claims?: ClaimUpdateManyWithoutParcelNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutParcelNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutParcelNestedInput
   }
 
   export type ParcelUncheckedUpdateWithoutEnquiriesInput = {
@@ -53212,6 +56336,7 @@ export namespace Prisma {
     trackingEvents?: TrackingEventUncheckedUpdateManyWithoutParcelNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutParcelNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutParcelNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutParcelNestedInput
   }
 
   export type CarrierUpsertWithoutEnquiriesInput = {
@@ -53249,6 +56374,7 @@ export namespace Prisma {
     connectors?: CarrierConnectorUpdateManyWithoutCarrierNestedInput
     slaPolicies?: SlaPolicyUpdateManyWithoutCarrierNestedInput
     claims?: ClaimUpdateManyWithoutCarrierNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutCarrierNestedInput
   }
 
   export type CarrierUncheckedUpdateWithoutEnquiriesInput = {
@@ -53275,6 +56401,7 @@ export namespace Prisma {
     connectors?: CarrierConnectorUncheckedUpdateManyWithoutCarrierNestedInput
     slaPolicies?: SlaPolicyUncheckedUpdateManyWithoutCarrierNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutCarrierNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutCarrierNestedInput
   }
 
   export type UserUpsertWithoutEnquiriesInput = {
@@ -53374,6 +56501,7 @@ export namespace Prisma {
     carrierEnquiries?: CarrierEnquiryCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -53419,6 +56547,7 @@ export namespace Prisma {
     carrierEnquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -53451,6 +56580,9 @@ export namespace Prisma {
     replyCount?: number
     internalNotes?: string | null
     followUpDueDate?: Date | string | null
+    followUpSequenceCount?: number
+    escalationTier?: string
+    lastFollowUpSentAt?: Date | string | null
     createdById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -53477,6 +56609,9 @@ export namespace Prisma {
     replyCount?: number
     internalNotes?: string | null
     followUpDueDate?: Date | string | null
+    followUpSequenceCount?: number
+    escalationTier?: string
+    lastFollowUpSentAt?: Date | string | null
     assignedUserId?: string | null
     createdById?: string | null
     createdAt?: Date | string
@@ -53531,6 +56666,7 @@ export namespace Prisma {
     carrierEnquiries?: CarrierEnquiryUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -53576,6 +56712,7 @@ export namespace Prisma {
     carrierEnquiries?: CarrierEnquiryUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -53614,6 +56751,9 @@ export namespace Prisma {
     replyCount?: IntFieldUpdateOperationsInput | number
     internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
     followUpDueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    followUpSequenceCount?: IntFieldUpdateOperationsInput | number
+    escalationTier?: StringFieldUpdateOperationsInput | string
+    lastFollowUpSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -53640,6 +56780,9 @@ export namespace Prisma {
     replyCount?: IntFieldUpdateOperationsInput | number
     internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
     followUpDueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    followUpSequenceCount?: IntFieldUpdateOperationsInput | number
+    escalationTier?: StringFieldUpdateOperationsInput | string
+    lastFollowUpSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     assignedUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -53678,6 +56821,7 @@ export namespace Prisma {
     carrierEnquiries?: CarrierEnquiryCreateNestedManyWithoutOrganizationInput
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -53723,6 +56867,7 @@ export namespace Prisma {
     carrierEnquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutOrganizationInput
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -53796,6 +56941,7 @@ export namespace Prisma {
     trackingEvents?: TrackingEventCreateNestedManyWithoutParcelInput
     enquiries?: CarrierEnquiryCreateNestedManyWithoutParcelInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutParcelInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutParcelInput
   }
 
   export type ParcelUncheckedCreateWithoutClaimsInput = {
@@ -53853,6 +56999,7 @@ export namespace Prisma {
     trackingEvents?: TrackingEventUncheckedCreateNestedManyWithoutParcelInput
     enquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutParcelInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutParcelInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutParcelInput
   }
 
   export type ParcelCreateOrConnectWithoutClaimsInput = {
@@ -53884,6 +57031,7 @@ export namespace Prisma {
     connectors?: CarrierConnectorCreateNestedManyWithoutCarrierInput
     slaPolicies?: SlaPolicyCreateNestedManyWithoutCarrierInput
     enquiries?: CarrierEnquiryCreateNestedManyWithoutCarrierInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutCarrierInput
   }
 
   export type CarrierUncheckedCreateWithoutClaimsInput = {
@@ -53910,6 +57058,7 @@ export namespace Prisma {
     connectors?: CarrierConnectorUncheckedCreateNestedManyWithoutCarrierInput
     slaPolicies?: SlaPolicyUncheckedCreateNestedManyWithoutCarrierInput
     enquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutCarrierInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutCarrierInput
   }
 
   export type CarrierCreateOrConnectWithoutClaimsInput = {
@@ -53998,6 +57147,94 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ClaimInvoiceCreateWithoutClaimInput = {
+    id?: string
+    invoiceNumber: string
+    generationType?: string
+    carrierFormat?: string
+    claimantName: string
+    claimantAddress: string
+    claimantTaxId?: string | null
+    claimantContactEmail?: string | null
+    claimantPhone?: string | null
+    courierName: string
+    courierAccountNo?: string | null
+    courierDeptEmail?: string | null
+    courierClaimRef?: string | null
+    trackingNumber: string
+    orderNumber: string
+    dispatchDate?: Date | string | null
+    lossReason?: string
+    currency?: string
+    merchandiseValue?: number
+    shippingCost?: number
+    taxAmount?: number
+    adminFeeAmount?: number
+    totalClaimedAmount?: number
+    lineItems?: string
+    customFields?: string
+    evidenceImages?: string
+    disclaimerText?: string
+    notes?: string | null
+    authorizedSignatory?: string | null
+    status?: string
+    submittedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organization: OrganizationCreateNestedOneWithoutClaimInvoicesInput
+    parcel: ParcelCreateNestedOneWithoutClaimInvoicesInput
+    carrier: CarrierCreateNestedOneWithoutClaimInvoicesInput
+  }
+
+  export type ClaimInvoiceUncheckedCreateWithoutClaimInput = {
+    id?: string
+    organizationId: string
+    parcelId: string
+    carrierId: string
+    invoiceNumber: string
+    generationType?: string
+    carrierFormat?: string
+    claimantName: string
+    claimantAddress: string
+    claimantTaxId?: string | null
+    claimantContactEmail?: string | null
+    claimantPhone?: string | null
+    courierName: string
+    courierAccountNo?: string | null
+    courierDeptEmail?: string | null
+    courierClaimRef?: string | null
+    trackingNumber: string
+    orderNumber: string
+    dispatchDate?: Date | string | null
+    lossReason?: string
+    currency?: string
+    merchandiseValue?: number
+    shippingCost?: number
+    taxAmount?: number
+    adminFeeAmount?: number
+    totalClaimedAmount?: number
+    lineItems?: string
+    customFields?: string
+    evidenceImages?: string
+    disclaimerText?: string
+    notes?: string | null
+    authorizedSignatory?: string | null
+    status?: string
+    submittedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClaimInvoiceCreateOrConnectWithoutClaimInput = {
+    where: ClaimInvoiceWhereUniqueInput
+    create: XOR<ClaimInvoiceCreateWithoutClaimInput, ClaimInvoiceUncheckedCreateWithoutClaimInput>
+  }
+
+  export type ClaimInvoiceCreateManyClaimInputEnvelope = {
+    data: ClaimInvoiceCreateManyClaimInput | ClaimInvoiceCreateManyClaimInput[]
+    skipDuplicates?: boolean
+  }
+
   export type OrganizationUpsertWithoutClaimsInput = {
     update: XOR<OrganizationUpdateWithoutClaimsInput, OrganizationUncheckedUpdateWithoutClaimsInput>
     create: XOR<OrganizationCreateWithoutClaimsInput, OrganizationUncheckedCreateWithoutClaimsInput>
@@ -54041,6 +57278,7 @@ export namespace Prisma {
     carrierEnquiries?: CarrierEnquiryUpdateManyWithoutOrganizationNestedInput
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -54086,6 +57324,7 @@ export namespace Prisma {
     carrierEnquiries?: CarrierEnquiryUncheckedUpdateManyWithoutOrganizationNestedInput
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -54165,6 +57404,7 @@ export namespace Prisma {
     trackingEvents?: TrackingEventUpdateManyWithoutParcelNestedInput
     enquiries?: CarrierEnquiryUpdateManyWithoutParcelNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutParcelNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutParcelNestedInput
   }
 
   export type ParcelUncheckedUpdateWithoutClaimsInput = {
@@ -54222,6 +57462,7 @@ export namespace Prisma {
     trackingEvents?: TrackingEventUncheckedUpdateManyWithoutParcelNestedInput
     enquiries?: CarrierEnquiryUncheckedUpdateManyWithoutParcelNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutParcelNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutParcelNestedInput
   }
 
   export type CarrierUpsertWithoutClaimsInput = {
@@ -54259,6 +57500,7 @@ export namespace Prisma {
     connectors?: CarrierConnectorUpdateManyWithoutCarrierNestedInput
     slaPolicies?: SlaPolicyUpdateManyWithoutCarrierNestedInput
     enquiries?: CarrierEnquiryUpdateManyWithoutCarrierNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutCarrierNestedInput
   }
 
   export type CarrierUncheckedUpdateWithoutClaimsInput = {
@@ -54285,6 +57527,7 @@ export namespace Prisma {
     connectors?: CarrierConnectorUncheckedUpdateManyWithoutCarrierNestedInput
     slaPolicies?: SlaPolicyUncheckedUpdateManyWithoutCarrierNestedInput
     enquiries?: CarrierEnquiryUncheckedUpdateManyWithoutCarrierNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutCarrierNestedInput
   }
 
   export type UserUpsertWithoutClaimsInput = {
@@ -54352,6 +57595,22 @@ export namespace Prisma {
     data: XOR<ClaimDocumentUpdateManyMutationInput, ClaimDocumentUncheckedUpdateManyWithoutClaimInput>
   }
 
+  export type ClaimInvoiceUpsertWithWhereUniqueWithoutClaimInput = {
+    where: ClaimInvoiceWhereUniqueInput
+    update: XOR<ClaimInvoiceUpdateWithoutClaimInput, ClaimInvoiceUncheckedUpdateWithoutClaimInput>
+    create: XOR<ClaimInvoiceCreateWithoutClaimInput, ClaimInvoiceUncheckedCreateWithoutClaimInput>
+  }
+
+  export type ClaimInvoiceUpdateWithWhereUniqueWithoutClaimInput = {
+    where: ClaimInvoiceWhereUniqueInput
+    data: XOR<ClaimInvoiceUpdateWithoutClaimInput, ClaimInvoiceUncheckedUpdateWithoutClaimInput>
+  }
+
+  export type ClaimInvoiceUpdateManyWithWhereWithoutClaimInput = {
+    where: ClaimInvoiceScalarWhereInput
+    data: XOR<ClaimInvoiceUpdateManyMutationInput, ClaimInvoiceUncheckedUpdateManyWithoutClaimInput>
+  }
+
   export type OrganizationCreateWithoutClaimDocumentsInput = {
     id?: string
     name: string
@@ -54384,6 +57643,7 @@ export namespace Prisma {
     carrierEnquiries?: CarrierEnquiryCreateNestedManyWithoutOrganizationInput
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -54429,6 +57689,7 @@ export namespace Prisma {
     carrierEnquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutOrganizationInput
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -54473,6 +57734,7 @@ export namespace Prisma {
     parcel: ParcelCreateNestedOneWithoutClaimsInput
     carrier: CarrierCreateNestedOneWithoutClaimsInput
     assignedUser?: UserCreateNestedOneWithoutClaimsInput
+    invoices?: ClaimInvoiceCreateNestedManyWithoutClaimInput
   }
 
   export type ClaimUncheckedCreateWithoutDocumentsInput = {
@@ -54501,6 +57763,7 @@ export namespace Prisma {
     createdById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    invoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutClaimInput
   }
 
   export type ClaimCreateOrConnectWithoutDocumentsInput = {
@@ -54563,6 +57826,7 @@ export namespace Prisma {
     trackingEvents?: TrackingEventCreateNestedManyWithoutParcelInput
     enquiries?: CarrierEnquiryCreateNestedManyWithoutParcelInput
     claims?: ClaimCreateNestedManyWithoutParcelInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutParcelInput
   }
 
   export type ParcelUncheckedCreateWithoutClaimDocumentsInput = {
@@ -54620,6 +57884,7 @@ export namespace Prisma {
     trackingEvents?: TrackingEventUncheckedCreateNestedManyWithoutParcelInput
     enquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutParcelInput
     claims?: ClaimUncheckedCreateNestedManyWithoutParcelInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutParcelInput
   }
 
   export type ParcelCreateOrConnectWithoutClaimDocumentsInput = {
@@ -54670,6 +57935,7 @@ export namespace Prisma {
     carrierEnquiries?: CarrierEnquiryUpdateManyWithoutOrganizationNestedInput
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -54715,6 +57981,7 @@ export namespace Prisma {
     carrierEnquiries?: CarrierEnquiryUncheckedUpdateManyWithoutOrganizationNestedInput
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -54765,6 +58032,7 @@ export namespace Prisma {
     parcel?: ParcelUpdateOneRequiredWithoutClaimsNestedInput
     carrier?: CarrierUpdateOneRequiredWithoutClaimsNestedInput
     assignedUser?: UserUpdateOneWithoutClaimsNestedInput
+    invoices?: ClaimInvoiceUpdateManyWithoutClaimNestedInput
   }
 
   export type ClaimUncheckedUpdateWithoutDocumentsInput = {
@@ -54793,6 +58061,7 @@ export namespace Prisma {
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoices?: ClaimInvoiceUncheckedUpdateManyWithoutClaimNestedInput
   }
 
   export type ParcelUpsertWithoutClaimDocumentsInput = {
@@ -54861,6 +58130,7 @@ export namespace Prisma {
     trackingEvents?: TrackingEventUpdateManyWithoutParcelNestedInput
     enquiries?: CarrierEnquiryUpdateManyWithoutParcelNestedInput
     claims?: ClaimUpdateManyWithoutParcelNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutParcelNestedInput
   }
 
   export type ParcelUncheckedUpdateWithoutClaimDocumentsInput = {
@@ -54918,6 +58188,7 @@ export namespace Prisma {
     trackingEvents?: TrackingEventUncheckedUpdateManyWithoutParcelNestedInput
     enquiries?: CarrierEnquiryUncheckedUpdateManyWithoutParcelNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutParcelNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutParcelNestedInput
   }
 
   export type OrganizationCreateWithoutCustomFieldsInput = {
@@ -54953,6 +58224,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
     workflowVersions?: WorkflowVersionCreateNestedManyWithoutOrganizationInput
@@ -54998,6 +58270,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
     workflowVersions?: WorkflowVersionUncheckedCreateNestedManyWithoutOrganizationInput
@@ -55059,6 +58332,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
     workflowVersions?: WorkflowVersionUpdateManyWithoutOrganizationNestedInput
@@ -55104,6 +58378,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowVersions?: WorkflowVersionUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -55149,6 +58424,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
     workflowVersions?: WorkflowVersionCreateNestedManyWithoutOrganizationInput
@@ -55194,6 +58470,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
     workflowVersions?: WorkflowVersionUncheckedCreateNestedManyWithoutOrganizationInput
@@ -55255,6 +58532,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
     workflowVersions?: WorkflowVersionUpdateManyWithoutOrganizationNestedInput
@@ -55300,6 +58578,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowVersions?: WorkflowVersionUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -55345,6 +58624,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowVersions?: WorkflowVersionCreateNestedManyWithoutOrganizationInput
@@ -55390,6 +58670,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowVersions?: WorkflowVersionUncheckedCreateNestedManyWithoutOrganizationInput
@@ -55481,6 +58762,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowVersions?: WorkflowVersionUpdateManyWithoutOrganizationNestedInput
@@ -55526,6 +58808,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowVersions?: WorkflowVersionUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -55587,6 +58870,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -55632,6 +58916,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -55730,6 +59015,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -55775,6 +59061,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -55863,6 +59150,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -55908,6 +59196,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -55969,6 +59258,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -56014,6 +59304,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -56059,6 +59350,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -56104,6 +59396,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -56201,6 +59494,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -56246,6 +59540,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -56307,6 +59602,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -56352,6 +59648,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -56440,6 +59737,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -56485,6 +59783,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -56563,6 +59862,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -56608,6 +59908,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -56669,6 +59970,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -56714,6 +60016,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -56759,6 +60062,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -56804,6 +60108,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -56865,6 +60170,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -56910,6 +60216,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -56955,6 +60262,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -57000,6 +60308,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -57104,6 +60413,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -57149,6 +60459,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -57243,6 +60554,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
     claims?: ClaimCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
@@ -57288,6 +60600,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
     claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
     claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    claimInvoices?: ClaimInvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
     customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
     workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -57349,6 +60662,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
@@ -57394,6 +60708,7 @@ export namespace Prisma {
     enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
     customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
     workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -57404,6 +60719,710 @@ export namespace Prisma {
     importBatches?: ImportBatchUncheckedUpdateManyWithoutOrganizationNestedInput
     exportLayouts?: ExportLayoutUncheckedUpdateManyWithoutOrganizationNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type OrganizationCreateWithoutClaimInvoicesInput = {
+    id?: string
+    name: string
+    slug: string
+    logoUrl?: string | null
+    primaryContactEmail: string
+    phone?: string | null
+    operatingCountries?: string
+    operatingCurrencies?: string
+    defaultCurrency?: string
+    timezone?: string
+    subscriptionTier?: string
+    subscriptionStatus?: string
+    parcelMonthlyLimit?: number
+    claimMonthlyLimit?: number
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutOrganizationInput
+    warehouses?: WarehouseCreateNestedManyWithoutOrganizationInput
+    carriers?: CarrierCreateNestedManyWithoutOrganizationInput
+    carrierMappings?: CarrierMappingCreateNestedManyWithoutOrganizationInput
+    carrierConnectors?: CarrierConnectorCreateNestedManyWithoutOrganizationInput
+    linnworksConnection?: LinnworksConnectionCreateNestedOneWithoutOrganizationInput
+    parcels?: ParcelCreateNestedManyWithoutOrganizationInput
+    rawTrackingEvents?: RawTrackingEventCreateNestedManyWithoutOrganizationInput
+    trackingEvents?: TrackingEventCreateNestedManyWithoutOrganizationInput
+    slaPolicies?: SlaPolicyCreateNestedManyWithoutOrganizationInput
+    carrierEnquiries?: CarrierEnquiryCreateNestedManyWithoutOrganizationInput
+    enquiryMessages?: EnquiryMessageCreateNestedManyWithoutOrganizationInput
+    claims?: ClaimCreateNestedManyWithoutOrganizationInput
+    claimDocuments?: ClaimDocumentCreateNestedManyWithoutOrganizationInput
+    customFields?: CustomFieldCreateNestedManyWithoutOrganizationInput
+    customStatusMappings?: CustomStatusMappingCreateNestedManyWithoutOrganizationInput
+    workflowRules?: WorkflowRuleCreateNestedManyWithoutOrganizationInput
+    workflowVersions?: WorkflowVersionCreateNestedManyWithoutOrganizationInput
+    apiKeys?: ApiKeyCreateNestedManyWithoutOrganizationInput
+    outboundWebhooks?: OutboundWebhookCreateNestedManyWithoutOrganizationInput
+    webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutOrganizationInput
+    importBatches?: ImportBatchCreateNestedManyWithoutOrganizationInput
+    exportLayouts?: ExportLayoutCreateNestedManyWithoutOrganizationInput
+    auditLogs?: AuditLogCreateNestedManyWithoutOrganizationInput
+    jobQueues?: JobQueueCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationUncheckedCreateWithoutClaimInvoicesInput = {
+    id?: string
+    name: string
+    slug: string
+    logoUrl?: string | null
+    primaryContactEmail: string
+    phone?: string | null
+    operatingCountries?: string
+    operatingCurrencies?: string
+    defaultCurrency?: string
+    timezone?: string
+    subscriptionTier?: string
+    subscriptionStatus?: string
+    parcelMonthlyLimit?: number
+    claimMonthlyLimit?: number
+    onboardingStep?: number
+    onboardingCompleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutOrganizationInput
+    warehouses?: WarehouseUncheckedCreateNestedManyWithoutOrganizationInput
+    carriers?: CarrierUncheckedCreateNestedManyWithoutOrganizationInput
+    carrierMappings?: CarrierMappingUncheckedCreateNestedManyWithoutOrganizationInput
+    carrierConnectors?: CarrierConnectorUncheckedCreateNestedManyWithoutOrganizationInput
+    linnworksConnection?: LinnworksConnectionUncheckedCreateNestedOneWithoutOrganizationInput
+    parcels?: ParcelUncheckedCreateNestedManyWithoutOrganizationInput
+    rawTrackingEvents?: RawTrackingEventUncheckedCreateNestedManyWithoutOrganizationInput
+    trackingEvents?: TrackingEventUncheckedCreateNestedManyWithoutOrganizationInput
+    slaPolicies?: SlaPolicyUncheckedCreateNestedManyWithoutOrganizationInput
+    carrierEnquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutOrganizationInput
+    enquiryMessages?: EnquiryMessageUncheckedCreateNestedManyWithoutOrganizationInput
+    claims?: ClaimUncheckedCreateNestedManyWithoutOrganizationInput
+    claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    customFields?: CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+    customStatusMappings?: CustomStatusMappingUncheckedCreateNestedManyWithoutOrganizationInput
+    workflowRules?: WorkflowRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    workflowVersions?: WorkflowVersionUncheckedCreateNestedManyWithoutOrganizationInput
+    apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+    outboundWebhooks?: OutboundWebhookUncheckedCreateNestedManyWithoutOrganizationInput
+    webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
+    importBatches?: ImportBatchUncheckedCreateNestedManyWithoutOrganizationInput
+    exportLayouts?: ExportLayoutUncheckedCreateNestedManyWithoutOrganizationInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+    jobQueues?: JobQueueUncheckedCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationCreateOrConnectWithoutClaimInvoicesInput = {
+    where: OrganizationWhereUniqueInput
+    create: XOR<OrganizationCreateWithoutClaimInvoicesInput, OrganizationUncheckedCreateWithoutClaimInvoicesInput>
+  }
+
+  export type ClaimCreateWithoutInvoicesInput = {
+    id?: string
+    claimNumber: string
+    carrierClaimReference?: string | null
+    reason?: string
+    status?: string
+    claimedAmount?: number
+    approvedAmount?: number
+    recoveredAmount?: number
+    currency?: string
+    filingDeadline: Date | string
+    earliestFilingDate: Date | string
+    submittedAt?: Date | string | null
+    decidedAt?: Date | string | null
+    settledAt?: Date | string | null
+    denialReason?: string | null
+    appealCount?: number
+    creditNoteReference?: string | null
+    declarationText?: string | null
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organization: OrganizationCreateNestedOneWithoutClaimsInput
+    parcel: ParcelCreateNestedOneWithoutClaimsInput
+    carrier: CarrierCreateNestedOneWithoutClaimsInput
+    assignedUser?: UserCreateNestedOneWithoutClaimsInput
+    documents?: ClaimDocumentCreateNestedManyWithoutClaimInput
+  }
+
+  export type ClaimUncheckedCreateWithoutInvoicesInput = {
+    id?: string
+    organizationId: string
+    parcelId: string
+    carrierId: string
+    claimNumber: string
+    carrierClaimReference?: string | null
+    reason?: string
+    status?: string
+    claimedAmount?: number
+    approvedAmount?: number
+    recoveredAmount?: number
+    currency?: string
+    filingDeadline: Date | string
+    earliestFilingDate: Date | string
+    submittedAt?: Date | string | null
+    decidedAt?: Date | string | null
+    settledAt?: Date | string | null
+    denialReason?: string | null
+    appealCount?: number
+    creditNoteReference?: string | null
+    declarationText?: string | null
+    assignedUserId?: string | null
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    documents?: ClaimDocumentUncheckedCreateNestedManyWithoutClaimInput
+  }
+
+  export type ClaimCreateOrConnectWithoutInvoicesInput = {
+    where: ClaimWhereUniqueInput
+    create: XOR<ClaimCreateWithoutInvoicesInput, ClaimUncheckedCreateWithoutInvoicesInput>
+  }
+
+  export type ParcelCreateWithoutClaimInvoicesInput = {
+    id?: string
+    orderNumber: string
+    packageId?: string | null
+    trackingNumber: string
+    secondaryTrackingNumber?: string | null
+    recipientName: string
+    recipientEmail?: string | null
+    recipientPhone?: string | null
+    recipientAddress: string
+    recipientCity: string
+    recipientState: string
+    recipientPostalCode: string
+    recipientCountry?: string
+    destinationZone?: string
+    weightKg?: number
+    lengthCm?: number | null
+    widthCm?: number | null
+    heightCm?: number | null
+    declaredValue?: number
+    currency?: string
+    itemsSummary?: string | null
+    shippingCost?: number
+    dispatchDate: Date | string
+    promisedDeliveryDate: Date | string
+    calculatedSlaHours?: number
+    slaCutoffUsed?: string
+    slaCalculationDetail?: string | null
+    isBreached?: boolean
+    breachHours?: number
+    stalledHours?: number
+    trackingStatus?: string
+    investigationStatus?: string
+    claimStatus?: string
+    recoveryStatus?: string
+    claimedAmount?: number
+    approvedAmount?: number
+    recoveredAmount?: number
+    creditNoteNumber?: string | null
+    latestStatusDescription?: string | null
+    lastPhysicalScanAt?: Date | string | null
+    lastScanLocation?: string | null
+    lastEventTime?: Date | string | null
+    lastApiCheckAt?: Date | string | null
+    source?: string
+    customFieldValues?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organization: OrganizationCreateNestedOneWithoutParcelsInput
+    warehouse?: WarehouseCreateNestedOneWithoutParcelsInput
+    carrier: CarrierCreateNestedOneWithoutParcelsInput
+    rawTrackingEvents?: RawTrackingEventCreateNestedManyWithoutParcelInput
+    trackingEvents?: TrackingEventCreateNestedManyWithoutParcelInput
+    enquiries?: CarrierEnquiryCreateNestedManyWithoutParcelInput
+    claims?: ClaimCreateNestedManyWithoutParcelInput
+    claimDocuments?: ClaimDocumentCreateNestedManyWithoutParcelInput
+  }
+
+  export type ParcelUncheckedCreateWithoutClaimInvoicesInput = {
+    id?: string
+    organizationId: string
+    warehouseId?: string | null
+    carrierId: string
+    orderNumber: string
+    packageId?: string | null
+    trackingNumber: string
+    secondaryTrackingNumber?: string | null
+    recipientName: string
+    recipientEmail?: string | null
+    recipientPhone?: string | null
+    recipientAddress: string
+    recipientCity: string
+    recipientState: string
+    recipientPostalCode: string
+    recipientCountry?: string
+    destinationZone?: string
+    weightKg?: number
+    lengthCm?: number | null
+    widthCm?: number | null
+    heightCm?: number | null
+    declaredValue?: number
+    currency?: string
+    itemsSummary?: string | null
+    shippingCost?: number
+    dispatchDate: Date | string
+    promisedDeliveryDate: Date | string
+    calculatedSlaHours?: number
+    slaCutoffUsed?: string
+    slaCalculationDetail?: string | null
+    isBreached?: boolean
+    breachHours?: number
+    stalledHours?: number
+    trackingStatus?: string
+    investigationStatus?: string
+    claimStatus?: string
+    recoveryStatus?: string
+    claimedAmount?: number
+    approvedAmount?: number
+    recoveredAmount?: number
+    creditNoteNumber?: string | null
+    latestStatusDescription?: string | null
+    lastPhysicalScanAt?: Date | string | null
+    lastScanLocation?: string | null
+    lastEventTime?: Date | string | null
+    lastApiCheckAt?: Date | string | null
+    source?: string
+    customFieldValues?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rawTrackingEvents?: RawTrackingEventUncheckedCreateNestedManyWithoutParcelInput
+    trackingEvents?: TrackingEventUncheckedCreateNestedManyWithoutParcelInput
+    enquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutParcelInput
+    claims?: ClaimUncheckedCreateNestedManyWithoutParcelInput
+    claimDocuments?: ClaimDocumentUncheckedCreateNestedManyWithoutParcelInput
+  }
+
+  export type ParcelCreateOrConnectWithoutClaimInvoicesInput = {
+    where: ParcelWhereUniqueInput
+    create: XOR<ParcelCreateWithoutClaimInvoicesInput, ParcelUncheckedCreateWithoutClaimInvoicesInput>
+  }
+
+  export type CarrierCreateWithoutClaimInvoicesInput = {
+    id?: string
+    code: string
+    name: string
+    category?: string
+    connectionType?: string
+    capabilities?: string
+    aggregatorId?: string | null
+    contractedParty?: string
+    physicalCarrier: string
+    finalMileCarrier: string
+    enquiryRecipientEmail?: string | null
+    claimRecipientEmail?: string | null
+    accountCredentials?: string | null
+    isLive?: boolean
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organization: OrganizationCreateNestedOneWithoutCarriersInput
+    parcels?: ParcelCreateNestedManyWithoutCarrierInput
+    mappings?: CarrierMappingCreateNestedManyWithoutCarrierInput
+    connectors?: CarrierConnectorCreateNestedManyWithoutCarrierInput
+    slaPolicies?: SlaPolicyCreateNestedManyWithoutCarrierInput
+    enquiries?: CarrierEnquiryCreateNestedManyWithoutCarrierInput
+    claims?: ClaimCreateNestedManyWithoutCarrierInput
+  }
+
+  export type CarrierUncheckedCreateWithoutClaimInvoicesInput = {
+    id?: string
+    organizationId: string
+    code: string
+    name: string
+    category?: string
+    connectionType?: string
+    capabilities?: string
+    aggregatorId?: string | null
+    contractedParty?: string
+    physicalCarrier: string
+    finalMileCarrier: string
+    enquiryRecipientEmail?: string | null
+    claimRecipientEmail?: string | null
+    accountCredentials?: string | null
+    isLive?: boolean
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    parcels?: ParcelUncheckedCreateNestedManyWithoutCarrierInput
+    mappings?: CarrierMappingUncheckedCreateNestedManyWithoutCarrierInput
+    connectors?: CarrierConnectorUncheckedCreateNestedManyWithoutCarrierInput
+    slaPolicies?: SlaPolicyUncheckedCreateNestedManyWithoutCarrierInput
+    enquiries?: CarrierEnquiryUncheckedCreateNestedManyWithoutCarrierInput
+    claims?: ClaimUncheckedCreateNestedManyWithoutCarrierInput
+  }
+
+  export type CarrierCreateOrConnectWithoutClaimInvoicesInput = {
+    where: CarrierWhereUniqueInput
+    create: XOR<CarrierCreateWithoutClaimInvoicesInput, CarrierUncheckedCreateWithoutClaimInvoicesInput>
+  }
+
+  export type OrganizationUpsertWithoutClaimInvoicesInput = {
+    update: XOR<OrganizationUpdateWithoutClaimInvoicesInput, OrganizationUncheckedUpdateWithoutClaimInvoicesInput>
+    create: XOR<OrganizationCreateWithoutClaimInvoicesInput, OrganizationUncheckedCreateWithoutClaimInvoicesInput>
+    where?: OrganizationWhereInput
+  }
+
+  export type OrganizationUpdateToOneWithWhereWithoutClaimInvoicesInput = {
+    where?: OrganizationWhereInput
+    data: XOR<OrganizationUpdateWithoutClaimInvoicesInput, OrganizationUncheckedUpdateWithoutClaimInvoicesInput>
+  }
+
+  export type OrganizationUpdateWithoutClaimInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryContactEmail?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    operatingCountries?: StringFieldUpdateOperationsInput | string
+    operatingCurrencies?: StringFieldUpdateOperationsInput | string
+    defaultCurrency?: StringFieldUpdateOperationsInput | string
+    timezone?: StringFieldUpdateOperationsInput | string
+    subscriptionTier?: StringFieldUpdateOperationsInput | string
+    subscriptionStatus?: StringFieldUpdateOperationsInput | string
+    parcelMonthlyLimit?: IntFieldUpdateOperationsInput | number
+    claimMonthlyLimit?: IntFieldUpdateOperationsInput | number
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutOrganizationNestedInput
+    warehouses?: WarehouseUpdateManyWithoutOrganizationNestedInput
+    carriers?: CarrierUpdateManyWithoutOrganizationNestedInput
+    carrierMappings?: CarrierMappingUpdateManyWithoutOrganizationNestedInput
+    carrierConnectors?: CarrierConnectorUpdateManyWithoutOrganizationNestedInput
+    linnworksConnection?: LinnworksConnectionUpdateOneWithoutOrganizationNestedInput
+    parcels?: ParcelUpdateManyWithoutOrganizationNestedInput
+    rawTrackingEvents?: RawTrackingEventUpdateManyWithoutOrganizationNestedInput
+    trackingEvents?: TrackingEventUpdateManyWithoutOrganizationNestedInput
+    slaPolicies?: SlaPolicyUpdateManyWithoutOrganizationNestedInput
+    carrierEnquiries?: CarrierEnquiryUpdateManyWithoutOrganizationNestedInput
+    enquiryMessages?: EnquiryMessageUpdateManyWithoutOrganizationNestedInput
+    claims?: ClaimUpdateManyWithoutOrganizationNestedInput
+    claimDocuments?: ClaimDocumentUpdateManyWithoutOrganizationNestedInput
+    customFields?: CustomFieldUpdateManyWithoutOrganizationNestedInput
+    customStatusMappings?: CustomStatusMappingUpdateManyWithoutOrganizationNestedInput
+    workflowRules?: WorkflowRuleUpdateManyWithoutOrganizationNestedInput
+    workflowVersions?: WorkflowVersionUpdateManyWithoutOrganizationNestedInput
+    apiKeys?: ApiKeyUpdateManyWithoutOrganizationNestedInput
+    outboundWebhooks?: OutboundWebhookUpdateManyWithoutOrganizationNestedInput
+    webhookDeliveries?: WebhookDeliveryUpdateManyWithoutOrganizationNestedInput
+    importBatches?: ImportBatchUpdateManyWithoutOrganizationNestedInput
+    exportLayouts?: ExportLayoutUpdateManyWithoutOrganizationNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutOrganizationNestedInput
+    jobQueues?: JobQueueUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type OrganizationUncheckedUpdateWithoutClaimInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryContactEmail?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    operatingCountries?: StringFieldUpdateOperationsInput | string
+    operatingCurrencies?: StringFieldUpdateOperationsInput | string
+    defaultCurrency?: StringFieldUpdateOperationsInput | string
+    timezone?: StringFieldUpdateOperationsInput | string
+    subscriptionTier?: StringFieldUpdateOperationsInput | string
+    subscriptionStatus?: StringFieldUpdateOperationsInput | string
+    parcelMonthlyLimit?: IntFieldUpdateOperationsInput | number
+    claimMonthlyLimit?: IntFieldUpdateOperationsInput | number
+    onboardingStep?: IntFieldUpdateOperationsInput | number
+    onboardingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutOrganizationNestedInput
+    warehouses?: WarehouseUncheckedUpdateManyWithoutOrganizationNestedInput
+    carriers?: CarrierUncheckedUpdateManyWithoutOrganizationNestedInput
+    carrierMappings?: CarrierMappingUncheckedUpdateManyWithoutOrganizationNestedInput
+    carrierConnectors?: CarrierConnectorUncheckedUpdateManyWithoutOrganizationNestedInput
+    linnworksConnection?: LinnworksConnectionUncheckedUpdateOneWithoutOrganizationNestedInput
+    parcels?: ParcelUncheckedUpdateManyWithoutOrganizationNestedInput
+    rawTrackingEvents?: RawTrackingEventUncheckedUpdateManyWithoutOrganizationNestedInput
+    trackingEvents?: TrackingEventUncheckedUpdateManyWithoutOrganizationNestedInput
+    slaPolicies?: SlaPolicyUncheckedUpdateManyWithoutOrganizationNestedInput
+    carrierEnquiries?: CarrierEnquiryUncheckedUpdateManyWithoutOrganizationNestedInput
+    enquiryMessages?: EnquiryMessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    claims?: ClaimUncheckedUpdateManyWithoutOrganizationNestedInput
+    claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    customFields?: CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+    customStatusMappings?: CustomStatusMappingUncheckedUpdateManyWithoutOrganizationNestedInput
+    workflowRules?: WorkflowRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    workflowVersions?: WorkflowVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+    apiKeys?: ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+    outboundWebhooks?: OutboundWebhookUncheckedUpdateManyWithoutOrganizationNestedInput
+    webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
+    importBatches?: ImportBatchUncheckedUpdateManyWithoutOrganizationNestedInput
+    exportLayouts?: ExportLayoutUncheckedUpdateManyWithoutOrganizationNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+    jobQueues?: JobQueueUncheckedUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type ClaimUpsertWithoutInvoicesInput = {
+    update: XOR<ClaimUpdateWithoutInvoicesInput, ClaimUncheckedUpdateWithoutInvoicesInput>
+    create: XOR<ClaimCreateWithoutInvoicesInput, ClaimUncheckedCreateWithoutInvoicesInput>
+    where?: ClaimWhereInput
+  }
+
+  export type ClaimUpdateToOneWithWhereWithoutInvoicesInput = {
+    where?: ClaimWhereInput
+    data: XOR<ClaimUpdateWithoutInvoicesInput, ClaimUncheckedUpdateWithoutInvoicesInput>
+  }
+
+  export type ClaimUpdateWithoutInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimNumber?: StringFieldUpdateOperationsInput | string
+    carrierClaimReference?: NullableStringFieldUpdateOperationsInput | string | null
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    claimedAmount?: FloatFieldUpdateOperationsInput | number
+    approvedAmount?: FloatFieldUpdateOperationsInput | number
+    recoveredAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    filingDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    earliestFilingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    decidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    appealCount?: IntFieldUpdateOperationsInput | number
+    creditNoteReference?: NullableStringFieldUpdateOperationsInput | string | null
+    declarationText?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutClaimsNestedInput
+    parcel?: ParcelUpdateOneRequiredWithoutClaimsNestedInput
+    carrier?: CarrierUpdateOneRequiredWithoutClaimsNestedInput
+    assignedUser?: UserUpdateOneWithoutClaimsNestedInput
+    documents?: ClaimDocumentUpdateManyWithoutClaimNestedInput
+  }
+
+  export type ClaimUncheckedUpdateWithoutInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    parcelId?: StringFieldUpdateOperationsInput | string
+    carrierId?: StringFieldUpdateOperationsInput | string
+    claimNumber?: StringFieldUpdateOperationsInput | string
+    carrierClaimReference?: NullableStringFieldUpdateOperationsInput | string | null
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    claimedAmount?: FloatFieldUpdateOperationsInput | number
+    approvedAmount?: FloatFieldUpdateOperationsInput | number
+    recoveredAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    filingDeadline?: DateTimeFieldUpdateOperationsInput | Date | string
+    earliestFilingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    decidedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    denialReason?: NullableStringFieldUpdateOperationsInput | string | null
+    appealCount?: IntFieldUpdateOperationsInput | number
+    creditNoteReference?: NullableStringFieldUpdateOperationsInput | string | null
+    declarationText?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documents?: ClaimDocumentUncheckedUpdateManyWithoutClaimNestedInput
+  }
+
+  export type ParcelUpsertWithoutClaimInvoicesInput = {
+    update: XOR<ParcelUpdateWithoutClaimInvoicesInput, ParcelUncheckedUpdateWithoutClaimInvoicesInput>
+    create: XOR<ParcelCreateWithoutClaimInvoicesInput, ParcelUncheckedCreateWithoutClaimInvoicesInput>
+    where?: ParcelWhereInput
+  }
+
+  export type ParcelUpdateToOneWithWhereWithoutClaimInvoicesInput = {
+    where?: ParcelWhereInput
+    data: XOR<ParcelUpdateWithoutClaimInvoicesInput, ParcelUncheckedUpdateWithoutClaimInvoicesInput>
+  }
+
+  export type ParcelUpdateWithoutClaimInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    packageId?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    secondaryTrackingNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    recipientName?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recipientPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    recipientAddress?: StringFieldUpdateOperationsInput | string
+    recipientCity?: StringFieldUpdateOperationsInput | string
+    recipientState?: StringFieldUpdateOperationsInput | string
+    recipientPostalCode?: StringFieldUpdateOperationsInput | string
+    recipientCountry?: StringFieldUpdateOperationsInput | string
+    destinationZone?: StringFieldUpdateOperationsInput | string
+    weightKg?: FloatFieldUpdateOperationsInput | number
+    lengthCm?: NullableFloatFieldUpdateOperationsInput | number | null
+    widthCm?: NullableFloatFieldUpdateOperationsInput | number | null
+    heightCm?: NullableFloatFieldUpdateOperationsInput | number | null
+    declaredValue?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    itemsSummary?: NullableStringFieldUpdateOperationsInput | string | null
+    shippingCost?: FloatFieldUpdateOperationsInput | number
+    dispatchDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    promisedDeliveryDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    calculatedSlaHours?: IntFieldUpdateOperationsInput | number
+    slaCutoffUsed?: StringFieldUpdateOperationsInput | string
+    slaCalculationDetail?: NullableStringFieldUpdateOperationsInput | string | null
+    isBreached?: BoolFieldUpdateOperationsInput | boolean
+    breachHours?: FloatFieldUpdateOperationsInput | number
+    stalledHours?: FloatFieldUpdateOperationsInput | number
+    trackingStatus?: StringFieldUpdateOperationsInput | string
+    investigationStatus?: StringFieldUpdateOperationsInput | string
+    claimStatus?: StringFieldUpdateOperationsInput | string
+    recoveryStatus?: StringFieldUpdateOperationsInput | string
+    claimedAmount?: FloatFieldUpdateOperationsInput | number
+    approvedAmount?: FloatFieldUpdateOperationsInput | number
+    recoveredAmount?: FloatFieldUpdateOperationsInput | number
+    creditNoteNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    latestStatusDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    lastPhysicalScanAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastScanLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    lastEventTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastApiCheckAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    source?: StringFieldUpdateOperationsInput | string
+    customFieldValues?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutParcelsNestedInput
+    warehouse?: WarehouseUpdateOneWithoutParcelsNestedInput
+    carrier?: CarrierUpdateOneRequiredWithoutParcelsNestedInput
+    rawTrackingEvents?: RawTrackingEventUpdateManyWithoutParcelNestedInput
+    trackingEvents?: TrackingEventUpdateManyWithoutParcelNestedInput
+    enquiries?: CarrierEnquiryUpdateManyWithoutParcelNestedInput
+    claims?: ClaimUpdateManyWithoutParcelNestedInput
+    claimDocuments?: ClaimDocumentUpdateManyWithoutParcelNestedInput
+  }
+
+  export type ParcelUncheckedUpdateWithoutClaimInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    warehouseId?: NullableStringFieldUpdateOperationsInput | string | null
+    carrierId?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    packageId?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    secondaryTrackingNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    recipientName?: StringFieldUpdateOperationsInput | string
+    recipientEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recipientPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    recipientAddress?: StringFieldUpdateOperationsInput | string
+    recipientCity?: StringFieldUpdateOperationsInput | string
+    recipientState?: StringFieldUpdateOperationsInput | string
+    recipientPostalCode?: StringFieldUpdateOperationsInput | string
+    recipientCountry?: StringFieldUpdateOperationsInput | string
+    destinationZone?: StringFieldUpdateOperationsInput | string
+    weightKg?: FloatFieldUpdateOperationsInput | number
+    lengthCm?: NullableFloatFieldUpdateOperationsInput | number | null
+    widthCm?: NullableFloatFieldUpdateOperationsInput | number | null
+    heightCm?: NullableFloatFieldUpdateOperationsInput | number | null
+    declaredValue?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    itemsSummary?: NullableStringFieldUpdateOperationsInput | string | null
+    shippingCost?: FloatFieldUpdateOperationsInput | number
+    dispatchDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    promisedDeliveryDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    calculatedSlaHours?: IntFieldUpdateOperationsInput | number
+    slaCutoffUsed?: StringFieldUpdateOperationsInput | string
+    slaCalculationDetail?: NullableStringFieldUpdateOperationsInput | string | null
+    isBreached?: BoolFieldUpdateOperationsInput | boolean
+    breachHours?: FloatFieldUpdateOperationsInput | number
+    stalledHours?: FloatFieldUpdateOperationsInput | number
+    trackingStatus?: StringFieldUpdateOperationsInput | string
+    investigationStatus?: StringFieldUpdateOperationsInput | string
+    claimStatus?: StringFieldUpdateOperationsInput | string
+    recoveryStatus?: StringFieldUpdateOperationsInput | string
+    claimedAmount?: FloatFieldUpdateOperationsInput | number
+    approvedAmount?: FloatFieldUpdateOperationsInput | number
+    recoveredAmount?: FloatFieldUpdateOperationsInput | number
+    creditNoteNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    latestStatusDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    lastPhysicalScanAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastScanLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    lastEventTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastApiCheckAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    source?: StringFieldUpdateOperationsInput | string
+    customFieldValues?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rawTrackingEvents?: RawTrackingEventUncheckedUpdateManyWithoutParcelNestedInput
+    trackingEvents?: TrackingEventUncheckedUpdateManyWithoutParcelNestedInput
+    enquiries?: CarrierEnquiryUncheckedUpdateManyWithoutParcelNestedInput
+    claims?: ClaimUncheckedUpdateManyWithoutParcelNestedInput
+    claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutParcelNestedInput
+  }
+
+  export type CarrierUpsertWithoutClaimInvoicesInput = {
+    update: XOR<CarrierUpdateWithoutClaimInvoicesInput, CarrierUncheckedUpdateWithoutClaimInvoicesInput>
+    create: XOR<CarrierCreateWithoutClaimInvoicesInput, CarrierUncheckedCreateWithoutClaimInvoicesInput>
+    where?: CarrierWhereInput
+  }
+
+  export type CarrierUpdateToOneWithWhereWithoutClaimInvoicesInput = {
+    where?: CarrierWhereInput
+    data: XOR<CarrierUpdateWithoutClaimInvoicesInput, CarrierUncheckedUpdateWithoutClaimInvoicesInput>
+  }
+
+  export type CarrierUpdateWithoutClaimInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    connectionType?: StringFieldUpdateOperationsInput | string
+    capabilities?: StringFieldUpdateOperationsInput | string
+    aggregatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    contractedParty?: StringFieldUpdateOperationsInput | string
+    physicalCarrier?: StringFieldUpdateOperationsInput | string
+    finalMileCarrier?: StringFieldUpdateOperationsInput | string
+    enquiryRecipientEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    claimRecipientEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    accountCredentials?: NullableStringFieldUpdateOperationsInput | string | null
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutCarriersNestedInput
+    parcels?: ParcelUpdateManyWithoutCarrierNestedInput
+    mappings?: CarrierMappingUpdateManyWithoutCarrierNestedInput
+    connectors?: CarrierConnectorUpdateManyWithoutCarrierNestedInput
+    slaPolicies?: SlaPolicyUpdateManyWithoutCarrierNestedInput
+    enquiries?: CarrierEnquiryUpdateManyWithoutCarrierNestedInput
+    claims?: ClaimUpdateManyWithoutCarrierNestedInput
+  }
+
+  export type CarrierUncheckedUpdateWithoutClaimInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    connectionType?: StringFieldUpdateOperationsInput | string
+    capabilities?: StringFieldUpdateOperationsInput | string
+    aggregatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    contractedParty?: StringFieldUpdateOperationsInput | string
+    physicalCarrier?: StringFieldUpdateOperationsInput | string
+    finalMileCarrier?: StringFieldUpdateOperationsInput | string
+    enquiryRecipientEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    claimRecipientEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    accountCredentials?: NullableStringFieldUpdateOperationsInput | string | null
+    isLive?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    parcels?: ParcelUncheckedUpdateManyWithoutCarrierNestedInput
+    mappings?: CarrierMappingUncheckedUpdateManyWithoutCarrierNestedInput
+    connectors?: CarrierConnectorUncheckedUpdateManyWithoutCarrierNestedInput
+    slaPolicies?: SlaPolicyUncheckedUpdateManyWithoutCarrierNestedInput
+    enquiries?: CarrierEnquiryUncheckedUpdateManyWithoutCarrierNestedInput
+    claims?: ClaimUncheckedUpdateManyWithoutCarrierNestedInput
   }
 
   export type UserCreateManyOrganizationInput = {
@@ -57622,6 +61641,9 @@ export namespace Prisma {
     replyCount?: number
     internalNotes?: string | null
     followUpDueDate?: Date | string | null
+    followUpSequenceCount?: number
+    escalationTier?: string
+    lastFollowUpSentAt?: Date | string | null
     assignedUserId?: string | null
     createdById?: string | null
     createdAt?: Date | string
@@ -57678,6 +61700,45 @@ export namespace Prisma {
     isGeneratedDeclaration?: boolean
     disclaimerText?: string | null
     uploadedAt?: Date | string
+  }
+
+  export type ClaimInvoiceCreateManyOrganizationInput = {
+    id?: string
+    claimId?: string | null
+    parcelId: string
+    carrierId: string
+    invoiceNumber: string
+    generationType?: string
+    carrierFormat?: string
+    claimantName: string
+    claimantAddress: string
+    claimantTaxId?: string | null
+    claimantContactEmail?: string | null
+    claimantPhone?: string | null
+    courierName: string
+    courierAccountNo?: string | null
+    courierDeptEmail?: string | null
+    courierClaimRef?: string | null
+    trackingNumber: string
+    orderNumber: string
+    dispatchDate?: Date | string | null
+    lossReason?: string
+    currency?: string
+    merchandiseValue?: number
+    shippingCost?: number
+    taxAmount?: number
+    adminFeeAmount?: number
+    totalClaimedAmount?: number
+    lineItems?: string
+    customFields?: string
+    evidenceImages?: string
+    disclaimerText?: string
+    notes?: string | null
+    authorizedSignatory?: string | null
+    status?: string
+    submittedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CustomFieldCreateManyOrganizationInput = {
@@ -57944,6 +62005,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyUpdateManyWithoutCarrierNestedInput
     enquiries?: CarrierEnquiryUpdateManyWithoutCarrierNestedInput
     claims?: ClaimUpdateManyWithoutCarrierNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutCarrierNestedInput
   }
 
   export type CarrierUncheckedUpdateWithoutOrganizationInput = {
@@ -57970,6 +62032,7 @@ export namespace Prisma {
     slaPolicies?: SlaPolicyUncheckedUpdateManyWithoutCarrierNestedInput
     enquiries?: CarrierEnquiryUncheckedUpdateManyWithoutCarrierNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutCarrierNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutCarrierNestedInput
   }
 
   export type CarrierUncheckedUpdateManyWithoutOrganizationInput = {
@@ -58176,6 +62239,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryUpdateManyWithoutParcelNestedInput
     claims?: ClaimUpdateManyWithoutParcelNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutParcelNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutParcelNestedInput
   }
 
   export type ParcelUncheckedUpdateWithoutOrganizationInput = {
@@ -58233,6 +62297,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryUncheckedUpdateManyWithoutParcelNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutParcelNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutParcelNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutParcelNestedInput
   }
 
   export type ParcelUncheckedUpdateManyWithoutOrganizationInput = {
@@ -58460,6 +62525,9 @@ export namespace Prisma {
     replyCount?: IntFieldUpdateOperationsInput | number
     internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
     followUpDueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    followUpSequenceCount?: IntFieldUpdateOperationsInput | number
+    escalationTier?: StringFieldUpdateOperationsInput | string
+    lastFollowUpSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -58485,6 +62553,9 @@ export namespace Prisma {
     replyCount?: IntFieldUpdateOperationsInput | number
     internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
     followUpDueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    followUpSequenceCount?: IntFieldUpdateOperationsInput | number
+    escalationTier?: StringFieldUpdateOperationsInput | string
+    lastFollowUpSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     assignedUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -58508,6 +62579,9 @@ export namespace Prisma {
     replyCount?: IntFieldUpdateOperationsInput | number
     internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
     followUpDueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    followUpSequenceCount?: IntFieldUpdateOperationsInput | number
+    escalationTier?: StringFieldUpdateOperationsInput | string
+    lastFollowUpSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     assignedUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -58573,6 +62647,7 @@ export namespace Prisma {
     carrier?: CarrierUpdateOneRequiredWithoutClaimsNestedInput
     assignedUser?: UserUpdateOneWithoutClaimsNestedInput
     documents?: ClaimDocumentUpdateManyWithoutClaimNestedInput
+    invoices?: ClaimInvoiceUpdateManyWithoutClaimNestedInput
   }
 
   export type ClaimUncheckedUpdateWithoutOrganizationInput = {
@@ -58601,6 +62676,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documents?: ClaimDocumentUncheckedUpdateManyWithoutClaimNestedInput
+    invoices?: ClaimInvoiceUncheckedUpdateManyWithoutClaimNestedInput
   }
 
   export type ClaimUncheckedUpdateManyWithoutOrganizationInput = {
@@ -58670,6 +62746,123 @@ export namespace Prisma {
     isGeneratedDeclaration?: BoolFieldUpdateOperationsInput | boolean
     disclaimerText?: NullableStringFieldUpdateOperationsInput | string | null
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClaimInvoiceUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    generationType?: StringFieldUpdateOperationsInput | string
+    carrierFormat?: StringFieldUpdateOperationsInput | string
+    claimantName?: StringFieldUpdateOperationsInput | string
+    claimantAddress?: StringFieldUpdateOperationsInput | string
+    claimantTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantContactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    courierName?: StringFieldUpdateOperationsInput | string
+    courierAccountNo?: NullableStringFieldUpdateOperationsInput | string | null
+    courierDeptEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    courierClaimRef?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    dispatchDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lossReason?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    merchandiseValue?: FloatFieldUpdateOperationsInput | number
+    shippingCost?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    adminFeeAmount?: FloatFieldUpdateOperationsInput | number
+    totalClaimedAmount?: FloatFieldUpdateOperationsInput | number
+    lineItems?: StringFieldUpdateOperationsInput | string
+    customFields?: StringFieldUpdateOperationsInput | string
+    evidenceImages?: StringFieldUpdateOperationsInput | string
+    disclaimerText?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    authorizedSignatory?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    claim?: ClaimUpdateOneWithoutInvoicesNestedInput
+    parcel?: ParcelUpdateOneRequiredWithoutClaimInvoicesNestedInput
+    carrier?: CarrierUpdateOneRequiredWithoutClaimInvoicesNestedInput
+  }
+
+  export type ClaimInvoiceUncheckedUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimId?: NullableStringFieldUpdateOperationsInput | string | null
+    parcelId?: StringFieldUpdateOperationsInput | string
+    carrierId?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    generationType?: StringFieldUpdateOperationsInput | string
+    carrierFormat?: StringFieldUpdateOperationsInput | string
+    claimantName?: StringFieldUpdateOperationsInput | string
+    claimantAddress?: StringFieldUpdateOperationsInput | string
+    claimantTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantContactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    courierName?: StringFieldUpdateOperationsInput | string
+    courierAccountNo?: NullableStringFieldUpdateOperationsInput | string | null
+    courierDeptEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    courierClaimRef?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    dispatchDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lossReason?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    merchandiseValue?: FloatFieldUpdateOperationsInput | number
+    shippingCost?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    adminFeeAmount?: FloatFieldUpdateOperationsInput | number
+    totalClaimedAmount?: FloatFieldUpdateOperationsInput | number
+    lineItems?: StringFieldUpdateOperationsInput | string
+    customFields?: StringFieldUpdateOperationsInput | string
+    evidenceImages?: StringFieldUpdateOperationsInput | string
+    disclaimerText?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    authorizedSignatory?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClaimInvoiceUncheckedUpdateManyWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimId?: NullableStringFieldUpdateOperationsInput | string | null
+    parcelId?: StringFieldUpdateOperationsInput | string
+    carrierId?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    generationType?: StringFieldUpdateOperationsInput | string
+    carrierFormat?: StringFieldUpdateOperationsInput | string
+    claimantName?: StringFieldUpdateOperationsInput | string
+    claimantAddress?: StringFieldUpdateOperationsInput | string
+    claimantTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantContactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    courierName?: StringFieldUpdateOperationsInput | string
+    courierAccountNo?: NullableStringFieldUpdateOperationsInput | string | null
+    courierDeptEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    courierClaimRef?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    dispatchDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lossReason?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    merchandiseValue?: FloatFieldUpdateOperationsInput | number
+    shippingCost?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    adminFeeAmount?: FloatFieldUpdateOperationsInput | number
+    totalClaimedAmount?: FloatFieldUpdateOperationsInput | number
+    lineItems?: StringFieldUpdateOperationsInput | string
+    customFields?: StringFieldUpdateOperationsInput | string
+    evidenceImages?: StringFieldUpdateOperationsInput | string
+    disclaimerText?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    authorizedSignatory?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CustomFieldUpdateWithoutOrganizationInput = {
@@ -59095,6 +63288,9 @@ export namespace Prisma {
     replyCount?: number
     internalNotes?: string | null
     followUpDueDate?: Date | string | null
+    followUpSequenceCount?: number
+    escalationTier?: string
+    lastFollowUpSentAt?: Date | string | null
     createdById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -59161,6 +63357,9 @@ export namespace Prisma {
     replyCount?: IntFieldUpdateOperationsInput | number
     internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
     followUpDueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    followUpSequenceCount?: IntFieldUpdateOperationsInput | number
+    escalationTier?: StringFieldUpdateOperationsInput | string
+    lastFollowUpSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -59187,6 +63386,9 @@ export namespace Prisma {
     replyCount?: IntFieldUpdateOperationsInput | number
     internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
     followUpDueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    followUpSequenceCount?: IntFieldUpdateOperationsInput | number
+    escalationTier?: StringFieldUpdateOperationsInput | string
+    lastFollowUpSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -59210,6 +63412,9 @@ export namespace Prisma {
     replyCount?: IntFieldUpdateOperationsInput | number
     internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
     followUpDueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    followUpSequenceCount?: IntFieldUpdateOperationsInput | number
+    escalationTier?: StringFieldUpdateOperationsInput | string
+    lastFollowUpSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -59241,6 +63446,7 @@ export namespace Prisma {
     parcel?: ParcelUpdateOneRequiredWithoutClaimsNestedInput
     carrier?: CarrierUpdateOneRequiredWithoutClaimsNestedInput
     documents?: ClaimDocumentUpdateManyWithoutClaimNestedInput
+    invoices?: ClaimInvoiceUpdateManyWithoutClaimNestedInput
   }
 
   export type ClaimUncheckedUpdateWithoutAssignedUserInput = {
@@ -59269,6 +63475,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documents?: ClaimDocumentUncheckedUpdateManyWithoutClaimNestedInput
+    invoices?: ClaimInvoiceUncheckedUpdateManyWithoutClaimNestedInput
   }
 
   export type ClaimUncheckedUpdateManyWithoutAssignedUserInput = {
@@ -59465,6 +63672,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryUpdateManyWithoutParcelNestedInput
     claims?: ClaimUpdateManyWithoutParcelNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutParcelNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutParcelNestedInput
   }
 
   export type ParcelUncheckedUpdateWithoutWarehouseInput = {
@@ -59522,6 +63730,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryUncheckedUpdateManyWithoutParcelNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutParcelNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutParcelNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutParcelNestedInput
   }
 
   export type ParcelUncheckedUpdateManyWithoutWarehouseInput = {
@@ -59709,6 +63918,9 @@ export namespace Prisma {
     replyCount?: number
     internalNotes?: string | null
     followUpDueDate?: Date | string | null
+    followUpSequenceCount?: number
+    escalationTier?: string
+    lastFollowUpSentAt?: Date | string | null
     assignedUserId?: string | null
     createdById?: string | null
     createdAt?: Date | string
@@ -59738,6 +63950,45 @@ export namespace Prisma {
     declarationText?: string | null
     assignedUserId?: string | null
     createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClaimInvoiceCreateManyCarrierInput = {
+    id?: string
+    organizationId: string
+    claimId?: string | null
+    parcelId: string
+    invoiceNumber: string
+    generationType?: string
+    carrierFormat?: string
+    claimantName: string
+    claimantAddress: string
+    claimantTaxId?: string | null
+    claimantContactEmail?: string | null
+    claimantPhone?: string | null
+    courierName: string
+    courierAccountNo?: string | null
+    courierDeptEmail?: string | null
+    courierClaimRef?: string | null
+    trackingNumber: string
+    orderNumber: string
+    dispatchDate?: Date | string | null
+    lossReason?: string
+    currency?: string
+    merchandiseValue?: number
+    shippingCost?: number
+    taxAmount?: number
+    adminFeeAmount?: number
+    totalClaimedAmount?: number
+    lineItems?: string
+    customFields?: string
+    evidenceImages?: string
+    disclaimerText?: string
+    notes?: string | null
+    authorizedSignatory?: string | null
+    status?: string
+    submittedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -59797,6 +64048,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryUpdateManyWithoutParcelNestedInput
     claims?: ClaimUpdateManyWithoutParcelNestedInput
     claimDocuments?: ClaimDocumentUpdateManyWithoutParcelNestedInput
+    claimInvoices?: ClaimInvoiceUpdateManyWithoutParcelNestedInput
   }
 
   export type ParcelUncheckedUpdateWithoutCarrierInput = {
@@ -59854,6 +64106,7 @@ export namespace Prisma {
     enquiries?: CarrierEnquiryUncheckedUpdateManyWithoutParcelNestedInput
     claims?: ClaimUncheckedUpdateManyWithoutParcelNestedInput
     claimDocuments?: ClaimDocumentUncheckedUpdateManyWithoutParcelNestedInput
+    claimInvoices?: ClaimInvoiceUncheckedUpdateManyWithoutParcelNestedInput
   }
 
   export type ParcelUncheckedUpdateManyWithoutCarrierInput = {
@@ -60117,6 +64370,9 @@ export namespace Prisma {
     replyCount?: IntFieldUpdateOperationsInput | number
     internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
     followUpDueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    followUpSequenceCount?: IntFieldUpdateOperationsInput | number
+    escalationTier?: StringFieldUpdateOperationsInput | string
+    lastFollowUpSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60142,6 +64398,9 @@ export namespace Prisma {
     replyCount?: IntFieldUpdateOperationsInput | number
     internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
     followUpDueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    followUpSequenceCount?: IntFieldUpdateOperationsInput | number
+    escalationTier?: StringFieldUpdateOperationsInput | string
+    lastFollowUpSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     assignedUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60165,6 +64424,9 @@ export namespace Prisma {
     replyCount?: IntFieldUpdateOperationsInput | number
     internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
     followUpDueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    followUpSequenceCount?: IntFieldUpdateOperationsInput | number
+    escalationTier?: StringFieldUpdateOperationsInput | string
+    lastFollowUpSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     assignedUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60197,6 +64459,7 @@ export namespace Prisma {
     parcel?: ParcelUpdateOneRequiredWithoutClaimsNestedInput
     assignedUser?: UserUpdateOneWithoutClaimsNestedInput
     documents?: ClaimDocumentUpdateManyWithoutClaimNestedInput
+    invoices?: ClaimInvoiceUpdateManyWithoutClaimNestedInput
   }
 
   export type ClaimUncheckedUpdateWithoutCarrierInput = {
@@ -60225,6 +64488,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documents?: ClaimDocumentUncheckedUpdateManyWithoutClaimNestedInput
+    invoices?: ClaimInvoiceUncheckedUpdateManyWithoutClaimNestedInput
   }
 
   export type ClaimUncheckedUpdateManyWithoutCarrierInput = {
@@ -60250,6 +64514,123 @@ export namespace Prisma {
     declarationText?: NullableStringFieldUpdateOperationsInput | string | null
     assignedUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClaimInvoiceUpdateWithoutCarrierInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    generationType?: StringFieldUpdateOperationsInput | string
+    carrierFormat?: StringFieldUpdateOperationsInput | string
+    claimantName?: StringFieldUpdateOperationsInput | string
+    claimantAddress?: StringFieldUpdateOperationsInput | string
+    claimantTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantContactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    courierName?: StringFieldUpdateOperationsInput | string
+    courierAccountNo?: NullableStringFieldUpdateOperationsInput | string | null
+    courierDeptEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    courierClaimRef?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    dispatchDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lossReason?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    merchandiseValue?: FloatFieldUpdateOperationsInput | number
+    shippingCost?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    adminFeeAmount?: FloatFieldUpdateOperationsInput | number
+    totalClaimedAmount?: FloatFieldUpdateOperationsInput | number
+    lineItems?: StringFieldUpdateOperationsInput | string
+    customFields?: StringFieldUpdateOperationsInput | string
+    evidenceImages?: StringFieldUpdateOperationsInput | string
+    disclaimerText?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    authorizedSignatory?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutClaimInvoicesNestedInput
+    claim?: ClaimUpdateOneWithoutInvoicesNestedInput
+    parcel?: ParcelUpdateOneRequiredWithoutClaimInvoicesNestedInput
+  }
+
+  export type ClaimInvoiceUncheckedUpdateWithoutCarrierInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    claimId?: NullableStringFieldUpdateOperationsInput | string | null
+    parcelId?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    generationType?: StringFieldUpdateOperationsInput | string
+    carrierFormat?: StringFieldUpdateOperationsInput | string
+    claimantName?: StringFieldUpdateOperationsInput | string
+    claimantAddress?: StringFieldUpdateOperationsInput | string
+    claimantTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantContactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    courierName?: StringFieldUpdateOperationsInput | string
+    courierAccountNo?: NullableStringFieldUpdateOperationsInput | string | null
+    courierDeptEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    courierClaimRef?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    dispatchDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lossReason?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    merchandiseValue?: FloatFieldUpdateOperationsInput | number
+    shippingCost?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    adminFeeAmount?: FloatFieldUpdateOperationsInput | number
+    totalClaimedAmount?: FloatFieldUpdateOperationsInput | number
+    lineItems?: StringFieldUpdateOperationsInput | string
+    customFields?: StringFieldUpdateOperationsInput | string
+    evidenceImages?: StringFieldUpdateOperationsInput | string
+    disclaimerText?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    authorizedSignatory?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClaimInvoiceUncheckedUpdateManyWithoutCarrierInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    claimId?: NullableStringFieldUpdateOperationsInput | string | null
+    parcelId?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    generationType?: StringFieldUpdateOperationsInput | string
+    carrierFormat?: StringFieldUpdateOperationsInput | string
+    claimantName?: StringFieldUpdateOperationsInput | string
+    claimantAddress?: StringFieldUpdateOperationsInput | string
+    claimantTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantContactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    courierName?: StringFieldUpdateOperationsInput | string
+    courierAccountNo?: NullableStringFieldUpdateOperationsInput | string | null
+    courierDeptEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    courierClaimRef?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    dispatchDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lossReason?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    merchandiseValue?: FloatFieldUpdateOperationsInput | number
+    shippingCost?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    adminFeeAmount?: FloatFieldUpdateOperationsInput | number
+    totalClaimedAmount?: FloatFieldUpdateOperationsInput | number
+    lineItems?: StringFieldUpdateOperationsInput | string
+    customFields?: StringFieldUpdateOperationsInput | string
+    evidenceImages?: StringFieldUpdateOperationsInput | string
+    disclaimerText?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    authorizedSignatory?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -60301,6 +64682,9 @@ export namespace Prisma {
     replyCount?: number
     internalNotes?: string | null
     followUpDueDate?: Date | string | null
+    followUpSequenceCount?: number
+    escalationTier?: string
+    lastFollowUpSentAt?: Date | string | null
     assignedUserId?: string | null
     createdById?: string | null
     createdAt?: Date | string
@@ -60346,6 +64730,45 @@ export namespace Prisma {
     isGeneratedDeclaration?: boolean
     disclaimerText?: string | null
     uploadedAt?: Date | string
+  }
+
+  export type ClaimInvoiceCreateManyParcelInput = {
+    id?: string
+    organizationId: string
+    claimId?: string | null
+    carrierId: string
+    invoiceNumber: string
+    generationType?: string
+    carrierFormat?: string
+    claimantName: string
+    claimantAddress: string
+    claimantTaxId?: string | null
+    claimantContactEmail?: string | null
+    claimantPhone?: string | null
+    courierName: string
+    courierAccountNo?: string | null
+    courierDeptEmail?: string | null
+    courierClaimRef?: string | null
+    trackingNumber: string
+    orderNumber: string
+    dispatchDate?: Date | string | null
+    lossReason?: string
+    currency?: string
+    merchandiseValue?: number
+    shippingCost?: number
+    taxAmount?: number
+    adminFeeAmount?: number
+    totalClaimedAmount?: number
+    lineItems?: string
+    customFields?: string
+    evidenceImages?: string
+    disclaimerText?: string
+    notes?: string | null
+    authorizedSignatory?: string | null
+    status?: string
+    submittedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type RawTrackingEventUpdateWithoutParcelInput = {
@@ -60455,6 +64878,9 @@ export namespace Prisma {
     replyCount?: IntFieldUpdateOperationsInput | number
     internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
     followUpDueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    followUpSequenceCount?: IntFieldUpdateOperationsInput | number
+    escalationTier?: StringFieldUpdateOperationsInput | string
+    lastFollowUpSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60480,6 +64906,9 @@ export namespace Prisma {
     replyCount?: IntFieldUpdateOperationsInput | number
     internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
     followUpDueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    followUpSequenceCount?: IntFieldUpdateOperationsInput | number
+    escalationTier?: StringFieldUpdateOperationsInput | string
+    lastFollowUpSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     assignedUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60503,6 +64932,9 @@ export namespace Prisma {
     replyCount?: IntFieldUpdateOperationsInput | number
     internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
     followUpDueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    followUpSequenceCount?: IntFieldUpdateOperationsInput | number
+    escalationTier?: StringFieldUpdateOperationsInput | string
+    lastFollowUpSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     assignedUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60535,6 +64967,7 @@ export namespace Prisma {
     carrier?: CarrierUpdateOneRequiredWithoutClaimsNestedInput
     assignedUser?: UserUpdateOneWithoutClaimsNestedInput
     documents?: ClaimDocumentUpdateManyWithoutClaimNestedInput
+    invoices?: ClaimInvoiceUpdateManyWithoutClaimNestedInput
   }
 
   export type ClaimUncheckedUpdateWithoutParcelInput = {
@@ -60563,6 +64996,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documents?: ClaimDocumentUncheckedUpdateManyWithoutClaimNestedInput
+    invoices?: ClaimInvoiceUncheckedUpdateManyWithoutClaimNestedInput
   }
 
   export type ClaimUncheckedUpdateManyWithoutParcelInput = {
@@ -60634,6 +65068,123 @@ export namespace Prisma {
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ClaimInvoiceUpdateWithoutParcelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    generationType?: StringFieldUpdateOperationsInput | string
+    carrierFormat?: StringFieldUpdateOperationsInput | string
+    claimantName?: StringFieldUpdateOperationsInput | string
+    claimantAddress?: StringFieldUpdateOperationsInput | string
+    claimantTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantContactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    courierName?: StringFieldUpdateOperationsInput | string
+    courierAccountNo?: NullableStringFieldUpdateOperationsInput | string | null
+    courierDeptEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    courierClaimRef?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    dispatchDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lossReason?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    merchandiseValue?: FloatFieldUpdateOperationsInput | number
+    shippingCost?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    adminFeeAmount?: FloatFieldUpdateOperationsInput | number
+    totalClaimedAmount?: FloatFieldUpdateOperationsInput | number
+    lineItems?: StringFieldUpdateOperationsInput | string
+    customFields?: StringFieldUpdateOperationsInput | string
+    evidenceImages?: StringFieldUpdateOperationsInput | string
+    disclaimerText?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    authorizedSignatory?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutClaimInvoicesNestedInput
+    claim?: ClaimUpdateOneWithoutInvoicesNestedInput
+    carrier?: CarrierUpdateOneRequiredWithoutClaimInvoicesNestedInput
+  }
+
+  export type ClaimInvoiceUncheckedUpdateWithoutParcelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    claimId?: NullableStringFieldUpdateOperationsInput | string | null
+    carrierId?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    generationType?: StringFieldUpdateOperationsInput | string
+    carrierFormat?: StringFieldUpdateOperationsInput | string
+    claimantName?: StringFieldUpdateOperationsInput | string
+    claimantAddress?: StringFieldUpdateOperationsInput | string
+    claimantTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantContactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    courierName?: StringFieldUpdateOperationsInput | string
+    courierAccountNo?: NullableStringFieldUpdateOperationsInput | string | null
+    courierDeptEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    courierClaimRef?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    dispatchDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lossReason?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    merchandiseValue?: FloatFieldUpdateOperationsInput | number
+    shippingCost?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    adminFeeAmount?: FloatFieldUpdateOperationsInput | number
+    totalClaimedAmount?: FloatFieldUpdateOperationsInput | number
+    lineItems?: StringFieldUpdateOperationsInput | string
+    customFields?: StringFieldUpdateOperationsInput | string
+    evidenceImages?: StringFieldUpdateOperationsInput | string
+    disclaimerText?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    authorizedSignatory?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClaimInvoiceUncheckedUpdateManyWithoutParcelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    claimId?: NullableStringFieldUpdateOperationsInput | string | null
+    carrierId?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    generationType?: StringFieldUpdateOperationsInput | string
+    carrierFormat?: StringFieldUpdateOperationsInput | string
+    claimantName?: StringFieldUpdateOperationsInput | string
+    claimantAddress?: StringFieldUpdateOperationsInput | string
+    claimantTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantContactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    courierName?: StringFieldUpdateOperationsInput | string
+    courierAccountNo?: NullableStringFieldUpdateOperationsInput | string | null
+    courierDeptEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    courierClaimRef?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    dispatchDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lossReason?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    merchandiseValue?: FloatFieldUpdateOperationsInput | number
+    shippingCost?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    adminFeeAmount?: FloatFieldUpdateOperationsInput | number
+    totalClaimedAmount?: FloatFieldUpdateOperationsInput | number
+    lineItems?: StringFieldUpdateOperationsInput | string
+    customFields?: StringFieldUpdateOperationsInput | string
+    evidenceImages?: StringFieldUpdateOperationsInput | string
+    disclaimerText?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    authorizedSignatory?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type EnquiryMessageCreateManyEnquiryInput = {
     id?: string
     organizationId: string
@@ -60692,6 +65243,45 @@ export namespace Prisma {
     uploadedAt?: Date | string
   }
 
+  export type ClaimInvoiceCreateManyClaimInput = {
+    id?: string
+    organizationId: string
+    parcelId: string
+    carrierId: string
+    invoiceNumber: string
+    generationType?: string
+    carrierFormat?: string
+    claimantName: string
+    claimantAddress: string
+    claimantTaxId?: string | null
+    claimantContactEmail?: string | null
+    claimantPhone?: string | null
+    courierName: string
+    courierAccountNo?: string | null
+    courierDeptEmail?: string | null
+    courierClaimRef?: string | null
+    trackingNumber: string
+    orderNumber: string
+    dispatchDate?: Date | string | null
+    lossReason?: string
+    currency?: string
+    merchandiseValue?: number
+    shippingCost?: number
+    taxAmount?: number
+    adminFeeAmount?: number
+    totalClaimedAmount?: number
+    lineItems?: string
+    customFields?: string
+    evidenceImages?: string
+    disclaimerText?: string
+    notes?: string | null
+    authorizedSignatory?: string | null
+    status?: string
+    submittedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ClaimDocumentUpdateWithoutClaimInput = {
     id?: StringFieldUpdateOperationsInput | string
     documentType?: StringFieldUpdateOperationsInput | string
@@ -60732,6 +65322,123 @@ export namespace Prisma {
     isGeneratedDeclaration?: BoolFieldUpdateOperationsInput | boolean
     disclaimerText?: NullableStringFieldUpdateOperationsInput | string | null
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClaimInvoiceUpdateWithoutClaimInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    generationType?: StringFieldUpdateOperationsInput | string
+    carrierFormat?: StringFieldUpdateOperationsInput | string
+    claimantName?: StringFieldUpdateOperationsInput | string
+    claimantAddress?: StringFieldUpdateOperationsInput | string
+    claimantTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantContactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    courierName?: StringFieldUpdateOperationsInput | string
+    courierAccountNo?: NullableStringFieldUpdateOperationsInput | string | null
+    courierDeptEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    courierClaimRef?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    dispatchDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lossReason?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    merchandiseValue?: FloatFieldUpdateOperationsInput | number
+    shippingCost?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    adminFeeAmount?: FloatFieldUpdateOperationsInput | number
+    totalClaimedAmount?: FloatFieldUpdateOperationsInput | number
+    lineItems?: StringFieldUpdateOperationsInput | string
+    customFields?: StringFieldUpdateOperationsInput | string
+    evidenceImages?: StringFieldUpdateOperationsInput | string
+    disclaimerText?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    authorizedSignatory?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutClaimInvoicesNestedInput
+    parcel?: ParcelUpdateOneRequiredWithoutClaimInvoicesNestedInput
+    carrier?: CarrierUpdateOneRequiredWithoutClaimInvoicesNestedInput
+  }
+
+  export type ClaimInvoiceUncheckedUpdateWithoutClaimInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    parcelId?: StringFieldUpdateOperationsInput | string
+    carrierId?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    generationType?: StringFieldUpdateOperationsInput | string
+    carrierFormat?: StringFieldUpdateOperationsInput | string
+    claimantName?: StringFieldUpdateOperationsInput | string
+    claimantAddress?: StringFieldUpdateOperationsInput | string
+    claimantTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantContactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    courierName?: StringFieldUpdateOperationsInput | string
+    courierAccountNo?: NullableStringFieldUpdateOperationsInput | string | null
+    courierDeptEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    courierClaimRef?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    dispatchDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lossReason?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    merchandiseValue?: FloatFieldUpdateOperationsInput | number
+    shippingCost?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    adminFeeAmount?: FloatFieldUpdateOperationsInput | number
+    totalClaimedAmount?: FloatFieldUpdateOperationsInput | number
+    lineItems?: StringFieldUpdateOperationsInput | string
+    customFields?: StringFieldUpdateOperationsInput | string
+    evidenceImages?: StringFieldUpdateOperationsInput | string
+    disclaimerText?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    authorizedSignatory?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClaimInvoiceUncheckedUpdateManyWithoutClaimInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    parcelId?: StringFieldUpdateOperationsInput | string
+    carrierId?: StringFieldUpdateOperationsInput | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    generationType?: StringFieldUpdateOperationsInput | string
+    carrierFormat?: StringFieldUpdateOperationsInput | string
+    claimantName?: StringFieldUpdateOperationsInput | string
+    claimantAddress?: StringFieldUpdateOperationsInput | string
+    claimantTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantContactEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    claimantPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    courierName?: StringFieldUpdateOperationsInput | string
+    courierAccountNo?: NullableStringFieldUpdateOperationsInput | string | null
+    courierDeptEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    courierClaimRef?: NullableStringFieldUpdateOperationsInput | string | null
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    dispatchDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lossReason?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    merchandiseValue?: FloatFieldUpdateOperationsInput | number
+    shippingCost?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    adminFeeAmount?: FloatFieldUpdateOperationsInput | number
+    totalClaimedAmount?: FloatFieldUpdateOperationsInput | number
+    lineItems?: StringFieldUpdateOperationsInput | string
+    customFields?: StringFieldUpdateOperationsInput | string
+    evidenceImages?: StringFieldUpdateOperationsInput | string
+    disclaimerText?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    authorizedSignatory?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type WorkflowVersionCreateManyWorkflowRuleInput = {
@@ -60975,6 +65682,10 @@ export namespace Prisma {
      * @deprecated Use JobQueueDefaultArgs instead
      */
     export type JobQueueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = JobQueueDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ClaimInvoiceDefaultArgs instead
+     */
+    export type ClaimInvoiceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ClaimInvoiceDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

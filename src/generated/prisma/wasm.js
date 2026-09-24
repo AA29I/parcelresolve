@@ -400,6 +400,9 @@ exports.Prisma.CarrierEnquiryScalarFieldEnum = {
   replyCount: 'replyCount',
   internalNotes: 'internalNotes',
   followUpDueDate: 'followUpDueDate',
+  followUpSequenceCount: 'followUpSequenceCount',
+  escalationTier: 'escalationTier',
+  lastFollowUpSentAt: 'lastFollowUpSentAt',
   assignedUserId: 'assignedUserId',
   createdById: 'createdById',
   createdAt: 'createdAt',
@@ -606,6 +609,46 @@ exports.Prisma.JobQueueScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.ClaimInvoiceScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  claimId: 'claimId',
+  parcelId: 'parcelId',
+  carrierId: 'carrierId',
+  invoiceNumber: 'invoiceNumber',
+  generationType: 'generationType',
+  carrierFormat: 'carrierFormat',
+  claimantName: 'claimantName',
+  claimantAddress: 'claimantAddress',
+  claimantTaxId: 'claimantTaxId',
+  claimantContactEmail: 'claimantContactEmail',
+  claimantPhone: 'claimantPhone',
+  courierName: 'courierName',
+  courierAccountNo: 'courierAccountNo',
+  courierDeptEmail: 'courierDeptEmail',
+  courierClaimRef: 'courierClaimRef',
+  trackingNumber: 'trackingNumber',
+  orderNumber: 'orderNumber',
+  dispatchDate: 'dispatchDate',
+  lossReason: 'lossReason',
+  currency: 'currency',
+  merchandiseValue: 'merchandiseValue',
+  shippingCost: 'shippingCost',
+  taxAmount: 'taxAmount',
+  adminFeeAmount: 'adminFeeAmount',
+  totalClaimedAmount: 'totalClaimedAmount',
+  lineItems: 'lineItems',
+  customFields: 'customFields',
+  evidenceImages: 'evidenceImages',
+  disclaimerText: 'disclaimerText',
+  notes: 'notes',
+  authorizedSignatory: 'authorizedSignatory',
+  status: 'status',
+  submittedAt: 'submittedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -649,7 +692,8 @@ exports.Prisma.ModelName = {
   ImportBatch: 'ImportBatch',
   ExportLayout: 'ExportLayout',
   AuditLog: 'AuditLog',
-  JobQueue: 'JobQueue'
+  JobQueue: 'JobQueue',
+  ClaimInvoice: 'ClaimInvoice'
 };
 
 /**

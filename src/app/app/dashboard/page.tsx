@@ -137,22 +137,63 @@ export default function DashboardPage() {
     }
   };
 
-  const handleCreateEnquiry = async (parcelId: string) => {
-    const res = await fetch('/api/enquiries', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ parcelId, enquiryType: 'SLA_BREACH', sendingMode: 'STAFF_APPROVAL' }),
-    });
-    const data = await res.json();
-    if (data.success) {
-      alert(`Carrier Enquiry Draft ${data.referenceNumber} created successfully!`);
+  // Dedicated Interactive Courier Enquiry State
+  const [enquiryModalOpen, setEnquiryModalOpen] = useState(false);
+  const [enquiryTargetParcel, setEnquiryTargetParcel] = useState<ParcelItem | null>(null);
+  const [enquiryType, setEnquiryType] = useState('SLA_BREACH');
+  const [enquiryRecipientEmail, setEnquiryRecipientEmail] = useState('');
+  const [enquiryNotes, setEnquiryNotes] = useState('');
+  const [enquirySending, setEnquirySending] = useState(false);
+  const [enquirySuccessMsg, setEnquirySuccessMsg] = useState<string | null>(null);
+
+  const openEnquiryModal = (parcel: ParcelItem) => {
+    setEnquiryTargetParcel(parcel);
+    setEnquiryType(parcel.isBreached ? 'SLA_BREACH' : parcel.stalledHours > 48 ? 'NO_MOVEMENT' : 'SLA_BREACH');
+    setEnquiryRecipientEmail(`investigations@${parcel.carrier.code.toLowerCase()}-support.example.com`);
+    setEnquiryNotes('');
+    setEnquirySuccessMsg(null);
+    setEnquiryModalOpen(true);
+  };
+
+  const handleSendCourierEnquiry = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!enquiryTargetParcel) return;
+    setEnquirySending(true);
+
+    try {
+      const res = await fetch(`/api/parcels/${enquiryTargetParcel.id}/enquire`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          enquiryType,
+          recipientEmail: enquiryRecipientEmail,
+          notes: enquiryNotes,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to dispatch courier enquiry');
+
+      setEnquirySuccessMsg(`Enquiry ${data.referenceNumber} dispatched to ${enquiryRecipientEmail}! Courier notified.`);
       await fetchParcels();
-      if (selectedParcel?.id === parcelId) {
-        const detailRes = await fetch(`/api/parcels/${parcelId}`);
+      if (selectedParcel?.id === enquiryTargetParcel.id) {
+        const detailRes = await fetch(`/api/parcels/${enquiryTargetParcel.id}`);
         const detailData = await detailRes.json();
         setParcelDetailData(detailData.parcel);
       }
+      setTimeout(() => {
+        setEnquiryModalOpen(false);
+      }, 1800);
+    } catch (err: unknown) {
+      alert(err instanceof Error ? err.message : String(err));
+    } finally {
+      setEnquirySending(false);
     }
+  };
+
+  const handleCreateEnquiry = (parcelId: string) => {
+    const p = parcels.find((item) => item.id === parcelId);
+    if (p) openEnquiryModal(p);
   };
 
   const handleCreateClaim = async (parcelId: string) => {
@@ -163,7 +204,7 @@ export default function DashboardPage() {
     });
     const data = await res.json();
     if (data.success) {
-      alert(`Claim Dossier ${data.claim.claimNumber} prepared with statutory Loss Declaration!`);
+      alert(`Claim Dossier ${data.claim.claimNumber} prepared with statutory Loss Declaration & Claim Invoice!`);
       await fetchParcels();
       if (selectedParcel?.id === parcelId) {
         const detailRes = await fetch(`/api/parcels/${parcelId}`);
@@ -411,7 +452,14 @@ export default function DashboardPage() {
                       </div>
                     </td>
 
-                    <td className="py-3 px-4 text-right" onClick={(e) => e.stopPropagation()}>
+                    <td className="py-3 px-4 text-right space-x-1.5" onClick={(e) => e.stopPropagation()}>
+                      <button
+                        onClick={() => openEnquiryModal(p)}
+                        className="px-2 py-1 rounded bg-purple-50 hover:bg-purple-100 text-purple-800 text-[10px] font-semibold transition-colors inline-flex items-center gap-1 border border-purple-200"
+                        title="Send Enquiry to Courier"
+                      >
+                        <Send className="w-2.5 h-2.5 text-purple-700" /> Enquire
+                      </button>
                       <button
                         onClick={() => handleOnDemandRefresh(p.id)}
                         disabled={refreshingId === p.id}
@@ -572,6 +620,109 @@ export default function DashboardPage() {
                 )}
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Interactive Courier Enquiry Dispatch Modal */}
+      {enquiryModalOpen && enquiryTargetParcel && (
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl border border-brand-border shadow-2xl max-w-lg w-full p-6 space-y-4">
+            <div className="flex items-center justify-between border-b border-brand-border pb-3">
+              <div>
+                <h3 className="font-bold text-base font-serif text-brand-dark flex items-center gap-2">
+                  <Send className="w-4 h-4 text-purple-700" /> Send Enquiry Email to Courier
+                </h3>
+                <div className="text-[11px] text-brand-muted mt-0.5">
+                  Direct tracer and delivery investigation for Trk #{enquiryTargetParcel.trackingNumber}
+                </div>
+              </div>
+              <button onClick={() => setEnquiryModalOpen(false)} className="text-brand-muted hover:text-brand-dark">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {enquirySuccessMsg ? (
+              <div className="p-4 bg-emerald-50 border border-emerald-300 rounded text-emerald-800 text-xs font-medium flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" /> {enquirySuccessMsg}
+              </div>
+            ) : (
+              <form onSubmit={handleSendCourierEnquiry} className="space-y-4 text-xs">
+                <div>
+                  <label className="block font-semibold text-brand-dark mb-1">
+                    Courier Support & Investigations Email:
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    value={enquiryRecipientEmail}
+                    onChange={(e) => setEnquiryRecipientEmail(e.target.value)}
+                    className="w-full p-2 border border-brand-border rounded font-mono text-xs focus:outline-none focus:border-brand-gold"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block font-semibold text-brand-dark mb-1">Enquiry Reason:</label>
+                    <select
+                      value={enquiryType}
+                      onChange={(e) => setEnquiryType(e.target.value)}
+                      className="w-full p-2 border border-brand-border rounded bg-white"
+                    >
+                      <option value="SLA_BREACH">SLA Breach / Overdue Transit</option>
+                      <option value="NO_MOVEMENT">Stalled / No Depot Scan 48h+</option>
+                      <option value="DAMAGED">Reported Damage in Transit</option>
+                      <option value="MISROUTED">Misrouted / Incorrect Depot</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block font-semibold text-brand-dark mb-1">Courier Carrier:</label>
+                    <div className="p-2 border border-brand-border rounded bg-brand-cream/60 font-semibold text-brand-dark">
+                      {enquiryTargetParcel.carrier.name} ({enquiryTargetParcel.carrier.code})
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block font-semibold text-brand-dark mb-1">
+                    Internal Notes / Specific Questions:
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={enquiryNotes}
+                    onChange={(e) => setEnquiryNotes(e.target.value)}
+                    placeholder="e.g. Recipient phoned support confirming package was not received..."
+                    className="w-full p-2 border border-brand-border rounded text-xs focus:outline-none focus:border-brand-gold"
+                  ></textarea>
+                </div>
+
+                <div className="p-3 bg-brand-cream/80 rounded border border-brand-border text-[11px] text-brand-muted space-y-1">
+                  <div className="font-bold text-brand-dark">Automated Email Highlights:</div>
+                  <div>• Includes origin, destination, elapsed overdue hours, and last scan checkpoint.</div>
+                  <div>• Automatically initiates a 48h follow-up cadence timer on the Enquiries Desk.</div>
+                  <div>• Updates parcel investigation status to <strong>AWAITING_CARRIER_REPLY</strong>.</div>
+                </div>
+
+                <div className="flex justify-end gap-2 pt-2 border-t border-brand-border">
+                  <button
+                    type="button"
+                    onClick={() => setEnquiryModalOpen(false)}
+                    className="px-3 py-1.5 rounded border border-brand-border bg-white text-brand-dark font-medium"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={enquirySending}
+                    className="px-4 py-1.5 rounded bg-purple-700 hover:bg-purple-800 text-white font-semibold flex items-center gap-1.5 shadow-xs"
+                  >
+                    <Send className="w-3.5 h-3.5" />
+                    {enquirySending ? 'Sending Email to Courier...' : 'Send Enquiry Email'}
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
         </div>
       )}

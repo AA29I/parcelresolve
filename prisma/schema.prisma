@@ -42,6 +42,7 @@ model Organization {
   enquiryMessages      EnquiryMessage[]
   claims               Claim[]
   claimDocuments       ClaimDocument[]
+  claimInvoices        ClaimInvoice[]
   customFields         CustomField[]
   customStatusMappings CustomStatusMapping[]
   workflowRules        WorkflowRule[]
@@ -150,6 +151,7 @@ model Carrier {
   slaPolicies           SlaPolicy[]
   enquiries             CarrierEnquiry[]
   claims                Claim[]
+  claimInvoices         ClaimInvoice[]
 
   @@unique([organizationId, code])
   @@index([organizationId, isActive])
@@ -296,6 +298,7 @@ model Parcel {
   enquiries              CarrierEnquiry[]
   claims                 Claim[]
   claimDocuments         ClaimDocument[]
+  claimInvoices          ClaimInvoice[]
 
   @@unique([organizationId, trackingNumber])
   @@index([organizationId, trackingStatus])
@@ -395,6 +398,9 @@ model CarrierEnquiry {
   replyCount       Int          @default(0)
   internalNotes    String?
   followUpDueDate  DateTime?
+  followUpSequenceCount Int          @default(0)
+  escalationTier   String       @default("INITIAL") // INITIAL, REMINDER_1, REMINDER_2, FINAL_DEMAND
+  lastFollowUpSentAt DateTime?
   assignedUserId   String?
   createdById      String?
   createdAt        DateTime     @default(now())
@@ -459,6 +465,7 @@ model Claim {
   carrier               Carrier      @relation(fields: [carrierId], references: [id], onDelete: Cascade)
   assignedUser          User?        @relation(fields: [assignedUserId], references: [id])
   documents             ClaimDocument[]
+  invoices              ClaimInvoice[]
 
   @@index([organizationId, status])
   @@index([organizationId, parcelId])
@@ -683,3 +690,70 @@ model JobQueue {
   @@index([status, runAfter])
   @@index([organizationId, taskType])
 }
+
+model ClaimInvoice {
+  id                   String       @id @default(cuid())
+  organizationId       String
+  claimId              String?
+  parcelId             String
+  carrierId            String
+  invoiceNumber        String       @unique
+  generationType       String       @default("MANUAL") // AUTO, MANUAL
+  carrierFormat        String       @default("UPS_STANDARD") // UPS_STANDARD, FEDEX_FORMAL, DHL_EXPRESS, GLS_EUROPE, GENERIC
+  
+  // Claimant Details
+  claimantName         String
+  claimantAddress      String
+  claimantTaxId        String?
+  claimantContactEmail String?
+  claimantPhone        String?
+
+  // Courier Details
+  courierName          String
+  courierAccountNo     String?
+  courierDeptEmail     String?
+  courierClaimRef      String?
+
+  // Consignment & Loss Details
+  trackingNumber       String
+  orderNumber          String
+  dispatchDate         DateTime?
+  lossReason           String       @default("LOST_IN_TRANSIT") // LOST_IN_TRANSIT, DAMAGED_IN_TRANSIT, DELAYED_BEYOND_REMEDY, MISROUTED
+  
+  // Financials & Currencies
+  currency             String       @default("USD") // USD, EUR, GBP, CAD
+  merchandiseValue     Float        @default(0)
+  shippingCost         Float        @default(0)
+  taxAmount            Float        @default(0)
+  adminFeeAmount       Float        @default(0)
+  totalClaimedAmount   Float        @default(0)
+
+  // Itemized Consignment Lines (JSON array of { description, sku, quantity, unitPrice, lineTotal })
+  lineItems            String       @default("[]")
+
+  // Custom Fields (JSON object for courier-specific fields e.g. { "po_reference": "PO-8812", "hazard_class": "NON-REG", "hs_tariff_code": "6109.10" })
+  customFields         String       @default("{}")
+
+  // Evidence Images & Attachments (JSON array of { id, type, url, label, uploadedAt })
+  evidenceImages       String       @default("[]")
+
+  // Legal & Formal Notices
+  disclaimerText       String       @default("NOT AN ORIGINAL COMMERCIAL SALES INVOICE. This statement of loss and indemnity is prepared exclusively for courier reimbursement and freight compensation under contract carrier terms.")
+  notes                String?
+  authorizedSignatory  String?
+
+  status               String       @default("DRAFT") // DRAFT, FINALIZED, SUBMITTED_TO_CARRIER, SETTLED, VOID
+  submittedAt          DateTime?
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+
+  organization         Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  claim                Claim?       @relation(fields: [claimId], references: [id], onDelete: SetNull)
+  parcel               Parcel       @relation(fields: [parcelId], references: [id], onDelete: Cascade)
+  carrier              Carrier      @relation(fields: [carrierId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, status])
+  @@index([organizationId, parcelId])
+  @@index([organizationId, invoiceNumber])
+}
+
