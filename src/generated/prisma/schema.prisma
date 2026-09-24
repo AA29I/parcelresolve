@@ -1,0 +1,665 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+model Organization {
+  id                  String   @id @default(cuid())
+  name                String
+  slug                String   @unique
+  logoUrl             String?
+  primaryContactEmail String
+  phone               String?
+  operatingCountries  String   @default("[\"US\",\"GB\",\"CA\",\"DE\"]") // JSON array
+  operatingCurrencies String   @default("[\"USD\",\"GBP\",\"EUR\"]") // JSON array
+  defaultCurrency     String   @default("USD")
+  timezone            String   @default("America/New_York")
+  subscriptionTier    String   @default("GROWTH") // STARTER, GROWTH, SCALE
+  subscriptionStatus  String   @default("ACTIVE") // ACTIVE, TRIAL, PAST_DUE
+  parcelMonthlyLimit  Int      @default(50000)
+  claimMonthlyLimit   Int      @default(1000)
+  onboardingStep      Int      @default(1)
+  onboardingCompleted Boolean  @default(false)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  users                User[]
+  warehouses           Warehouse[]
+  carriers             Carrier[]
+  carrierMappings      CarrierMapping[]
+  carrierConnectors    CarrierConnector[]
+  linnworksConnection  LinnworksConnection?
+  parcels              Parcel[]
+  rawTrackingEvents    RawTrackingEvent[]
+  trackingEvents       TrackingEvent[]
+  slaPolicies          SlaPolicy[]
+  carrierEnquiries     CarrierEnquiry[]
+  enquiryMessages      EnquiryMessage[]
+  claims               Claim[]
+  claimDocuments       ClaimDocument[]
+  customFields         CustomField[]
+  customStatusMappings CustomStatusMapping[]
+  workflowRules        WorkflowRule[]
+  workflowVersions     WorkflowVersion[]
+  apiKeys              ApiKey[]
+  outboundWebhooks     OutboundWebhook[]
+  webhookDeliveries    WebhookDelivery[]
+  importBatches        ImportBatch[]
+  exportLayouts        ExportLayout[]
+  auditLogs            AuditLog[]
+  jobQueues            JobQueue[]
+
+  @@index([slug])
+}
+
+model User {
+  id             String   @id @default(cuid())
+  organizationId String
+  name           String
+  email          String
+  passwordHash   String
+  role           String   @default("OPS_DISPATCHER") // OWNER, ADMIN, OPS_DISPATCHER, CLAIMS_SPECIALIST, DEVELOPER, VIEWER
+  phone          String?
+  isActive       Boolean  @default(true)
+  avatarUrl      String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organization Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  enquiries    CarrierEnquiry[]
+  claims       Claim[]
+  auditLogs    AuditLog[]
+
+  @@unique([organizationId, email])
+  @@index([organizationId, role])
+}
+
+model Warehouse {
+  id             String   @id @default(cuid())
+  organizationId String
+  code           String
+  name           String
+  addressLine1   String
+  addressLine2   String?
+  city           String
+  state          String
+  postalCode     String
+  country        String   @default("US")
+  cutoffTime     String   @default("16:00") // 24-hr format
+  timezone       String   @default("America/New_York")
+  isDefault      Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  parcels      Parcel[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId])
+}
+
+model Carrier {
+  id                    String   @id @default(cuid())
+  organizationId        String
+  code                  String // UPS, USPS, ESHIPPER, GLS, DPD, PARCELFORCE, DHL, AP2P, CUSTOM
+  name                  String
+  category              String   @default("DIRECT_COURIER") // DIRECT_COURIER, AGGREGATOR, 3PL
+  connectionType        String   @default("CONFIGURABLE_API") // LIVE_API, CONFIGURABLE_API, NEEDS_CUSTOM_ADAPTER, FILE_IMPORT
+  capabilities          String   @default("LOOKUP,WEBHOOK,POD") // comma-separated
+  aggregatorId          String?
+  contractedParty       String   @default("Workspace Primary Account")
+  physicalCarrier       String // Underlying courier (e.g. UPS)
+  finalMileCarrier      String // Last-mile carrier (e.g. USPS)
+  enquiryRecipientEmail String?
+  claimRecipientEmail   String?
+  accountCredentials    String? // Encrypted JSON
+  isLive                Boolean  @default(true)
+  isActive              Boolean  @default(true)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  organization Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  parcels      Parcel[]
+  mappings     CarrierMapping[]
+  connectors   CarrierConnector[]
+  slaPolicies  SlaPolicy[]
+  enquiries    CarrierEnquiry[]
+  claims       Claim[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, isActive])
+}
+
+model CarrierMapping {
+  id                String   @id @default(cuid())
+  organizationId    String
+  carrierId         String
+  inputCourierName  String // As given in CSV or external system, e.g. "UPS-Standard"
+  inputServiceName  String? // e.g. "Standard Delivery 48h"
+  mappedCourierCode String // Standardized code e.g. "UPS"
+  mappedServiceCode String // Standardized service e.g. "UPS_STD"
+  notes             String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  carrier      Carrier      @relation(fields: [carrierId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, inputCourierName])
+}
+
+model CarrierConnector {
+  id                      String    @id @default(cuid())
+  organizationId          String
+  carrierId               String
+  name                    String
+  version                 Int       @default(1)
+  status                  String    @default("DRAFT") // DRAFT, PUBLISHED, ROLLED_BACK
+  authType                String    @default("API_KEY") // API_KEY, BEARER, OAUTH2_CLIENT_CREDENTIALS, NONE
+  baseUrl                 String
+  trackingEndpoint        String    @default("/v1/track/{trackingNumber}")
+  headersTemplate         String    @default("{}") // JSON text
+  queryParamsTemplate     String    @default("{}") // JSON text
+  trackingNumberParam     String    @default("trackingNumber")
+  responseStatusPath      String    @default("status")
+  responseTimestampPath   String    @default("timestamp")
+  responseLocationPath    String    @default("location")
+  responseMessagePath     String    @default("message")
+  responseEventsArrayPath String    @default("events")
+  statusCodeMap           String    @default("{\"IT\":\"IN_TRANSIT\",\"DL\":\"DELIVERED\",\"EX\":\"EXCEPTION\"}") // JSON
+  minPollIntervalMinutes  Int       @default(60)
+  maxCallsPerMinute       Int       @default(120)
+  backoffStrategy         String    @default("EXPONENTIAL") // EXPONENTIAL, LINEAR, FIXED
+  sampleTrackingNumber    String?
+  testSuccess             Boolean   @default(false)
+  lastTestedAt            DateTime?
+  testResultPayload       String? // JSON preview of normalized result
+  publishedAt             DateTime?
+  rollbackVersionId       String?
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  carrier      Carrier      @relation(fields: [carrierId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, carrierId, status])
+}
+
+model LinnworksConnection {
+  id                  String    @id @default(cuid())
+  organizationId      String    @unique
+  applicationId       String
+  applicationSecret   String
+  authorizationToken  String
+  tokenExpiresAt      DateTime?
+  serverUrl           String    @default("https://api.linnworks.net")
+  isConnected         Boolean   @default(false)
+  syncStatus          String    @default("IDLE") // IDLE, SYNCING, ERROR
+  lastSyncAt          DateTime?
+  autoSyncEnabled     Boolean   @default(true)
+  syncIntervalMinutes Int       @default(30)
+  lastError           String?
+  syncProvenance      String    @default("LINNWORKS")
+  backfillCompleted   Boolean   @default(false)
+  ordersSyncedCount   Int       @default(0)
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+}
+
+model Parcel {
+  id                      String   @id @default(cuid())
+  organizationId          String
+  warehouseId             String?
+  carrierId               String
+  orderNumber             String
+  packageId               String?
+  trackingNumber          String
+  secondaryTrackingNumber String?
+  recipientName           String
+  recipientEmail          String?
+  recipientPhone          String?
+  recipientAddress        String
+  recipientCity           String
+  recipientState          String
+  recipientPostalCode     String
+  recipientCountry        String   @default("US")
+  destinationZone         String   @default("ZONE_1")
+  weightKg                Float    @default(1.0)
+  lengthCm                Float?
+  widthCm                 Float?
+  heightCm                Float?
+  declaredValue           Float    @default(0)
+  currency                String   @default("USD")
+  itemsSummary            String?
+  shippingCost            Float    @default(0)
+  dispatchDate            DateTime
+  promisedDeliveryDate    DateTime
+  calculatedSlaHours      Int      @default(48)
+  slaCutoffUsed           String   @default("16:00")
+  slaCalculationDetail    String? // Explanation string of the SLA calculation
+  isBreached              Boolean  @default(false)
+  breachHours             Float    @default(0)
+  stalledHours            Float    @default(0)
+
+  // Separated 4 core statuses:
+  trackingStatus      String @default("MANIFEST_CREATED") // MANIFEST_CREATED, PICKED_UP, IN_TRANSIT, OUT_FOR_DELIVERY, DELIVERED, EXCEPTION, RETURNED_TO_SENDER, DAMAGED, LOST
+  investigationStatus String @default("NONE") // NONE, OPEN, AWAITING_CARRIER_REPLY, ESCALATED, RESOLVED_FOUND, RESOLVED_LOST
+  claimStatus         String @default("NOT_ELIGIBLE") // NOT_ELIGIBLE, ELIGIBLE, DRAFT_PENDING_EVIDENCE, READY_TO_SUBMIT, SUBMITTED, UNDER_REVIEW, APPROVED, REJECTED, APPEALED, CLOSED
+  recoveryStatus      String @default("UNPAID") // UNPAID, PARTIALLY_PAID, PAID_IN_FULL, WRITTEN_OFF
+
+  claimedAmount           Float     @default(0)
+  approvedAmount          Float     @default(0)
+  recoveredAmount         Float     @default(0)
+  creditNoteNumber        String?
+  latestStatusDescription String?
+  lastPhysicalScanAt      DateTime?
+  lastScanLocation        String?
+  lastEventTime           DateTime?
+  lastApiCheckAt          DateTime?
+  source                  String    @default("CSV_IMPORT") // CSV_IMPORT, LINNWORKS, REST_API, MANUAL
+  customFieldValues       String    @default("{}") // JSON key-value store for tenant custom fields
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+
+  organization      Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  warehouse         Warehouse?         @relation(fields: [warehouseId], references: [id])
+  carrier           Carrier            @relation(fields: [carrierId], references: [id])
+  rawTrackingEvents RawTrackingEvent[]
+  trackingEvents    TrackingEvent[]
+  enquiries         CarrierEnquiry[]
+  claims            Claim[]
+  claimDocuments    ClaimDocument[]
+
+  @@unique([organizationId, trackingNumber])
+  @@index([organizationId, trackingStatus])
+  @@index([organizationId, isBreached])
+  @@index([organizationId, claimStatus])
+  @@index([organizationId, orderNumber])
+  @@index([organizationId, dispatchDate])
+}
+
+model RawTrackingEvent {
+  id             String   @id @default(cuid())
+  organizationId String
+  parcelId       String
+  trackingNumber String
+  rawPayload     String // Immutable raw response string
+  httpStatusCode Int      @default(200)
+  source         String   @default("POLL") // POLL, WEBHOOK, MANUAL_REFRESH, IMPORT
+  headers        String? // JSON string of headers
+  receivedAt     DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  parcel       Parcel       @relation(fields: [parcelId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, parcelId])
+  @@index([trackingNumber])
+}
+
+model TrackingEvent {
+  id                String   @id @default(cuid())
+  organizationId    String
+  parcelId          String
+  eventCode         String
+  normalizedStatus  String // Standardized enum status
+  statusDescription String
+  locationCity      String?
+  locationState     String?
+  locationCountry   String?
+  latitude          Float?
+  longitude         Float?
+  eventTimestamp    DateTime
+  carrierEventId    String? // For deduplication
+  isPhysicalScan    Boolean  @default(true)
+  signatureUrl      String?
+  podImageUrl       String?
+  isDuplicate       Boolean  @default(false)
+  createdAt         DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  parcel       Parcel       @relation(fields: [parcelId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, parcelId, eventTimestamp])
+  @@index([carrierEventId])
+}
+
+model SlaPolicy {
+  id                 String   @id @default(cuid())
+  organizationId     String
+  name               String
+  carrierId          String
+  serviceCode        String   @default("STANDARD") // e.g. "UPS_GROUND", "DPD_NEXT_DAY"
+  aggregatorContract String?
+  originCountry      String   @default("US")
+  destinationCountry String   @default("US")
+  destinationZone    String?
+  minWeightKg        Float    @default(0)
+  maxWeightKg        Float    @default(100)
+  slaHours           Int      @default(48)
+  cutoffTime         String   @default("16:00")
+  calendarType       String   @default("BUSINESS_DAYS") // BUSINESS_DAYS, CALENDAR_DAYS
+  weekendHandling    String   @default("SKIP_WEEKENDS") // SKIP_WEEKENDS, INCLUDE_WEEKENDS
+  nationalHolidays   String   @default("[]") // JSON array of YYYY-MM-DD
+  version            Int      @default(1)
+  isActive           Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  carrier      Carrier      @relation(fields: [carrierId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, carrierId, serviceCode])
+}
+
+model CarrierEnquiry {
+  id              String    @id @default(cuid())
+  organizationId  String
+  parcelId        String
+  carrierId       String
+  referenceNumber String    @unique
+  enquiryType     String    @default("SLA_BREACH") // NO_MOVEMENT, SLA_BREACH, DAMAGED, MISROUTED
+  status          String    @default("DRAFT") // DRAFT, PENDING_APPROVAL, SENT, CARRIER_REPLIED, RESOLVED, CANCELLED
+  sendingMode     String    @default("STAFF_APPROVAL") // DRAFT_ONLY, STAFF_APPROVAL, AUTO_SEND
+  recipientEmail  String
+  subject         String
+  body            String
+  sentAt          DateTime?
+  lastReplyAt     DateTime?
+  replyCount      Int       @default(0)
+  internalNotes   String?
+  followUpDueDate DateTime?
+  assignedUserId  String?
+  createdById     String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  organization Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  parcel       Parcel           @relation(fields: [parcelId], references: [id], onDelete: Cascade)
+  carrier      Carrier          @relation(fields: [carrierId], references: [id], onDelete: Cascade)
+  assignedUser User?            @relation(fields: [assignedUserId], references: [id])
+  messages     EnquiryMessage[]
+
+  @@index([organizationId, status])
+  @@index([organizationId, parcelId])
+}
+
+model EnquiryMessage {
+  id               String   @id @default(cuid())
+  organizationId   String
+  enquiryId        String
+  senderType       String   @default("STAFF") // SYSTEM, STAFF, CARRIER
+  senderEmail      String
+  senderName       String
+  messageBody      String
+  attachments      String   @default("[]") // JSON array of file metadata
+  messageTimestamp DateTime @default(now())
+
+  organization Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  enquiry      CarrierEnquiry @relation(fields: [enquiryId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, enquiryId])
+}
+
+model Claim {
+  id                    String    @id @default(cuid())
+  organizationId        String
+  parcelId              String
+  carrierId             String
+  claimNumber           String    @unique
+  carrierClaimReference String?
+  reason                String    @default("LOST_IN_TRANSIT") // LOST_IN_TRANSIT, DAMAGE_IN_TRANSIT, SLA_BREACH_PENALTY, INCORRECT_DELIVERY
+  status                String    @default("ELIGIBLE") // ELIGIBLE, DRAFT_PENDING_EVIDENCE, READY_TO_SUBMIT, SUBMITTED, UNDER_REVIEW, APPROVED, REJECTED, APPEALED, CLOSED
+  claimedAmount         Float     @default(0)
+  approvedAmount        Float     @default(0)
+  recoveredAmount       Float     @default(0)
+  currency              String    @default("USD")
+  filingDeadline        DateTime
+  earliestFilingDate    DateTime
+  submittedAt           DateTime?
+  decidedAt             DateTime?
+  settledAt             DateTime?
+  denialReason          String?
+  appealCount           Int       @default(0)
+  creditNoteReference   String?
+  declarationText       String? // Generated legal loss declaration statement
+  assignedUserId        String?
+  createdById           String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  organization Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  parcel       Parcel          @relation(fields: [parcelId], references: [id], onDelete: Cascade)
+  carrier      Carrier         @relation(fields: [carrierId], references: [id], onDelete: Cascade)
+  assignedUser User?           @relation(fields: [assignedUserId], references: [id])
+  documents    ClaimDocument[]
+
+  @@index([organizationId, status])
+  @@index([organizationId, parcelId])
+  @@index([organizationId, filingDeadline])
+}
+
+model ClaimDocument {
+  id                     String   @id @default(cuid())
+  organizationId         String
+  claimId                String?
+  parcelId               String
+  documentType           String // INVOICE_DECLARATION, CUSTOMER_DECLARATION, PROOF_OF_POSTAGE, DAMAGE_PHOTO, CARRIER_CREDIT_NOTE, CORRESPONDENCE
+  fileName               String
+  fileUrl                String
+  fileSize               Int      @default(0)
+  mimeType               String   @default("application/pdf")
+  isGeneratedDeclaration Boolean  @default(false)
+  disclaimerText         String?
+  uploadedAt             DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  claim        Claim?       @relation(fields: [claimId], references: [id], onDelete: Cascade)
+  parcel       Parcel       @relation(fields: [parcelId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, claimId])
+}
+
+model CustomField {
+  id             String   @id @default(cuid())
+  organizationId String
+  entityType     String // PARCEL, ORDER, ENQUIRY, CLAIM
+  fieldKey       String // e.g. "hazard_class", "customs_declaration_no"
+  fieldLabel     String // e.g. "Hazard Classification"
+  fieldType      String   @default("TEXT") // TEXT, NUMBER, DATE, SELECT, BOOLEAN
+  options        String   @default("[]") // JSON array for SELECT
+  isRequired     Boolean  @default(false)
+  isSearchable   Boolean  @default(true)
+  roleVisibility String   @default("[\"ADMIN\",\"OPS_DISPATCHER\",\"CLAIMS_SPECIALIST\",\"DEVELOPER\"]") // JSON array
+  createdAt      DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, entityType, fieldKey])
+  @@index([organizationId, entityType])
+}
+
+model CustomStatusMapping {
+  id             String   @id @default(cuid())
+  organizationId String
+  entityType     String   @default("PARCEL") // PARCEL, CLAIM, ENQUIRY
+  customLabel    String
+  coreStatus     String
+  colorCode      String   @default("#B8892D")
+  isDefault      Boolean  @default(false)
+  createdAt      DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, entityType, customLabel])
+}
+
+model WorkflowRule {
+  id               String   @id @default(cuid())
+  organizationId   String
+  name             String
+  description      String?
+  triggerEvent     String // TRACKING_STATUS_CHANGED, SLA_BREACHED, NO_MOVEMENT_HOURS, CLAIM_STATUS_CHANGED
+  conditions       String   @default("[]") // JSON array of condition rules
+  actions          String   @default("[]") // JSON array of safe executable actions
+  requiresApproval Boolean  @default(false)
+  isActive         Boolean  @default(true)
+  version          Int      @default(1)
+  createdById      String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  organization Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  versions     WorkflowVersion[]
+
+  @@index([organizationId, triggerEvent, isActive])
+}
+
+model WorkflowVersion {
+  id             String   @id @default(cuid())
+  organizationId String
+  workflowRuleId String
+  versionNumber  Int
+  snapshot       String // Full JSON snapshot of conditions and actions
+  changeNotes    String?
+  createdById    String?
+  createdAt      DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workflowRule WorkflowRule @relation(fields: [workflowRuleId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, workflowRuleId])
+}
+
+model ApiKey {
+  id             String    @id @default(cuid())
+  organizationId String
+  name           String
+  keyPrefix      String // First 8 characters for identification
+  keyHash        String // SHA-256 hash of the full secret key
+  scopes         String    @default("[\"parcels:read\",\"tracking:read\"]") // JSON array
+  lastUsedAt     DateTime?
+  expiresAt      DateTime?
+  isActive       Boolean   @default(true)
+  createdById    String?
+  createdAt      DateTime  @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, isActive])
+  @@index([keyHash])
+}
+
+model OutboundWebhook {
+  id             String   @id @default(cuid())
+  organizationId String
+  name           String
+  targetUrl      String
+  secretKey      String // Shared secret for HMAC-SHA256 signature
+  events         String   @default("[\"parcel.status_changed\",\"sla.breached\",\"claim.approved\"]") // JSON array
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+
+  organization Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  deliveries   WebhookDelivery[]
+
+  @@index([organizationId, isActive])
+}
+
+model WebhookDelivery {
+  id             String   @id @default(cuid())
+  organizationId String
+  webhookId      String
+  eventType      String
+  payload        String // JSON sent
+  httpStatus     Int?
+  responseBody   String?
+  signatureSent  String
+  isSuccess      Boolean  @default(false)
+  retryCount     Int      @default(0)
+  deliveredAt    DateTime @default(now())
+
+  organization Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  webhook      OutboundWebhook @relation(fields: [webhookId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, webhookId])
+}
+
+model ImportBatch {
+  id                  String   @id @default(cuid())
+  organizationId      String
+  fileName            String
+  fileFormat          String   @default("CSV") // CSV, XLSX
+  totalRows           Int      @default(0)
+  processedRows       Int      @default(0)
+  successRows         Int      @default(0)
+  errorRows           Int      @default(0)
+  errorLog            String   @default("[]") // JSON array of row-level errors
+  mappingTemplateName String?
+  fieldMapping        String   @default("{}") // JSON mapping of file header -> parcel field
+  status              String   @default("COMPLETED") // UPLOADING, VALIDATING, PROCESSING, COMPLETED, FAILED
+  createdById         String?
+  createdAt           DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, status])
+}
+
+model ExportLayout {
+  id              String   @id @default(cuid())
+  organizationId  String
+  name            String
+  entityType      String   @default("PARCEL") // PARCEL, CLAIM, SLA_REPORT
+  selectedColumns String   @default("[\"trackingNumber\",\"orderNumber\",\"carrier\",\"trackingStatus\",\"slaBreached\",\"promisedDeliveryDate\"]") // JSON
+  filterPreset    String   @default("{}") // JSON
+  createdAt       DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, entityType])
+}
+
+model AuditLog {
+  id             String   @id @default(cuid())
+  organizationId String
+  userId         String?
+  action         String // CREATED, UPDATED, DELETED, IMPORTED, EXPORTED, WORKFLOW_ROLLEDBACK, API_CALL
+  entityType     String // PARCEL, CLAIM, ENQUIRY, WORKFLOW, CONNECTOR, USER, SETTINGS
+  entityId       String
+  details        String? // JSON context
+  ipAddress      String?
+  createdAt      DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User?        @relation(fields: [userId], references: [id])
+
+  @@index([organizationId, entityType, action])
+  @@index([organizationId, createdAt])
+}
+
+model JobQueue {
+  id             String    @id @default(cuid())
+  organizationId String
+  taskType       String // POLL_CARRIER, EVALUATE_SLA, GENERATE_ENQUIRY, SEND_WEBHOOK, LINNWORKS_SYNC, PROCESS_IMPORT
+  payload        String // JSON payload
+  status         String    @default("PENDING") // PENDING, PROCESSING, COMPLETED, FAILED
+  attempts       Int       @default(0)
+  maxAttempts    Int       @default(5)
+  lastError      String?
+  runAfter       DateTime  @default(now())
+  lockedAt       DateTime?
+  completedAt    DateTime?
+  createdAt      DateTime  @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([status, runAfter])
+  @@index([organizationId, taskType])
+}
