@@ -62,21 +62,41 @@ model User {
   organizationId String
   name           String
   email          String
-  passwordHash   String
+  passwordHash   String?
   role           String   @default("OPS_DISPATCHER") // OWNER, ADMIN, OPS_DISPATCHER, CLAIMS_SPECIALIST, DEVELOPER, VIEWER
+  authProvider   String   @default("CREDENTIALS") // CREDENTIALS, GOOGLE
+  googleId       String?
   phone          String?
   isActive       Boolean  @default(true)
   avatarUrl      String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
-  organization Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  enquiries    CarrierEnquiry[]
-  claims       Claim[]
-  auditLogs    AuditLog[]
+  organization        Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  enquiries           CarrierEnquiry[]
+  claims              Claim[]
+  auditLogs           AuditLog[]
+  passwordResetTokens PasswordResetToken[]
 
   @@unique([organizationId, email])
   @@index([organizationId, role])
+  @@index([googleId])
+  @@index([email])
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  email     String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([tokenHash])
+  @@index([email])
 }
 
 model Warehouse {

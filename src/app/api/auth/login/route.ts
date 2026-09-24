@@ -48,6 +48,13 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
     }
 
+    if (!user.passwordHash) {
+      return NextResponse.json(
+        { error: 'This account was registered using Google. Please click "Continue with Google Workspace".' },
+        { status: 401 }
+      );
+    }
+
     const isValid = await verifyPassword(password, user.passwordHash);
     if (!isValid) {
       return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });

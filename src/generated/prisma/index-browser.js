@@ -147,11 +147,23 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   passwordHash: 'passwordHash',
   role: 'role',
+  authProvider: 'authProvider',
+  googleId: 'googleId',
   phone: 'phone',
   isActive: 'isActive',
   avatarUrl: 'avatarUrl',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PasswordResetTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  email: 'email',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.WarehouseScalarFieldEnum = {
@@ -605,6 +617,7 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   Organization: 'Organization',
   User: 'User',
+  PasswordResetToken: 'PasswordResetToken',
   Warehouse: 'Warehouse',
   Carrier: 'Carrier',
   CarrierMapping: 'CarrierMapping',

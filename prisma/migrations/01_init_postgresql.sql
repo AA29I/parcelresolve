@@ -38,8 +38,10 @@ CREATE TABLE IF NOT EXISTS "User" (
     "organizationId" VARCHAR(64) NOT NULL REFERENCES "Organization"("id") ON DELETE CASCADE,
     "name" VARCHAR(255) NOT NULL,
     "email" VARCHAR(255) NOT NULL,
-    "passwordHash" TEXT NOT NULL,
+    "passwordHash" TEXT,
     "role" VARCHAR(32) NOT NULL DEFAULT 'OPS_DISPATCHER',
+    "authProvider" VARCHAR(32) NOT NULL DEFAULT 'CREDENTIALS',
+    "googleId" VARCHAR(255),
     "phone" VARCHAR(64),
     "isActive" BOOLEAN NOT NULL DEFAULT TRUE,
     "avatarUrl" TEXT,
@@ -49,6 +51,22 @@ CREATE TABLE IF NOT EXISTS "User" (
 );
 
 CREATE INDEX IF NOT EXISTS "idx_user_org_role" ON "User" ("organizationId", "role");
+CREATE INDEX IF NOT EXISTS "idx_user_google_id" ON "User" ("googleId");
+CREATE INDEX IF NOT EXISTS "idx_user_email" ON "User" ("email");
+
+-- Password Reset Tokens
+CREATE TABLE IF NOT EXISTS "PasswordResetToken" (
+    "id" VARCHAR(64) PRIMARY KEY,
+    "userId" VARCHAR(64) NOT NULL REFERENCES "User"("id") ON DELETE CASCADE,
+    "email" VARCHAR(255) NOT NULL,
+    "tokenHash" VARCHAR(255) NOT NULL UNIQUE,
+    "expiresAt" TIMESTAMPTZ NOT NULL,
+    "usedAt" TIMESTAMPTZ,
+    "createdAt" TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS "idx_pwd_reset_token_hash" ON "PasswordResetToken" ("tokenHash");
+CREATE INDEX IF NOT EXISTS "idx_pwd_reset_email" ON "PasswordResetToken" ("email");
 
 -- Warehouses
 CREATE TABLE IF NOT EXISTS "Warehouse" (
