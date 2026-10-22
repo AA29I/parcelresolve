@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import db from '@/lib/db';
 import { createSessionToken } from '@/lib/auth';
+import { ensureOrganizationCarriers } from '@/lib/carrier-provisioning';
 
 export async function GET(req: Request) {
   try {
@@ -106,6 +107,8 @@ export async function GET(req: Request) {
         include: { organization: true },
       });
     }
+
+    await ensureOrganizationCarriers(user.organizationId);
 
     // Issue session token
     const sessionToken = await createSessionToken({

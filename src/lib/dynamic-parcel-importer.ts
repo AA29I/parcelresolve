@@ -1,5 +1,6 @@
 import db from './db';
 import { calculateSla } from './sla-calculator';
+import { ensureOrganizationCarriers } from './carrier-provisioning';
 
 export interface DynamicImportRow {
   [columnName: string]: string | number | undefined | null;
@@ -198,8 +199,8 @@ export async function executeDynamicParcelImport(params: {
     throw new Error('No rows found to import.');
   }
 
-  // Load existing workspace carriers
-  const carriers = await db.carrier.findMany({ where: { organizationId } });
+  // Load existing workspace carriers (auto-provision defaults if empty)
+  const carriers = await ensureOrganizationCarriers(organizationId);
   const carrierMap = new Map(carriers.map((c) => [c.code.toUpperCase(), c]));
   const defaultCarrier =
     (defaultCarrierCode ? carrierMap.get(defaultCarrierCode.toUpperCase()) : null) ||

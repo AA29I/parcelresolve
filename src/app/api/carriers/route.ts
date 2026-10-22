@@ -2,10 +2,12 @@ import { NextResponse } from 'next/server';
 import db from '@/lib/db';
 import { requireAuth } from '@/lib/auth';
 import { CARRIER_CATALOG } from '@/lib/carrier-connectors';
+import { ensureOrganizationCarriers } from '@/lib/carrier-provisioning';
 
 export async function GET() {
   try {
     const session = await requireAuth();
+    await ensureOrganizationCarriers(session.organizationId);
     const connectedCarriers = await db.carrier.findMany({
       where: { organizationId: session.organizationId },
       include: {

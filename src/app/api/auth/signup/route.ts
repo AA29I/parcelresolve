@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import db from '@/lib/db';
 import { hashPassword, setSessionCookie } from '@/lib/auth';
+import { ensureOrganizationCarriers } from '@/lib/carrier-provisioning';
 
 export async function POST(req: Request) {
   try {
@@ -81,6 +82,9 @@ export async function POST(req: Request) {
         isDefault: true,
       },
     });
+
+    // Provision default global & UK carriers with pre-configured claim & invoice templates
+    await ensureOrganizationCarriers(org.id);
 
     await setSessionCookie({
       userId: user.id,

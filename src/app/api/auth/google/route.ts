@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import crypto from 'crypto';
 import db from '@/lib/db';
 import { createSessionToken } from '@/lib/auth';
+import { ensureOrganizationCarriers } from '@/lib/carrier-provisioning';
 
 export async function GET(req: Request) {
   try {
@@ -57,6 +58,8 @@ export async function GET(req: Request) {
           include: { organization: true },
         });
       }
+
+      await ensureOrganizationCarriers(user.organizationId);
 
       // Generate session token and set cookie
       const token = await createSessionToken({
