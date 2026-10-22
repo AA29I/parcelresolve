@@ -60,11 +60,11 @@ export default function PublicFooter() {
         </div>
 
         <div className="border-t border-brand-border/60 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-brand-muted gap-4">
-          <p>© {new Date().getFullYear()} ParcelResolve. Designed with Mett Global enterprise aesthetics.</p>
+          <p>© {new Date().getFullYear()} ParcelResolve Enterprise Logistics & Claims Recovery Platform. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <span>ISO 27001 Aligned</span>
             <span>GDPR Compliant</span>
-            <span>Independent Tenant Sandboxes</span>
+            <span>Multi-Tenant Isolation</span>
           </div>
         </div>
       </div>

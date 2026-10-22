@@ -13,8 +13,8 @@ export default function SignupPage() {
     adminName: '',
     email: '',
     password: '',
-    defaultCurrency: 'USD',
-    operatingCountry: 'US',
+    defaultCurrency: 'GBP',
+    operatingCountry: 'GB',
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -43,7 +43,7 @@ export default function SignupPage() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Failed to create workspace');
 
-      router.push('/app/onboarding');
+      router.push('/app/dashboard');
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
       setError(msg);
@@ -64,9 +64,9 @@ export default function SignupPage() {
 
       <div className="w-full max-w-lg bg-white border border-brand-border rounded-xl shadow-md p-6 sm:p-8 space-y-6">
         <div>
-          <h1 className="text-xl font-serif font-bold text-brand-dark">Create Your Workspace</h1>
+          <h1 className="text-xl font-serif font-bold text-brand-dark">Create Your Company Workspace</h1>
           <p className="text-xs text-brand-muted mt-1">
-            Universal onboarding initiates in an isolated, private workspace.
+            Set up your private multi-carrier tracking, Linnworks ingestion, and claims recovery portal.
           </p>
         </div>
 
@@ -82,7 +82,7 @@ export default function SignupPage() {
               <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
               <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
             </svg>
-            <span>Register Workspace with Google</span>
+            <span>Continue with Google</span>
           </a>
         </div>
 
@@ -112,23 +112,23 @@ export default function SignupPage() {
                   setForm({
                     ...form,
                     companyName: val,
-                    slug: form.slug ? form.slug : val.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+                    slug: val.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, ''),
                   });
                 }}
-                placeholder="Pacific Merchant Logistics"
+                placeholder="e.g. RDX Sports UK"
                 className="w-full px-3 py-2 text-xs border border-brand-border rounded focus:outline-none focus:border-brand-gold"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-brand-dark mb-1">Workspace URL Slug</label>
+              <label className="block text-xs font-semibold text-brand-dark mb-1">Workspace URL ID</label>
               <div className="flex items-center text-xs">
                 <input
                   type="text"
                   required
                   value={form.slug}
                   onChange={(e) => setForm({ ...form, slug: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '') })}
-                  placeholder="pacific-logistics"
+                  placeholder="rdx-sports-uk"
                   className="w-full px-3 py-2 text-xs border border-brand-border rounded focus:outline-none focus:border-brand-gold font-mono"
                 />
               </div>
@@ -137,25 +137,25 @@ export default function SignupPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-brand-dark mb-1">Admin Full Name</label>
+              <label className="block text-xs font-semibold text-brand-dark mb-1">Your Full Name</label>
               <input
                 type="text"
                 required
                 value={form.adminName}
                 onChange={(e) => setForm({ ...form, adminName: e.target.value })}
-                placeholder="Marcus Brody"
+                placeholder="Full Name"
                 className="w-full px-3 py-2 text-xs border border-brand-border rounded focus:outline-none focus:border-brand-gold"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-brand-dark mb-1">Admin Email</label>
+              <label className="block text-xs font-semibold text-brand-dark mb-1">Work Email Address</label>
               <input
                 type="email"
                 required
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                placeholder="admin@pacific.example.com"
+                placeholder="name@company.com"
                 className="w-full px-3 py-2 text-xs border border-brand-border rounded focus:outline-none focus:border-brand-gold"
               />
             </div>
@@ -169,11 +169,10 @@ export default function SignupPage() {
                 onChange={(e) => setForm({ ...form, defaultCurrency: e.target.value })}
                 className="w-full px-3 py-2 text-xs border border-brand-border rounded focus:outline-none focus:border-brand-gold bg-white font-mono"
               >
+                <option value="GBP">GBP (£)</option>
                 <option value="USD">USD ($)</option>
                 <option value="EUR">EUR (€)</option>
-                <option value="GBP">GBP (£)</option>
                 <option value="CAD">CAD ($)</option>
-                <option value="SEK">SEK (kr)</option>
               </select>
             </div>
 
@@ -184,10 +183,9 @@ export default function SignupPage() {
                 onChange={(e) => setForm({ ...form, operatingCountry: e.target.value })}
                 className="w-full px-3 py-2 text-xs border border-brand-border rounded focus:outline-none focus:border-brand-gold bg-white font-mono"
               >
-                <option value="US">United States (US)</option>
                 <option value="GB">United Kingdom (GB)</option>
+                <option value="US">United States (US)</option>
                 <option value="DE">Germany (DE)</option>
-                <option value="SE">Sweden (SE)</option>
                 <option value="CA">Canada (CA)</option>
               </select>
             </div>
@@ -210,7 +208,7 @@ export default function SignupPage() {
             disabled={loading}
             className="w-full py-2.5 rounded bg-brand-dark text-brand-paper hover:bg-brand-ink text-xs font-semibold transition-colors disabled:opacity-60 flex items-center justify-center gap-2 mt-4"
           >
-            {loading ? 'Initializing Workspace...' : 'Initialize Workspace & Start Setup'}
+            {loading ? 'Creating Workspace...' : 'Create Workspace & Launch Dashboard'}
             <ArrowRight className="w-3.5 h-3.5 text-brand-gold" />
           </button>
         </form>

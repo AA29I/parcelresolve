@@ -40,13 +40,13 @@ export default function PublicHeader() {
             href="/login"
             className="text-xs sm:text-sm font-medium text-brand-dark hover:text-brand-gold transition-colors px-3 py-1.5"
           >
-            Sign In / Demo
+            Sign In
           </Link>
           <Link
             href="/signup"
             className="inline-flex items-center gap-1.5 bg-brand-dark hover:bg-brand-ink text-brand-paper px-4 py-2 rounded text-xs sm:text-sm font-medium transition-colors shadow-sm"
           >
-            Start Free Trial
+            Get Started
             <ArrowRight className="w-3.5 h-3.5 text-brand-gold" />
           </Link>
         </div>

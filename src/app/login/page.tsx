@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { Package, ArrowRight, ShieldCheck, Check, AlertCircle } from 'lucide-react';
+import { Package, AlertCircle, ShieldCheck } from 'lucide-react';
 
 function LoginForm() {
   const router = useRouter();
@@ -13,32 +13,7 @@ function LoginForm() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Fast demo switcher handler
-  const handleDemoLogin = async (slug: string) => {
-    setLoading(true);
-    setError('');
-    try {
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ demoOrgSlug: slug }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Failed to login');
-      router.push('/app/dashboard');
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : String(err);
-      setError(msg);
-      setLoading(false);
-    }
-  };
-
-  // Check URL query for automatic demo trigger or error messages
   useEffect(() => {
-    const demo = searchParams.get('demo');
-    if (demo === 'apex-global' || demo === 'nordic-craft') {
-      handleDemoLogin(demo);
-    }
     const err = searchParams.get('error');
     if (err) setError(decodeURIComponent(err));
   }, [searchParams]);
@@ -79,70 +54,8 @@ function LoginForm() {
         <div>
           <h1 className="text-xl font-serif font-bold text-brand-dark">Sign In to Your Workspace</h1>
           <p className="text-xs text-brand-muted mt-1">
-            Access your isolated tenant tracking, SLA policies, and claims.
+            Access your multi-carrier tracking, SLA monitors, courier queries, and claims recovery ledger.
           </p>
-        </div>
-
-        {/* Quick Demo Workspace Selector */}
-        <div className="p-4 rounded-lg bg-brand-cream/80 border border-brand-border space-y-2.5">
-          <div className="flex items-center justify-between text-[11px] font-semibold text-brand-dark uppercase tracking-wider">
-            <span>One-Click Demonstration Workspaces</span>
-            <span className="text-[10px] text-brand-gold font-mono">Isolated</span>
-          </div>
-
-          <div className="space-y-2">
-            <button
-              type="button"
-              disabled={loading}
-              onClick={() => handleDemoLogin('mett-global')}
-              className="w-full text-left p-2.5 rounded bg-amber-50/50 border border-brand-gold/60 hover:border-brand-gold transition-all text-xs flex items-center justify-between group disabled:opacity-50"
-            >
-              <div>
-                <div className="font-bold text-brand-dark group-hover:text-brand-gold flex items-center gap-1.5">
-                  <span>Mett Global Logistics</span>
-                  <span className="text-[9px] bg-brand-gold/20 text-brand-dark px-1.5 py-0.5 rounded font-mono font-semibold">Flagship</span>
-                </div>
-                <div className="text-[10px] text-brand-muted">
-                  ahmedaamirctn@gmail.com • DPD, RM, Evri, Yodel, UPS • GBP
-                </div>
-              </div>
-              <ArrowRight className="w-4 h-4 text-brand-gold opacity-80 group-hover:opacity-100" />
-            </button>
-
-            <button
-              type="button"
-              disabled={loading}
-              onClick={() => handleDemoLogin('apex-global')}
-              className="w-full text-left p-2.5 rounded bg-white border border-brand-border hover:border-brand-gold transition-all text-xs flex items-center justify-between group disabled:opacity-50"
-            >
-              <div>
-                <div className="font-bold text-brand-dark group-hover:text-brand-gold">
-                  Demo Client A: Apex Global
-                </div>
-                <div className="text-[10px] text-brand-muted">
-                  admin@apexglobal.example.com • UPS Direct • USD
-                </div>
-              </div>
-              <ArrowRight className="w-4 h-4 text-brand-gold opacity-60 group-hover:opacity-100" />
-            </button>
-
-            <button
-              type="button"
-              disabled={loading}
-              onClick={() => handleDemoLogin('nordic-craft')}
-              className="w-full text-left p-2.5 rounded bg-white border border-brand-border hover:border-brand-gold transition-all text-xs flex items-center justify-between group disabled:opacity-50"
-            >
-              <div>
-                <div className="font-bold text-brand-dark group-hover:text-brand-gold">
-                  Company B: Nordic Craft Goods
-                </div>
-                <div className="text-[10px] text-brand-muted">
-                  admin@nordiccraft.example.com • GLS Europe • EUR
-                </div>
-              </div>
-              <ArrowRight className="w-4 h-4 text-brand-gold opacity-60 group-hover:opacity-100" />
-            </button>
-          </div>
         </div>
 
         {/* Google Sign-In Button */}
@@ -157,7 +70,7 @@ function LoginForm() {
               <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
               <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
             </svg>
-            <span>Continue with Google Workspace</span>
+            <span>Continue with Google</span>
           </a>
         </div>
 
@@ -176,13 +89,13 @@ function LoginForm() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-brand-dark mb-1">Email Address</label>
+            <label className="block text-xs font-semibold text-brand-dark mb-1">Work Email Address</label>
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@yourcompany.com"
+              placeholder="name@company.com"
               className="w-full px-3 py-2 text-xs border border-brand-border rounded focus:outline-none focus:border-brand-gold"
             />
           </div>
@@ -213,11 +126,17 @@ function LoginForm() {
           </button>
         </form>
 
-        <div className="text-center pt-2 text-xs text-brand-muted">
-          Need a new workspace?{' '}
-          <Link href="/signup" className="text-brand-gold font-semibold hover:underline">
-            Create an Account
-          </Link>
+        <div className="pt-2 border-t border-brand-border/60 flex items-center justify-between text-xs text-brand-muted">
+          <span className="flex items-center gap-1 text-[11px]">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+            Encrypted Session
+          </span>
+          <div>
+            New to ParcelResolve?{' '}
+            <Link href="/signup" className="text-brand-gold font-semibold hover:underline">
+              Create Workspace
+            </Link>
+          </div>
         </div>
       </div>
     </div>

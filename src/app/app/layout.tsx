@@ -6,23 +6,14 @@ import { usePathname, useRouter } from 'next/navigation';
 import {
   Package,
   Clock,
-  AlertCircle,
   FileCheck2,
   Layers,
   FileSpreadsheet,
-  Cpu,
-  Code2,
   Settings,
   LogOut,
-  ChevronDown,
-  ShieldCheck,
-  CheckCircle2,
-  Search,
   RefreshCw,
-  SlidersHorizontal,
   BookOpen,
 } from 'lucide-react';
-import DevModeCustomizer from '@/components/DevModeCustomizer';
 import OperationsGuideDrawer from '@/components/OperationsGuideDrawer';
 
 interface SessionData {
@@ -48,8 +39,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const [session, setSession] = useState<SessionData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [isSandbox, setIsSandbox] = useState(false);
-  const [switching, setSwitching] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
 
   const fetchSession = async () => {
@@ -77,26 +66,11 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     router.push('/login');
   };
 
-  const handleQuickSwitch = async (targetSlug: string) => {
-    setSwitching(true);
-    try {
-      await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ demoOrgSlug: targetSlug }),
-      });
-      await fetchSession();
-      router.refresh();
-    } finally {
-      setSwitching(false);
-    }
-  };
-
   if (loading) {
     return (
       <div className="min-h-screen bg-brand-paper flex items-center justify-center font-mono text-xs text-brand-muted">
         <RefreshCw className="w-4 h-4 animate-spin text-brand-gold mr-2" />
-        Loading secure workspace...
+        Loading workspace...
       </div>
     );
   }
@@ -110,68 +84,36 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   const navItems: NavItem[] = [
     { label: 'Courier Performance Radar', href: '/app/dashboard', icon: Package },
-    { label: 'Linnworks & Ingestion', href: '/app/imports', icon: FileSpreadsheet },
+    { label: 'Linnworks & Manifest Import', href: '/app/imports', icon: FileSpreadsheet },
     { label: 'Courier Inquiries & Tracers', href: '/app/enquiries', icon: Clock },
     { label: 'Claims & Invoice Studio', href: '/app/claims', icon: FileCheck2 },
     { label: 'Couriers & Claim Rules', href: '/app/carriers', icon: Layers },
     { label: 'Workspace Settings', href: '/app/settings', icon: Settings },
   ];
 
-  const currentOrgSlug = session?.organization?.slug || '';
-
   return (
     <div className="min-h-screen flex bg-brand-paper text-brand-ink">
       {/* Sidebar */}
       <aside className="w-64 border-r border-brand-border bg-white flex flex-col shrink-0">
-        {/* Workspace Identifier & Quick Switcher */}
+        {/* Brand & Active Company Workspace Card */}
         <div className="p-4 border-b border-brand-border">
           <Link href="/app/dashboard" className="flex items-center gap-2 mb-3">
-            <div className="w-8 h-8 rounded-lg bg-brand-dark flex items-center justify-center text-brand-gold font-serif font-bold text-xs shadow-xs">
-              MG
+            <div className="w-8 h-8 rounded-lg bg-brand-dark flex items-center justify-center text-brand-gold shadow-xs">
+              <Package className="w-4 h-4" />
             </div>
             <span className="font-semibold text-base tracking-tight text-brand-dark">
-              Mett <span className="text-brand-gold font-serif">Global</span>
+              Parcel<span className="text-brand-gold font-serif">Resolve</span>
             </span>
           </Link>
 
-          {/* Tenant Switcher Card */}
           <div className="p-2.5 rounded-lg bg-brand-cream border border-brand-border text-xs">
             <div className="flex items-center justify-between text-[10px] text-brand-muted uppercase tracking-wider font-semibold mb-1">
-              <span>Active Tenant</span>
-              <span className="text-emerald-700 font-mono">Isolated</span>
+              <span>Organization</span>
+              <span className="text-emerald-700 font-mono">Active</span>
             </div>
             <div className="font-bold text-brand-dark truncate">{session?.organization?.name}</div>
-            <div className="text-[11px] text-brand-muted font-mono">{session?.organization?.defaultCurrency} • {session?.organization?.subscriptionTier} Tier</div>
-
-            {/* Quick Demo Switcher Dropdown */}
-            <div className="mt-2 pt-2 border-t border-brand-border/60 flex items-center justify-between">
-              <span className="text-[10px] text-brand-muted">Switch:</span>
-              <div className="flex gap-1">
-                <button
-                  type="button"
-                  disabled={switching || currentOrgSlug === 'apex-global'}
-                  onClick={() => handleQuickSwitch('apex-global')}
-                  className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
-                    currentOrgSlug === 'apex-global'
-                      ? 'bg-brand-dark text-brand-paper'
-                      : 'bg-white hover:bg-brand-paper text-brand-muted border border-brand-border'
-                  }`}
-                >
-                  Apex (A)
-                </button>
-                <button
-                  type="button"
-                  disabled={switching || currentOrgSlug === 'nordic-craft'}
-                  onClick={() => handleQuickSwitch('nordic-craft')}
-                  className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
-                    currentOrgSlug === 'nordic-craft'
-                      ? 'bg-brand-dark text-brand-paper'
-                      : 'bg-white hover:bg-brand-paper text-brand-muted border border-brand-border'
-                  }`}
-                >
-                  Nordic (B)
-                </button>
-              </div>
+            <div className="text-[11px] text-brand-muted font-mono mt-0.5">
+              {session?.organization?.defaultCurrency} • {session?.user?.email}
             </div>
           </div>
         </div>
@@ -210,7 +152,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           <div className="flex items-center justify-between">
             <div className="truncate mr-2">
               <div className="text-xs font-semibold text-brand-dark truncate">{session?.user?.name}</div>
-              <div className="text-[10px] text-brand-muted font-mono truncate">{session?.user?.role}</div>
+              <div className="text-[10px] text-brand-muted font-mono truncate">{session?.user?.email}</div>
             </div>
             <button
               onClick={handleLogout}
@@ -236,33 +178,19 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="flex items-center gap-3 text-xs">
-            {/* Claims Playbook / Operations Guide Button */}
+            {/* Operations Documentation & SOP Button */}
             <button
               type="button"
               onClick={() => setGuideOpen(true)}
               className="px-3 py-1.5 rounded-lg bg-brand-cream border border-brand-border text-brand-dark text-xs font-semibold flex items-center gap-1.5 hover:border-brand-gold transition-colors shadow-xs"
             >
               <BookOpen className="w-3.5 h-3.5 text-brand-gold" />
-              <span>Claims Playbook &amp; SOP</span>
+              <span>Platform Guide &amp; SOP</span>
             </button>
 
-            {/* Sandbox Mode Toggle */}
             <div className="flex items-center gap-2 bg-brand-paper border border-brand-border rounded-full px-3 py-1">
-              <span className={`w-2 h-2 rounded-full ${isSandbox ? 'bg-amber-500' : 'bg-emerald-500'}`}></span>
-              <span className="text-[11px] font-medium text-brand-dark">
-                {isSandbox ? 'Sandbox Mode' : 'Live Production'}
-              </span>
-              <button
-                type="button"
-                onClick={() => setIsSandbox(!isSandbox)}
-                className="text-[10px] font-semibold text-brand-gold hover:underline ml-1"
-              >
-                Switch
-              </button>
-            </div>
-
-            <div className="text-brand-muted text-[11px]">
-              Role: <span className="font-semibold text-brand-dark">{session?.user?.role}</span>
+              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span className="text-[11px] font-medium text-brand-dark">Live Connected</span>
             </div>
           </div>
         </header>
@@ -272,13 +200,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
         {/* Built-in Operations Playbook Drawer */}
         <OperationsGuideDrawer isOpen={guideOpen} onClose={() => setGuideOpen(false)} />
-
-        {/* Global Dev Mode & Customization Center */}
-        <DevModeCustomizer
-          currentOrgName={session?.organization?.name || 'Workspace'}
-          currentOrgSlug={session?.organization?.slug || 'workspace'}
-          onRefreshNeeded={() => router.refresh()}
-        />
       </div>
     </div>
   );
