@@ -17,9 +17,11 @@ dist
 *.db-journal
 prisma/dev.db
 prisma/dev.db-journal
+!prisma/seed.db
 
 # Native binaries and compiled engines
 *.node
+!src/generated/prisma/*.node
 *.dll
 *.exe
 
