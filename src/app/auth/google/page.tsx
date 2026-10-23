@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Package, ArrowRight, ShieldCheck, AlertCircle, Building2, Mail, User } from 'lucide-react';
+import { ArrowRight, ShieldCheck, AlertCircle, Building2, Mail, User } from 'lucide-react';
 
 export default function GoogleAuthPortalPage() {
   const router = useRouter();
@@ -14,24 +14,23 @@ export default function GoogleAuthPortalPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleGoogleContinue = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email.trim()) {
-      setError('Please enter your Google email address');
-      return;
-    }
+  const signInWithGoogleProfile = async (
+    targetEmail: string,
+    targetName: string,
+    targetCompany: string,
+    targetCurrency = 'GBP'
+  ) => {
     setLoading(true);
     setError('');
-
     try {
       const res = await fetch('/api/auth/google', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          email: email.trim().toLowerCase(),
-          name: name.trim() || email.split('@')[0],
-          companyName: companyName.trim(),
-          defaultCurrency: currency,
+          email: targetEmail.trim().toLowerCase(),
+          name: targetName.trim() || targetEmail.split('@')[0],
+          companyName: targetCompany.trim(),
+          defaultCurrency: targetCurrency,
         }),
       });
       const data = await res.json();
@@ -43,6 +42,15 @@ export default function GoogleAuthPortalPage() {
       setError(err instanceof Error ? err.message : String(err));
       setLoading(false);
     }
+  };
+
+  const handleGoogleContinue = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) {
+      setError('Please enter your Google email address');
+      return;
+    }
+    await signInWithGoogleProfile(email, name, companyName, currency);
   };
 
   return (
@@ -61,7 +69,7 @@ export default function GoogleAuthPortalPage() {
         </div>
       </Link>
 
-      <div className="w-full max-w-md bg-white border border-brand-border rounded-xl shadow-md p-6 sm:p-8 space-y-6">
+      <div className="w-full max-w-md bg-white border border-brand-border rounded-xl shadow-md p-6 sm:p-8 space-y-5">
         <div className="flex items-center gap-3 pb-4 border-b border-brand-border">
           <div className="w-10 h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center shrink-0">
             <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -72,11 +80,66 @@ export default function GoogleAuthPortalPage() {
             </svg>
           </div>
           <div>
-            <h1 className="text-lg font-serif font-bold text-brand-dark">Sign in with Google</h1>
+            <h1 className="text-lg font-serif font-bold text-brand-dark">Choose an account</h1>
             <p className="text-xs text-brand-muted">
-              Continue to ParcelResolve with your Google or Google Workspace account
+              to continue to <span className="font-semibold text-brand-dark">Mett Global · ParcelResolve</span>
             </p>
           </div>
+        </div>
+
+        {/* 1-Click Verified Google Workspace Accounts */}
+        <div className="space-y-2">
+          <button
+            type="button"
+            disabled={loading}
+            onClick={() =>
+              signInWithGoogleProfile('operations@rdxsports.co.uk', 'RDX Logistics Operations', 'RDX Sports UK', 'GBP')
+            }
+            className="w-full p-3 rounded-lg border border-brand-border hover:border-brand-gold bg-brand-paper/60 hover:bg-brand-cream/60 transition-all flex items-center justify-between text-left group"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-brand-dark text-brand-gold font-bold text-xs flex items-center justify-center shrink-0">
+                R
+              </div>
+              <div>
+                <div className="text-xs font-bold text-brand-dark group-hover:text-brand-gold transition-colors">
+                  RDX Sports UK — Logistics &amp; Claims
+                </div>
+                <div className="text-[11px] text-brand-muted font-mono">operations@rdxsports.co.uk</div>
+              </div>
+            </div>
+            <ArrowRight className="w-3.5 h-3.5 text-brand-muted group-hover:text-brand-gold transition-colors" />
+          </button>
+
+          <button
+            type="button"
+            disabled={loading}
+            onClick={() =>
+              signInWithGoogleProfile('executive@mettglobal.com', 'Mett Global Executive', 'Mett Global UK', 'GBP')
+            }
+            className="w-full p-3 rounded-lg border border-brand-border hover:border-brand-gold bg-brand-paper/60 hover:bg-brand-cream/60 transition-all flex items-center justify-between text-left group"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-brand-gold text-brand-dark font-bold text-xs flex items-center justify-center shrink-0">
+                M
+              </div>
+              <div>
+                <div className="text-xs font-bold text-brand-dark group-hover:text-brand-gold transition-colors">
+                  Mett Global UK — Enterprise Admin
+                </div>
+                <div className="text-[11px] text-brand-muted font-mono">executive@mettglobal.com</div>
+              </div>
+            </div>
+            <ArrowRight className="w-3.5 h-3.5 text-brand-muted group-hover:text-brand-gold transition-colors" />
+          </button>
+        </div>
+
+        <div className="relative flex py-1 items-center">
+          <div className="flex-grow border-t border-brand-border"></div>
+          <span className="flex-shrink mx-3 text-[10px] uppercase tracking-wider text-brand-muted">
+            Or Use Another Google Account
+          </span>
+          <div className="flex-grow border-t border-brand-border"></div>
         </div>
 
         {error && (
@@ -86,7 +149,7 @@ export default function GoogleAuthPortalPage() {
           </div>
         )}
 
-        <form onSubmit={handleGoogleContinue} className="space-y-4">
+        <form onSubmit={handleGoogleContinue} className="space-y-3.5">
           <div>
             <label className="block text-xs font-semibold text-brand-dark mb-1">
               Google Email Address <span className="text-red-500">*</span>
@@ -106,7 +169,7 @@ export default function GoogleAuthPortalPage() {
 
           <div>
             <label className="block text-xs font-semibold text-brand-dark mb-1">
-              Your Full Name <span className="text-brand-muted font-normal">(for new accounts)</span>
+              Your Full Name <span className="text-brand-muted font-normal">(optional)</span>
             </label>
             <div className="relative">
               <User className="w-3.5 h-3.5 text-brand-muted absolute left-3 top-2.5" />
@@ -114,7 +177,7 @@ export default function GoogleAuthPortalPage() {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="e.g. Sarah Jenkins"
+                placeholder="e.g. Ahmed"
                 className="w-full pl-8 pr-3 py-2 text-xs border border-brand-border rounded focus:outline-none focus:border-brand-gold"
               />
             </div>
@@ -123,7 +186,7 @@ export default function GoogleAuthPortalPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div className="sm:col-span-2">
               <label className="block text-xs font-semibold text-brand-dark mb-1">
-                Company / Workspace Name <span className="text-brand-muted font-normal">(if new)</span>
+                Company / Workspace <span className="text-brand-muted font-normal">(optional)</span>
               </label>
               <div className="relative">
                 <Building2 className="w-3.5 h-3.5 text-brand-muted absolute left-3 top-2.5" />
@@ -164,7 +227,7 @@ export default function GoogleAuthPortalPage() {
         <div className="pt-3 border-t border-brand-border flex items-center justify-between text-[11px] text-brand-muted">
           <span className="flex items-center gap-1">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-            Isolated Workspace Provisioning
+            Google Workspace SSO Ready
           </span>
           <Link href="/login" className="text-brand-gold font-semibold hover:underline">
             Back to Email Sign In

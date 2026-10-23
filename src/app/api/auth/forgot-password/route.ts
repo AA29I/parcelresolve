@@ -51,7 +51,7 @@ export async function POST(req: Request) {
     });
 
     // Determine application origin URL
-    const origin = process.env.NEXT_PUBLIC_APP_URL || new URL(req.url).origin || 'http://localhost:3000';
+    const origin = new URL(req.url).origin;
     const resetUrl = `${origin}/reset-password?token=${rawToken}`;
 
     // Audit Log

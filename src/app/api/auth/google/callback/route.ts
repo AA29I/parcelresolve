@@ -9,7 +9,7 @@ export async function GET(req: Request) {
     const code = url.searchParams.get('code');
     const state = url.searchParams.get('state');
 
-    const origin = process.env.NEXT_PUBLIC_APP_URL || url.origin || 'http://localhost:3000';
+    const origin = url.origin;
     const redirectUri = `${origin}/api/auth/google/callback`;
 
     if (!code) {
@@ -132,7 +132,7 @@ export async function GET(req: Request) {
     return response;
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : String(err);
-    const origin = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+    const origin = new URL(req.url).origin;
     return NextResponse.redirect(`${origin}/login?error=${encodeURIComponent(msg)}`);
   }
 }

@@ -77,8 +77,8 @@ export default function SignupPage() {
 
         {/* Google Sign-Up Button */}
         <div>
-          <a
-            href="/api/auth/google"
+          <Link
+            href="/auth/google"
             className="w-full py-2.5 px-4 rounded bg-white hover:bg-brand-paper border border-brand-border text-xs font-semibold text-brand-dark transition-all flex items-center justify-center gap-2.5 shadow-xs hover:border-brand-gold group"
           >
             <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
@@ -88,7 +88,7 @@ export default function SignupPage() {
               <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
             </svg>
             <span>Continue with Google</span>
-          </a>
+          </Link>
         </div>
 
         <div className="relative flex py-1 items-center">

@@ -12,7 +12,7 @@ export async function GET(req: Request) {
     const mockOrg = url.searchParams.get('mock_org');
 
     const googleClientId = process.env.GOOGLE_CLIENT_ID;
-    const origin = process.env.NEXT_PUBLIC_APP_URL || url.origin || 'http://localhost:3000';
+    const origin = url.origin;
     const redirectUri = `${origin}/api/auth/google/callback`;
 
     // If real Google OAuth credentials are configured and no explicit email parameter is given, launch Google OAuth
