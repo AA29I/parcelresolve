@@ -9,12 +9,17 @@ export default function PublicHeader() {
     <header className="sticky top-0 z-50 bg-brand-paper/90 backdrop-blur-md border-b border-brand-border/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded bg-brand-dark flex items-center justify-center text-brand-gold">
-            <Package className="w-4 h-4" />
+          <div className="w-8 h-8 rounded bg-brand-dark flex items-center justify-center text-brand-gold font-serif font-bold text-sm border border-brand-gold/40">
+            MG
           </div>
-          <span className="font-semibold text-lg tracking-tight text-brand-dark font-sans">
-            Parcel<span className="text-brand-gold">Resolve</span>
-          </span>
+          <div>
+            <span className="font-semibold text-lg tracking-tight text-brand-dark font-sans block leading-none">
+              Mett <span className="text-brand-gold font-serif">Global</span>
+            </span>
+            <span className="text-[9px] font-mono uppercase tracking-widest text-brand-muted block">
+              ParcelResolve OS
+            </span>
+          </div>
         </Link>
 
         <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-brand-muted">

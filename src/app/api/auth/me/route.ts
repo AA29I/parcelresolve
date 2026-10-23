@@ -1,12 +1,15 @@
 import { NextResponse } from 'next/server';
 import db from '@/lib/db';
 import { getSession } from '@/lib/auth';
+import { ensureOrganizationCarriers } from '@/lib/carrier-provisioning';
 
 export async function GET() {
   const session = await getSession();
   if (!session) {
     return NextResponse.json({ authenticated: false, user: null, organization: null });
   }
+
+  await ensureOrganizationCarriers(session.organizationId);
 
   const user = await db.user.findUnique({
     where: { id: session.userId },

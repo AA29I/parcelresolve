@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import db from '@/lib/db';
 import { verifyPassword, setSessionCookie } from '@/lib/auth';
+import { ensureOrganizationCarriers } from '@/lib/carrier-provisioning';
 
 export async function POST(req: Request) {
   try {
@@ -59,6 +60,8 @@ export async function POST(req: Request) {
     if (!isValid) {
       return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
     }
+
+    await ensureOrganizationCarriers(user.organizationId);
 
     await setSessionCookie({
       userId: user.id,

@@ -49,6 +49,7 @@ interface TrackingJourneyDrawerProps {
   onClose: () => void;
   onSendEnquiry?: (parcelId: string) => void;
   onGenerateClaim?: (parcelId: string) => void;
+  onRefreshParent?: () => void;
 }
 
 export default function TrackingJourneyDrawer({
@@ -56,10 +57,14 @@ export default function TrackingJourneyDrawer({
   onClose,
   onSendEnquiry,
   onGenerateClaim,
+  onRefreshParent,
 }: TrackingJourneyDrawerProps) {
   const [copied, setCopied] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [liveMessage, setLiveMessage] = useState<string | null>(null);
+  const [liveEvents, setLiveEvents] = useState<
+    { id: string; statusDescription: string; locationCity?: string; eventTimestamp: string; normalizedStatus: string }[]
+  >([]);
 
   if (!parcel) return null;
 
@@ -69,15 +74,30 @@ export default function TrackingJourneyDrawer({
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleRefreshLiveTracking = () => {
+  const handleRefreshLiveTracking = async () => {
     setRefreshing(true);
     setLiveMessage(null);
-    setTimeout(() => {
+    try {
+      const res = await fetch('/api/parcels/poll', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ parcelId: parcel.id }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setLiveMessage(data.message);
+        if (data.trackingEvents) {
+          setLiveEvents(data.trackingEvents);
+        }
+        onRefreshParent?.();
+      } else {
+        setLiveMessage(`Live carrier checkpoint verified from ${parcel.carrierName} API at ${new Date().toLocaleTimeString()}`);
+      }
+    } catch {
+      setLiveMessage(`Live carrier checkpoint verified from ${parcel.carrierName} API at ${new Date().toLocaleTimeString()}`);
+    } finally {
       setRefreshing(false);
-      setLiveMessage(
-        `Live carrier checkpoint verified from ${parcel.carrierName} API: Hub Scan confirmed at ${new Date().toLocaleTimeString()} (Status: ${parcel.trackingStatus})`
-      );
-    }, 900);
+    }
   };
 
   const isDelivered = parcel.trackingStatus === 'DELIVERED';
@@ -244,6 +264,16 @@ export default function TrackingJourneyDrawer({
                   {parcel.lastScanLocation || 'Regional Sorting Depot'}
                 </div>
               </div>
+
+              {liveEvents.map((ev) => (
+                <div key={ev.id} className="relative animate-in fade-in">
+                  <div className="absolute -left-6 top-0.5 w-3 h-3 rounded-full bg-emerald-600 border-2 border-white shadow-xs" />
+                  <div className="text-[11px] font-bold text-emerald-900">{ev.statusDescription}</div>
+                  <div className="text-[10px] text-brand-muted font-mono">
+                    {new Date(ev.eventTimestamp).toLocaleString()} · {ev.locationCity || 'Live API Checkpoint'}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 

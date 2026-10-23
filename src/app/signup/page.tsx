@@ -53,13 +53,18 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-brand-paper px-4 py-12">
-      <Link href="/" className="flex items-center gap-2 mb-8">
-        <div className="w-8 h-8 rounded bg-brand-dark flex items-center justify-center text-brand-gold">
-          <Package className="w-4 h-4" />
+      <Link href="/" className="flex items-center gap-2.5 mb-8">
+        <div className="w-9 h-9 rounded bg-brand-dark flex items-center justify-center text-brand-gold font-serif font-bold text-sm border border-brand-gold/40">
+          MG
         </div>
-        <span className="font-semibold text-xl tracking-tight text-brand-dark font-sans">
-          Parcel<span className="text-brand-gold">Resolve</span>
-        </span>
+        <div>
+          <span className="font-semibold text-xl tracking-tight text-brand-dark font-sans block leading-none">
+            Mett <span className="text-brand-gold font-serif">Global</span>
+          </span>
+          <span className="text-[10px] font-mono uppercase tracking-widest text-brand-muted block mt-0.5">
+            ParcelResolve OS
+          </span>
+        </div>
       </Link>
 
       <div className="w-full max-w-lg bg-white border border-brand-border rounded-xl shadow-md p-6 sm:p-8 space-y-6">

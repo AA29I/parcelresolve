@@ -8,12 +8,12 @@ export default function PublicFooter() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-10">
           <div className="col-span-2">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-6 h-6 rounded bg-brand-dark flex items-center justify-center text-brand-gold">
-                <Package className="w-3.5 h-3.5" />
+            <div className="flex items-center gap-2.5 mb-3">
+              <div className="w-7 h-7 rounded bg-brand-dark flex items-center justify-center text-brand-gold font-serif font-bold text-xs border border-brand-gold/40">
+                MG
               </div>
               <span className="font-semibold text-base text-brand-dark font-sans">
-                Parcel<span className="text-brand-gold">Resolve</span>
+                Mett <span className="text-brand-gold font-serif">Global</span> · ParcelResolve
               </span>
             </div>
             <p className="text-xs text-brand-muted leading-relaxed max-w-sm mb-4">

@@ -113,6 +113,8 @@ export default function DashboardPage() {
   const [batchQueryModal, setBatchQueryModal] = useState(false);
   const [batchQuerying, setBatchQuerying] = useState(false);
   const [batchQueryDone, setBatchQueryDone] = useState(false);
+  const [pollingAll, setPollingAll] = useState(false);
+  const [pollAllResult, setPollAllResult] = useState<string | null>(null);
 
   // Search & Filters
   const [searchQuery, setSearchQuery] = useState('');
@@ -154,6 +156,26 @@ export default function DashboardPage() {
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     fetchParcels();
+  };
+
+  // 1-Click Live Poll All Couriers
+  const handlePollAllCarriers = async () => {
+    setPollingAll(true);
+    setPollAllResult(null);
+    try {
+      const res = await fetch('/api/parcels/poll', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pollAll: true }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setPollAllResult(data.message);
+        await fetchParcels();
+      }
+    } finally {
+      setPollingAll(false);
+    }
   };
 
   // 1-Click Auto Claim Invoice Generator
@@ -252,7 +274,16 @@ export default function DashboardPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={handlePollAllCarriers}
+            disabled={pollingAll}
+            className="px-3 py-2 rounded bg-brand-cream border border-brand-gold/60 text-brand-dark text-xs font-semibold hover:bg-brand-gold/20 transition-colors flex items-center gap-1.5 shadow-xs disabled:opacity-60"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 text-brand-gold ${pollingAll ? 'animate-spin' : ''}`} />
+            {pollingAll ? 'Polling Couriers...' : 'Live Poll Couriers'}
+          </button>
           <Link
             href="/app/imports"
             className="px-3 py-2 rounded bg-brand-dark text-white text-xs font-semibold hover:bg-black transition-colors flex items-center gap-1.5 shadow-xs"
@@ -274,6 +305,18 @@ export default function DashboardPage() {
           </button>
         </div>
       </div>
+
+      {pollAllResult && (
+        <div className="p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs flex items-center justify-between animate-in fade-in">
+          <div className="flex items-center gap-2 font-medium">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+            <span>{pollAllResult}</span>
+          </div>
+          <button onClick={() => setPollAllResult(null)} className="text-emerald-700 hover:text-emerald-950">
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
 
       {/* 5-Tab Operational Master Switcher */}
       <div className="border-b border-brand-border bg-white rounded-t-lg px-2 pt-2 shadow-2xs">
@@ -962,6 +1005,56 @@ export default function DashboardPage() {
           </div>
         </div>
       )}
+      {/* ========================================================================= */}
+      {/* INTERACTIVE TRACKING JOURNEY DRAWER                                       */}
+      {/* ========================================================================= */}
+      <TrackingJourneyDrawer
+        parcel={
+          trackingDrawerParcel
+            ? {
+                id: trackingDrawerParcel.id,
+                trackingNumber: trackingDrawerParcel.trackingNumber,
+                orderNumber: trackingDrawerParcel.orderNumber,
+                carrierName: trackingDrawerParcel.carrier.name,
+                carrierCode: trackingDrawerParcel.carrier.code,
+                recipientName: trackingDrawerParcel.recipientName,
+                recipientAddress: trackingDrawerParcel.recipientAddress || trackingDrawerParcel.recipientCity,
+                recipientCity: trackingDrawerParcel.recipientCity,
+                recipientCountry: trackingDrawerParcel.recipientCountry,
+                dispatchDate: trackingDrawerParcel.dispatchDate,
+                promisedDeliveryDate: trackingDrawerParcel.promisedDeliveryDate,
+                trackingStatus: trackingDrawerParcel.trackingStatus,
+                latestStatusDescription: trackingDrawerParcel.latestStatusDescription,
+                lastPhysicalScanAt: trackingDrawerParcel.lastPhysicalScanAt,
+                lastScanLocation: trackingDrawerParcel.lastScanLocation,
+                isBreached: trackingDrawerParcel.isBreached,
+                breachHours: trackingDrawerParcel.breachHours,
+                stalledHours: trackingDrawerParcel.stalledHours,
+                declaredValue: trackingDrawerParcel.declaredValue,
+                currency: trackingDrawerParcel.currency,
+                postalServiceName: trackingDrawerParcel.postalServiceName,
+                sourceChannel: trackingDrawerParcel.sourceChannel,
+                claimStatus: trackingDrawerParcel.claimStatus,
+              }
+            : null
+        }
+        onClose={() => setTrackingDrawerParcel(null)}
+        onGenerateClaim={(id) => handleGenerateClaimInvoice(id)}
+        onSendEnquiry={async (id) => {
+          await fetch('/api/enquiries', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              parcelId: id,
+              enquiryType: 'SLA_BREACH',
+              sendingMode: 'AUTO_SEND',
+              notes: 'Dispatched directly from Live Tracking Journey Drawer.',
+            }),
+          });
+          await fetchParcels();
+        }}
+        onRefreshParent={fetchParcels}
+      />
     </div>
   );
 }

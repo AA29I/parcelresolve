@@ -8,12 +8,16 @@ import {
   Clock,
   FileCheck2,
   Layers,
+  Code2,
   FileSpreadsheet,
   Settings,
   LogOut,
+  CheckCircle2,
   RefreshCw,
   BookOpen,
+  Cpu,
 } from 'lucide-react';
+import DevModeCustomizer from '@/components/DevModeCustomizer';
 import OperationsGuideDrawer from '@/components/OperationsGuideDrawer';
 
 interface SessionData {
@@ -70,7 +74,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     return (
       <div className="min-h-screen bg-brand-paper flex items-center justify-center font-mono text-xs text-brand-muted">
         <RefreshCw className="w-4 h-4 animate-spin text-brand-gold mr-2" />
-        Loading workspace...
+        Loading Mett Global workspace...
       </div>
     );
   }
@@ -85,9 +89,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const navItems: NavItem[] = [
     { label: 'Courier Performance Radar', href: '/app/dashboard', icon: Package },
     { label: 'Linnworks & Manifest Import', href: '/app/imports', icon: FileSpreadsheet },
+    { label: 'Linnworks Direct Connector', href: '/app/linnworks', icon: Cpu },
     { label: 'Courier Inquiries & Tracers', href: '/app/enquiries', icon: Clock },
     { label: 'Claims & Invoice Studio', href: '/app/claims', icon: FileCheck2 },
     { label: 'Couriers & Claim Rules', href: '/app/carriers', icon: Layers },
+    { label: 'Developer API & Webhooks', href: '/app/developer', icon: Code2 },
+    { label: 'Guided Setup Wizard', href: '/app/onboarding', icon: CheckCircle2 },
     { label: 'Workspace Settings', href: '/app/settings', icon: Settings },
   ];
 
@@ -97,23 +104,28 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <aside className="w-64 border-r border-brand-border bg-white flex flex-col shrink-0">
         {/* Brand & Active Company Workspace Card */}
         <div className="p-4 border-b border-brand-border">
-          <Link href="/app/dashboard" className="flex items-center gap-2 mb-3">
-            <div className="w-8 h-8 rounded-lg bg-brand-dark flex items-center justify-center text-brand-gold shadow-xs">
-              <Package className="w-4 h-4" />
+          <Link href="/app/dashboard" className="flex items-center gap-2.5 mb-3">
+            <div className="w-8 h-8 rounded-lg bg-brand-dark flex items-center justify-center text-brand-gold font-serif font-bold text-sm shadow-xs border border-brand-gold/40">
+              MG
             </div>
-            <span className="font-semibold text-base tracking-tight text-brand-dark">
-              Parcel<span className="text-brand-gold font-serif">Resolve</span>
-            </span>
+            <div>
+              <span className="font-semibold text-base tracking-tight text-brand-dark block leading-none">
+                Mett <span className="text-brand-gold font-serif">Global</span>
+              </span>
+              <span className="text-[9px] font-mono uppercase tracking-widest text-brand-muted block mt-0.5">
+                ParcelResolve OS
+              </span>
+            </div>
           </Link>
 
           <div className="p-2.5 rounded-lg bg-brand-cream border border-brand-border text-xs">
             <div className="flex items-center justify-between text-[10px] text-brand-muted uppercase tracking-wider font-semibold mb-1">
               <span>Organization</span>
-              <span className="text-emerald-700 font-mono">Active</span>
+              <span className="text-emerald-700 font-mono">Live</span>
             </div>
             <div className="font-bold text-brand-dark truncate">{session?.organization?.name}</div>
-            <div className="text-[11px] text-brand-muted font-mono mt-0.5">
-              {session?.organization?.defaultCurrency} • {session?.user?.email}
+            <div className="text-[11px] text-brand-muted font-mono mt-0.5 truncate">
+              {session?.organization?.defaultCurrency} • {session?.organization?.carriers?.length || 7} Couriers Linked
             </div>
           </div>
         </div>
@@ -170,7 +182,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         {/* Top Header Bar */}
         <header className="h-14 bg-white border-b border-brand-border flex items-center justify-between px-6 shrink-0">
           <div className="flex items-center gap-3">
-            <span className="text-xs text-brand-muted">Workspace:</span>
+            <span className="text-xs text-brand-muted">Mett Global Workspace:</span>
             <span className="text-xs font-bold text-brand-dark">{session?.organization?.name}</span>
             <span className="text-[10px] font-mono bg-brand-cream text-brand-dark px-2 py-0.5 rounded border border-brand-border">
               {session?.organization?.defaultCurrency}
@@ -185,12 +197,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               className="px-3 py-1.5 rounded-lg bg-brand-cream border border-brand-border text-brand-dark text-xs font-semibold flex items-center gap-1.5 hover:border-brand-gold transition-colors shadow-xs"
             >
               <BookOpen className="w-3.5 h-3.5 text-brand-gold" />
-              <span>Platform Guide &amp; SOP</span>
+              <span>Claims Playbook &amp; SOP</span>
             </button>
 
             <div className="flex items-center gap-2 bg-brand-paper border border-brand-border rounded-full px-3 py-1">
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-              <span className="text-[11px] font-medium text-brand-dark">Live Connected</span>
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="text-[11px] font-medium text-brand-dark">Live Courier Telemetry</span>
             </div>
           </div>
         </header>
@@ -200,6 +212,15 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
         {/* Built-in Operations Playbook Drawer */}
         <OperationsGuideDrawer isOpen={guideOpen} onClose={() => setGuideOpen(false)} />
+
+        {/* Interactive Dev Mode & Customizer Drawer */}
+        {session?.organization && (
+          <DevModeCustomizer
+            currentOrgName={session.organization.name}
+            currentOrgSlug={session.organization.slug}
+            onRefreshNeeded={() => window.location.reload()}
+          />
+        )}
       </div>
     </div>
   );
